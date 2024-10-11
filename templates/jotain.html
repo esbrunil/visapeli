@@ -7,16 +7,20 @@
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-  <script type="text/jsx" src="main.js"></script>
 </head>
 
 <body>
-  <div id="root"></div>
 
-  <script type="text/jsx">
-const root = ReactDOM.createRoot( document.getElementById('root'));
+<div id="root"></div>
+<script type="text/jsx">
+
+
+const App = () => {
+	return (<h1>moikka maailma</h1>);
+}
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <App />
+<App />
 );
 </script>
 </body>
