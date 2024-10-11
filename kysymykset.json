@@ -1,8 +1,10 @@
 {
-    "Minkä värinen on kissa?": {
-        "o": "riippuu kissasta",
-        "v1": "harmaa",
-        "v2": "viininpunainen",
-        "v3": "ultravioletti"
+    "35113244": {
+        "kysymys": "Minkä värinen on kissa?",
+        "o": [1],
+        "0": "harmaa",
+        "1": "riippuu kissasta",
+        "2": "viininpunainen",
+        "3": "ultravioletti"
     }
 }

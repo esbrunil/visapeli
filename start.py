@@ -59,3 +59,52 @@ def asetaAihe():
         json.dump(data, users, indent=2)
 
     return data[id], 200
+
+
+@app.route('/haeKysymys', methods=['POST'])
+def haeKysymys():
+    print("moi")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#alhaalla :]
