@@ -1,14 +1,28 @@
 <!DOCTYPE html>
-<html lang="fi">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello, World!</title>
+  <meta charset="UTF-8" />
+  <title>React Hello World</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 
 <body>
-  <h1>Hello, World!</h1>
+
+<div id="root"></div>
+<script type="text/jsx">
+
+
+const App = () => {
+	return (<h1>moikka maailma</h1>);
+}
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+<App />
+);
+</script>
 </body>
 
 </html>
