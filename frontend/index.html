@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>React Hello World</title>
+  <link rel="stylesheet" href="tyylit.css">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+
+  <div id="root"></div>
+  <script type="text/jsx">
+
+
+
+const Kysymys = ({userId, kysymys}) => {
+  const [question, setQuestion] = React.useState(null);
+  const [vaihtoehdot, setKysymys] = React.useState(null);
+  const [kysymysIndex, setKysymysIndex] = React.useState(0);
+  const [kysymykset, setKysymykset] = React.useState(kysymys.kysymykset);
+  const [painettu, setPainettu] = React.useState(false);
+  const [aktiivinen, setAktiivinen] = React.useState(-1);
+
+  const haeKysymys = async (kysymysIndex) => {
+    try {
+      console.log(kysymys);
+      console.log(userId);
+
+      const response = await fetch("../main.cgi/haeKysymys", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+          body: JSON.stringify({ kayttajaID: userId.toString(), kysymysID: kysymykset[kysymysIndex].toString() , aihe: kysymys.aiheData.aihe}), });
+        if (!response.ok) {
+          throw new Error("Virhe");
+        }
+        const result = await response.json();
+        setQuestion(result);
+      } catch (error) {
+        //
+      }
+    };
+
+    React.useEffect(() => {
+    console.log(kysymykset);
+    if (kysymysIndex < kysymykset.length) {
+      haeKysymys(kysymysIndex);
+    }
+  }, [kysymysIndex]);
+
+  let handleClick = (e) => {
+    e.preventDefault();
+    let uusiIndex = kysymysIndex+1
+    setKysymysIndex(uusiIndex);
+    setPainettu(false);
+    setAktiivinen(-1);
+  };
+
+  let handleAnswerClick = (e, key, index) => {
+    if (painettu) {
+      return;
+    }
+    console.log(index);
+    setPainettu(true);
+    setAktiivinen(index);
+  };
+
+  let kysymysJaNapit = (question) => {
+    return (
+    <div>
+      <h1>{question.kysymys}</h1>
+      <ul>
+        {Object.entries(question.vastausvaihtoehdot).map(([key, vastaus], index) => (
+          <li 
+            key={key} 
+            className={aktiivinen === index ? "painettu" : "vastaus"}
+            onClick={(e) => handleAnswerClick(e, key, index)}
+          >
+            {vastaus}
+          </li>
+        ))}
+      </ul>
+    </div>
+    );
+  };
+
+  return (
+    <div>
+      {question && (
+        <div>
+          {kysymysJaNapit(question)}
+          <button onClick={(e) => handleClick(e)}>Uusi</button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+
+const Peli = ({pelinAihe}) => {
+
+  const [userId, setUserId] = React.useState("");
+  const [kysymys, setKysymys] = React.useState();
+
+  React.useEffect(() => {
+
+    const haeId = async () => {
+      try {
+        const response = await fetch("../main.cgi/annaID"); 
+        if (!response.ok) {
+          throw new Error("");
+        }
+        const result = await response.json();
+        setUserId(result); 
+        asetaAihe(result);
+      } catch (error) {
+        //
+      }
+    };
+
+    const asetaAihe = async (kayttajaId) => {
+      try {
+        const response = await fetch("../main.cgi/asetaAihe", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ kayttajaID: kayttajaId.toString() , aihe: pelinAihe }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Virhe");
+        }
+        const result = await response.json();
+        setKysymys(result);
+
+      } catch (error) {
+        //
+      }
+    };
+
+    haeId();
+
+  }, []);
+
+  return (<div> {userId && kysymys && (<Kysymys userId={userId} kysymys={kysymys} />)} </div>);
+};
+
+
+const App = () => {
+return (<Peli pelinAihe={"history"}/>);
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+<App />
+);
+</script>
+</body>
+
+</html>

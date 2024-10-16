@@ -1,0 +1,21 @@
+.vastaus {
+  cursor: pointer;
+  padding: 1em;
+  margin: 1em;
+  border: 1px solid black;
+  list-style-type: none;
+}
+
+.vastaus:hover {
+  background-color: lightgray;
+}
+
+
+.painettu {
+  cursor: pointer;
+  padding: 1em;
+  margin: 1em;
+  border: 1px solid black;
+  list-style-type: none;
+  background-color: darkgrey;
+}
