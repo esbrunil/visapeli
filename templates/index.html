@@ -4,10 +4,14 @@
 <head>
   <meta charset="UTF-8" />
   <title>React Hello World</title>
-  <link rel="stylesheet" href="tyylit.css">
+  <link rel="stylesheet" href="http://users.jyu.fi/~omatunnus/cgi-bin/visapeli/tyylit.css">
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script src='https://unpkg.com/@remix-run/router@1.11.0/dist/router.umd.min.js'></script>
+  <script src='https://unpkg.com/react-router@6.18.0/dist/umd/react-router.development.js'></script>
+  <script src='https://unpkg.com/react-router-dom@6.18.0/dist/umd/react-router-dom.development.js'></script>
 </head>
 
 <body>
@@ -15,7 +19,11 @@
   <div id="root"></div>
   <script type="text/jsx">
 
+let omatunnus = ""
+let path = "/~" + omatunnus + "/cgi-bin/visapeli/main.cgi";
 
+
+const { BrowserRouter, Routes, Route, Navigate, Link, useParams } = ReactRouterDOM;
 
 const Kysymys = ({userId, kysymys}) => {
   const [question, setQuestion] = React.useState(null);
@@ -27,10 +35,7 @@ const Kysymys = ({userId, kysymys}) => {
 
   const haeKysymys = async (kysymysIndex) => {
     try {
-      console.log(kysymys);
-      console.log(userId);
-
-      const response = await fetch("../main.cgi/haeKysymys", {
+      const response = await fetch(`${path}/haeKysymys`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,10 +51,14 @@ const Kysymys = ({userId, kysymys}) => {
       }
     };
 
+    const navigate = ReactRouterDOM.useNavigate();
     React.useEffect(() => {
     console.log(kysymykset);
     if (kysymysIndex < kysymykset.length) {
       haeKysymys(kysymysIndex);
+    }
+    else {
+      navigate(`${path}/ValitseAihe`);
     }
   }, [kysymysIndex]);
 
@@ -102,8 +111,9 @@ const Kysymys = ({userId, kysymys}) => {
 };
 
 
-const Peli = ({pelinAihe}) => {
-
+const Peli = () => {
+  let {aihe} = useParams();
+  let pelinAihe = aihe; 
   const [userId, setUserId] = React.useState("");
   const [kysymys, setKysymys] = React.useState();
 
@@ -111,11 +121,12 @@ const Peli = ({pelinAihe}) => {
 
     const haeId = async () => {
       try {
-        const response = await fetch("../main.cgi/annaID"); 
+        const response = await fetch(`${path}/annaID`); 
         if (!response.ok) {
           throw new Error("");
         }
         const result = await response.json();
+        console.log(result);
         setUserId(result); 
         asetaAihe(result);
       } catch (error) {
@@ -125,7 +136,9 @@ const Peli = ({pelinAihe}) => {
 
     const asetaAihe = async (kayttajaId) => {
       try {
-        const response = await fetch("../main.cgi/asetaAihe", {
+        console.log(kayttajaId);
+        console.log(pelinAihe);
+        const response = await fetch(`${path}/asetaAihe`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -151,10 +164,45 @@ const Peli = ({pelinAihe}) => {
   return (<div> {userId && kysymys && (<Kysymys userId={userId} kysymys={kysymys} />)} </div>);
 };
 
+const ValitseAihe = () => {
+  const navigate = ReactRouterDOM.useNavigate();
+
+  const aiheet = ["history", "geography"];
+
+  const handleClick = (aihe) => {
+    navigate(`${path}/Peli/${aihe}`);
+  };
+
+  return (
+    <div className="valitseAihe">
+      <h2 className="h1">VISAPELI</h2>
+      {aiheet.map((aihe, index) => (
+        <div
+          className="aihe"
+          key={index}
+          onClick={() => handleClick(aihe)}
+        >
+          {aihe.toUpperCase()}
+        </div>
+      ))}
+    </div>
+  );
+};
 
 const App = () => {
-return (<Peli pelinAihe={"history"}/>);
-}
+
+return (
+  <BrowserRouter>
+    <div>
+      <Routes>
+        <Route path={`${path}/Peli/:aihe`} element={<Peli />} />
+        <Route path={`${path}/ValitseAihe`} element={<ValitseAihe />} />
+        <Route path={`${path}/`} element={<Navigate to={`${path}/ValitseAihe`} replace />} />
+      </Routes>
+    </div>
+  </BrowserRouter>
+);
+};
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

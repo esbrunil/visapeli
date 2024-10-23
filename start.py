@@ -4,6 +4,7 @@ from flask_cors import CORS
 from functools import wraps
 import time, json, math, random
 
+
 app = Flask(__name__)
 CORS(app)
 
@@ -11,7 +12,15 @@ CORS(app)
 # Palauttaa default-html:n, kun sivu ladataan
 @app.route("/", methods=['GET'])
 def index():
-    return render_template("jotain.html")
+    return render_template("index.html")
+
+@app.route("/ValitseAihe", methods=['GET'])
+def ValitseAihe():
+    return render_template("index.html")
+
+@app.route("/Peli/<path:aihe>", methods=['GET'])
+def Peli(aihe):
+    return render_template("index.html")
 
 
 # Palauttaa clientille käyttäjäspesifin ID:n
