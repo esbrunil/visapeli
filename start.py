@@ -97,7 +97,7 @@ def haeKysymys():
 # Tarkistaa annetun vastauksen
 # attr: { vastaus, kysymysID, kayttajaID}
 # return oikeiden määrä?
-@app.route('/vastaus', methods=['POST'])
+@app.route('/tarkistaVastaus', methods=['POST'])
 def tarkistaVastaus():
     vastaus = request.json['vastaus']
     kysymysID = request.json['kysymysID']

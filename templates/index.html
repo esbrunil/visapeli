@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>React Hello World</title>
-  <link rel="stylesheet" href="http://users.jyu.fi/~omatunnus/cgi-bin/visapeli/tyylit.css">
+  <link rel="stylesheet" href="http://users.jyu.fi/~jbpalola/cgi-bin/visapeli/tyylit.css">
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
@@ -19,7 +19,7 @@
   <div id="root"></div>
   <script type="text/jsx">
 
-let omatunnus = ""
+let omatunnus = "jbpalola";
 let path = "/~" + omatunnus + "/cgi-bin/visapeli/main.cgi";
 
 
@@ -32,6 +32,7 @@ const Kysymys = ({userId, kysymys}) => {
   const [kysymykset, setKysymykset] = React.useState(kysymys.kysymykset);
   const [painettu, setPainettu] = React.useState(false);
   const [aktiivinen, setAktiivinen] = React.useState(-1);
+  const [isCorrect, setIsCorrect] = React.useState(null);
 
   const haeKysymys = async (kysymysIndex) => {
     try {
@@ -62,21 +63,48 @@ const Kysymys = ({userId, kysymys}) => {
     }
   }, [kysymysIndex]);
 
+  const tarkistaVastaus = async (vastausId) => {
+    try {
+      const response = await fetch(`${path}/tarkistaVastaus`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.strigify({
+          kayttajaID: userId.toString(),
+          kysymysID: kysymykset[kysymysIndex].toString(),
+          vastausID: vastausId.toString(),
+        }),
+      });
+      if (!response.ok) {
+        throw new Error("Virhe tarkistuksessa");
+      }
+      const result = await response.json();
+      return true; // return result.oikeaVastaus;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   let handleClick = (e) => {
     e.preventDefault();
     let uusiIndex = kysymysIndex+1
     setKysymysIndex(uusiIndex);
     setPainettu(false);
     setAktiivinen(-1);
+    setIsCorrect(null);
   };
 
-  let handleAnswerClick = (e, key, index) => {
+  let handleAnswerClick = async (e, key, index) => {
     if (painettu) {
       return;
     }
     console.log(index);
     setPainettu(true);
     setAktiivinen(index);
+
+    const oikein = await tarkistaVastaus(key);
+    setIsCorrect(oikein);
   };
 
   let kysymysJaNapit = (question) => {
@@ -87,13 +115,16 @@ const Kysymys = ({userId, kysymys}) => {
         {Object.entries(question.vastausvaihtoehdot).map(([key, vastaus], index) => (
           <li 
             key={key} 
-            className={aktiivinen === index ? "painettu" : "vastaus"}
+            className={aktiivinen === index ? (isCorrect === true ? "oikein" : "väärin") : "vastaus"}
             onClick={(e) => handleAnswerClick(e, key, index)}
           >
             {vastaus}
           </li>
         ))}
       </ul>
+      {painettu && isCorrect !== null && (
+        <p>{isCorrect ? "Oikea vastaus!" : "Väärä vastaus!"}</p>
+      )}
     </div>
     );
   };
