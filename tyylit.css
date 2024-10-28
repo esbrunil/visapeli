@@ -38,3 +38,21 @@
   text-align: center;
   margin-top: 0;
 }
+
+.väärin {
+  cursor: pointer;
+  padding: 1em;
+  margin: 1em;
+  border: 1px solid black;
+  list-style-type: none;
+  background-color: red;
+}
+
+.oikein {
+  cursor: pointer;
+  padding: 1em;
+  margin: 1em;
+  border: 1px solid black;
+  list-style-type: none;
+  background-color: lightgreen;
+}

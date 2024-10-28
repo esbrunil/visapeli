@@ -80,7 +80,8 @@ const Kysymys = ({userId, kysymys}) => {
         throw new Error("Virhe tarkistuksessa");
       }
       const result = await response.json();
-      return true; // return result.oikeaVastaus;
+      return true; 
+      // return result.oikeaVastaus;
     } catch (error) {
       console.log(error);
     }
@@ -123,7 +124,7 @@ const Kysymys = ({userId, kysymys}) => {
         ))}
       </ul>
       {painettu && isCorrect !== null && (
-        <p>{isCorrect ? "Oikea vastaus!" : "Väärä vastaus!"}</p>
+        <p>{isCorrect ? "Oikea vastaus" : "Väärä vastaus"}</p>
       )}
     </div>
     );
