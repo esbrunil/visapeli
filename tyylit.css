@@ -1,23 +1,55 @@
+body {
+  font-size: 2em;
+}
+
+.kysymysJaNapit {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+
 .vastaus {
   cursor: pointer;
-  padding: 1em;
-  margin: 1em;
+  padding: 0.5em;
+  margin: 0.2em;
   border: 1px solid black;
-  list-style-type: none;
+  text-align: center;
+  border-radius: 1em;
 }
 
-.vastaus:hover {
-  background-color: lightgray;
+.vaarin {
+  background-color: red;
 }
 
+.oikein {
+  background-color: lightgreen;
+}
 
 .painettu {
-  cursor: pointer;
-  padding: 1em;
-  margin: 1em;
-  border: 1px solid black;
-  list-style-type: none;
   background-color: darkgrey;
+}
+
+.seuraavaKysymys {
+  cursor: pointer;
+  padding: 0.5em;
+  margin: 0.2em;
+  border: 1px solid black;
+  text-align: center;
+  background-color: lightgray;
+  border-radius: 1em;
+}
+
+.painettu {
+  background-color: white;
+}
+
+.seuraavaKysymysHr {
+  margin: 1em;
+}
+
+.kysymys {
+  text-align: center;
 }
 
 .aihe {
@@ -37,22 +69,4 @@
 .h1 {
   text-align: center;
   margin-top: 0;
-}
-
-.väärin {
-  cursor: pointer;
-  padding: 1em;
-  margin: 1em;
-  border: 1px solid black;
-  list-style-type: none;
-  background-color: red;
-}
-
-.oikein {
-  cursor: pointer;
-  padding: 1em;
-  margin: 1em;
-  border: 1px solid black;
-  list-style-type: none;
-  background-color: lightgreen;
 }

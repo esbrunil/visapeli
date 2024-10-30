@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>React Hello World</title>
-  <link rel="stylesheet" href="http://users.jyu.fi/~jbpalola/cgi-bin/visapeli/tyylit.css">
+  <link rel="stylesheet" href="http://users.jyu.fi/~omatunnus/cgi-bin/visapeli/tyylit.css">
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
@@ -19,7 +19,7 @@
   <div id="root"></div>
   <script type="text/jsx">
 
-let omatunnus = "jbpalola";
+let omatunnus = "";
 let path = "/~" + omatunnus + "/cgi-bin/visapeli/main.cgi";
 
 
@@ -81,13 +81,14 @@ const Kysymys = ({userId, kysymys}) => {
       }
       const result = await response.json();
       return true; 
-      // return result.oikeaVastaus;
+      //return result.oikeaVastaus;
     } catch (error) {
       console.log(error);
     }
   };
 
   let handleClick = (e) => {
+    if (painettu === false) return;
     e.preventDefault();
     let uusiIndex = kysymysIndex+1
     setKysymysIndex(uusiIndex);
@@ -111,18 +112,16 @@ const Kysymys = ({userId, kysymys}) => {
   let kysymysJaNapit = (question) => {
     return (
     <div>
-      <h1>{question.kysymys}</h1>
-      <ul>
-        {Object.entries(question.vastausvaihtoehdot).map(([key, vastaus], index) => (
-          <li 
-            key={key} 
-            className={aktiivinen === index ? (isCorrect === true ? "oikein" : "väärin") : "vastaus"}
-            onClick={(e) => handleAnswerClick(e, key, index)}
-          >
-            {vastaus}
-          </li>
-        ))}
-      </ul>
+        <h1 className={"kysymys"}>{question.kysymys}</h1>
+      {Object.entries(question.vastausvaihtoehdot).map(([key, vastaus], index) => (
+      <div 
+        key={key} 
+        className={aktiivinen === index ? (isCorrect === true ? "oikein vastaus" : "vaarin vastaus") : "vastaus"}
+        onClick={(e) => handleAnswerClick(e, key, index)}
+      >
+      {vastaus}
+      </div>
+  ))}
       {painettu && isCorrect !== null && (
         <p>{isCorrect ? "Oikea vastaus" : "Väärä vastaus"}</p>
       )}
@@ -133,9 +132,10 @@ const Kysymys = ({userId, kysymys}) => {
   return (
     <div>
       {question && (
-        <div>
+        <div className="kysymysJaNapit">
           {kysymysJaNapit(question)}
-          <button onClick={(e) => handleClick(e)}>Uusi</button>
+          <hr className={"seuraavaKysymysHr"}/> 
+          <div className={"seuraavaKysymys"} onClick={(e) => handleClick(e)}>Seuraava Kysymys</div>
         </div>
       )}
     </div>
