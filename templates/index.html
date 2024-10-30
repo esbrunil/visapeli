@@ -19,190 +19,15 @@
   <div id="root"></div>
   <script type="text/jsx">
 
-let omatunnus = "nieetorp";
-let path = "/~" + omatunnus + "/cgi-bin/visapeli/main.cgi";
-
-
+<let url = window.location.pathname;
+let path = url.slice(0, url.lastIndexOf("/"));
 const { BrowserRouter, Routes, Route, Navigate, Link, useParams } = ReactRouterDOM;
 
-const Kysymys = ({userId, kysymys}) => {
-  const [question, setQuestion] = React.useState(null);
-  const [vaihtoehdot, setKysymys] = React.useState(null);
-  const [kysymysIndex, setKysymysIndex] = React.useState(0);
-  const [kysymykset, setKysymykset] = React.useState(kysymys.kysymykset);
-  const [painettu, setPainettu] = React.useState(false);
-  const [aktiivinen, setAktiivinen] = React.useState(-1);
-  const [isCorrect, setIsCorrect] = React.useState(null);
-
-  const haeKysymys = async (kysymysIndex) => {
-    try {
-      const response = await fetch(`${path}/haeKysymys`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-          body: JSON.stringify({ kayttajaID: userId.toString(), kysymysID: kysymykset[kysymysIndex].toString() , aihe: kysymys.aiheData.aihe}), });
-        if (!response.ok) {
-          throw new Error("Virhe");
-        }
-        const result = await response.json();
-        setQuestion(result);
-      } catch (error) {
-        //
-      }
-    };
-
-    const navigate = ReactRouterDOM.useNavigate();
-    React.useEffect(() => {
-    console.log(kysymykset);
-    if (kysymysIndex < kysymykset.length) {
-      haeKysymys(kysymysIndex);
-    }
-    else {
-      navigate(`${path}/ValitseAihe`);
-    }
-  }, [kysymysIndex]);
-
-  const tarkistaVastaus = async (vastausId) => {
-    try {
-      const response = await fetch(`${path}/tarkistaVastaus`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.strigify({
-          kayttajaID: userId.toString(),
-          kysymysID: kysymykset[kysymysIndex].toString(),
-          vastausID: vastausId.toString(),
-        }),
-      });
-      if (!response.ok) {
-        throw new Error("Virhe tarkistuksessa");
-      }
-      const result = await response.json();
-      return true; 
-      //return result.oikeaVastaus;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  let handleClick = (e) => {
-    if (painettu === false) return;
-    e.preventDefault();
-    let uusiIndex = kysymysIndex+1
-    setKysymysIndex(uusiIndex);
-    setPainettu(false);
-    setAktiivinen(-1);
-    setIsCorrect(null);
-  };
-
-  let handleAnswerClick = async (e, key, index) => {
-    if (painettu) {
-      return;
-    }
-    console.log(index);
-    setPainettu(true);
-    setAktiivinen(index);
-
-    const oikein = await tarkistaVastaus(key);
-    setIsCorrect(oikein);
-  };
-
-  let kysymysJaNapit = (question) => {
-    return (
-    <div>
-        <h1 className={"kysymys"}>{question.kysymys}</h1>
-      {Object.entries(question.vastausvaihtoehdot).map(([key, vastaus], index) => (
-      <div 
-        key={key} 
-        className={aktiivinen === index ? (isCorrect === true ? "oikein vastaus" : "vaarin vastaus") : "vastaus"}
-        onClick={(e) => handleAnswerClick(e, key, index)}
-      >
-      {vastaus}
-      </div>
-  ))}
-      {painettu && isCorrect !== null && (
-        <p>{isCorrect ? "Oikea vastaus" : "Väärä vastaus"}</p>
-      )}
-    </div>
-    );
-  };
-
-  return (
-    <div>
-      {question && (
-        <div className="kysymysJaNapit">
-          {kysymysJaNapit(question)}
-          <hr className={"seuraavaKysymysHr"}/> 
-          <div className={"seuraavaKysymys"} onClick={(e) => handleClick(e)}>Seuraava Kysymys</div>
-        </div>
-      )}
-    </div>
-  );
-};
-
-
-const Peli = () => {
-  let {aihe} = useParams();
-  let pelinAihe = aihe; 
-  const [userId, setUserId] = React.useState("");
-  const [kysymys, setKysymys] = React.useState();
-
-  React.useEffect(() => {
-
-    const haeId = async () => {
-      try {
-        const response = await fetch(`${path}/annaID`); 
-        if (!response.ok) {
-          throw new Error("");
-        }
-        const result = await response.json();
-        console.log(result);
-        setUserId(result); 
-        asetaAihe(result);
-      } catch (error) {
-        //
-      }
-    };
-
-    const asetaAihe = async (kayttajaId) => {
-      try {
-        console.log(kayttajaId);
-        console.log(pelinAihe);
-        const response = await fetch(`${path}/asetaAihe`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ kayttajaID: kayttajaId.toString() , aihe: pelinAihe }),
-        });
-
-        if (!response.ok) {
-          throw new Error("Virhe");
-        }
-        const result = await response.json();
-        setKysymys(result);
-
-      } catch (error) {
-        //
-      }
-    };
-
-    haeId();
-
-  }, []);
-
-  return (<div> {userId && kysymys && (<Kysymys userId={userId} kysymys={kysymys} />)} </div>);
-};
-
 const ValitseAihe = () => {
-  const navigate = ReactRouterDOM.useNavigate();
-
   const aiheet = ["history", "geography"];
-
+ 
   const handleClick = (aihe) => {
-    navigate(`${path}/Peli/${aihe}`);
+    window.location.href = `${path}/Peli/${aihe}`; 
   };
 
   return (
@@ -222,14 +47,14 @@ const ValitseAihe = () => {
 };
 
 const App = () => {
+  
 
 return (
   <BrowserRouter>
     <div>
       <Routes>
-        <Route path={`${path}/Peli/:aihe`} element={<Peli />} />
-        <Route path={`${path}/ValitseAihe`} element={<ValitseAihe />} />
-        <Route path={`${path}/`} element={<Navigate to={`${path}/ValitseAihe`} replace />} />
+        <Route path={path + "/ValitseAihe"} element={<ValitseAihe />} />
+          <Route path={path + "/"} element={<Navigate to={path + "/ValitseAihe"} replace /> }/>
       </Routes>
     </div>
   </BrowserRouter>
