@@ -17,6 +17,7 @@ c.execute('''
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         aihe_id INTEGER,
         vastauksia INTEGER,
+        oikea_vastaus INTEGER,
         kysymys TEXT,
         FOREIGN KEY (aihe_id) REFERENCES Aiheet (id) ON DELETE CASCADE
     )
@@ -33,10 +34,10 @@ c.execute('''
 ''')
 
 
-def insert_kysymys(aihe_id, vastauksia, kysymys):
+def insert_kysymys(aihe_id, vastauksia, oikea_vastaus, kysymys):
     with conn:
-        c.execute('''INSERT INTO Kysymykset (aihe_id, vastauksia, kysymys) VALUES (?,?,?)''', 
-                  (aihe_id, vastauksia, kysymys))
+        c.execute('''INSERT INTO Kysymykset (aihe_id, vastauksia, oikea_vastaus, kysymys) VALUES (?,?,?,?)''', 
+                  (aihe_id, vastauksia, oikea_vastaus, kysymys))
         
 
 def insert_aihe(aihe):
@@ -57,7 +58,7 @@ def insert_vve(kysymys_id, onko_oikein, teksti):
 
 aihe = "Historia"
 insert_aihe(aihe)
-insert_kysymys(get_aihe_id(aihe)[0], 4, "Mitä värejä on Suomen lipussa?")
+insert_kysymys(get_aihe_id(aihe)[0], 4, 2, "Mitä värejä on Suomen lipussa?")
 k_id = get_kysymys_id("Mitä värejä on Suomen lipussa?")[0]
 insert_vve(k_id, False, "punainen")
 insert_vve(k_id, False, "vihreä")
