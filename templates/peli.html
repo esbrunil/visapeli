@@ -58,6 +58,7 @@ const Kysymys = ({userId, kysymys}) => {
     console.log(kysymykset);
     if (kysymysIndex < kysymykset.length) {
       haeKysymys(kysymysIndex);
+      
     }
     else {
       window.location.href = path + "/ValitseAihe";
@@ -74,16 +75,16 @@ const Kysymys = ({userId, kysymys}) => {
         body: JSON.stringify({
           kayttajaID: userId.toString(),
           kysymysID: kysymykset[kysymysIndex].toString(),
-          vastausID: vastausId.toString(),
+          vastaus: vastausId.toString(),
         }),
       });
       if (!response.ok) {
-        //throw new Error("Virhe tarkistuksessa");
+        throw new Error("Virhe tarkistuksessa");
         return true;
       }
       const result = await response.json();
       return true; 
-      //return result.oikeaVastaus;
+      //return result;
     } catch (error) {
       console.log(error);
     }
@@ -101,13 +102,14 @@ const Kysymys = ({userId, kysymys}) => {
       return;
     }
     console.log(index);
+    setIsCorrect(null);
     setPainettu(true);
     setAktiivinen(index);
 
     e.target.className = "painettu vastaus";
-    const oikein = await tarkistaVastaus(key);
+    const oikeinko = await tarkistaVastaus(key);
 
-    setIsCorrect(oikein);
+    setIsCorrect(oikeinko);
 
     const timeout = setTimeout(seuraavaKysymys, 5000);
 
@@ -122,12 +124,28 @@ const Kysymys = ({userId, kysymys}) => {
       setKysymysIndex(uusiIndex);
       setPainettu(false);
       setAktiivinen(-1);
-      setIsCorrect(null);
   };
+
+  let Kello = () => {
+    const handRef = React.useRef(null);
+    React.useEffect(() => {
+      handRef.current.style.animation = 'rotateHand 5s linear forwards';
+    }, []);
+
+    return (
+      <div className="clock">
+        <div className="pie spinner" ref={handRef}></div>
+        <div className="pie paint"></div>
+        <div className="hand"></div>
+        <div className="mask"></div>
+      </div>
+    );
+  }
 
   let kysymysJaNapit = (question) => {
     return (
     <div>
+      <Kello/>
         <h1 className={"kysymys"}>{question.kysymys}</h1>
       {Object.entries(question.vastausvaihtoehdot).map(([key, vastaus], index) => (
       <div 
@@ -141,7 +159,7 @@ const Kysymys = ({userId, kysymys}) => {
       </div>
   ))}
       {painettu && isCorrect !== null && (
-        <p>{isCorrect ? "Oikea vastaus" : "Väärä vastaus"}</p>
+         <p>{isCorrect ? "Oikea vastaus" : "Väärä vastaus"}</p>
       )}
     </div>
     );

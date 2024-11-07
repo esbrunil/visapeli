@@ -20,7 +20,7 @@ def ValitseAihe():
 
 @app.route("/Peli/<path:aihe>", methods=['GET'])
 def Peli(aihe):
-    return render_template("index.html")
+    return render_template("peli.html")
 
 
 # Palauttaa clientille käyttäjäspesifin ID:n
@@ -109,4 +109,4 @@ def tarkistaVastaus():
     # hae tässä datasta haluttu tieto, eli oikeiden vastausten taulukko
     # tarkista
     # palauta mitä?
-    return data
+    return data, 200
