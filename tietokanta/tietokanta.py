@@ -1,8 +1,8 @@
 import sqlite3
 
 #suluissa :memory:, niin tekee vain muistiin
-#conn = sqlite3.connect('employee.db')
-conn = sqlite3.connect(':memory:')
+conn = sqlite3.connect('kysymykset.db')
+#conn = sqlite3.connect(':memory:')
 
 c = conn.cursor()
 c.execute('''
@@ -40,6 +40,7 @@ def insert_kysymys(aihe_id, vastauksia, oikea_vastaus, kysymys):
                   (aihe_id, vastauksia, oikea_vastaus, kysymys))
         
 
+
 def insert_aihe(aihe):
     with conn:
         c.execute('''INSERT INTO Aiheet (aihe) VALUES (?)''', (aihe,))
@@ -55,17 +56,5 @@ def get_kysymys_id(kysymys):
 def insert_vve(kysymys_id, onko_oikein, teksti):
     c.execute('''INSERT INTO Vastausvaihtoehdot (kysymys_id, onko_oikein, vve_teksti) VALUES (?,?,?)''',
               (kysymys_id, onko_oikein, teksti))
-
-aihe = "Historia"
-insert_aihe(aihe)
-insert_kysymys(get_aihe_id(aihe)[0], 4, 2, "Mitä värejä on Suomen lipussa?")
-k_id = get_kysymys_id("Mitä värejä on Suomen lipussa?")[0]
-insert_vve(k_id, False, "punainen")
-insert_vve(k_id, False, "vihreä")
-insert_vve(k_id, True, "valkoinen")
-insert_vve(k_id, True, "sininen")
-
-c.execute('SELECT * FROM Vastausvaihtoehdot WHERE kysymys_id = (?) AND onko_oikein = TRUE', (k_id,))
-print(c.fetchall())
 
 conn.close()

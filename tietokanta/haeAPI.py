@@ -10,7 +10,7 @@ aiheet = {
 
 RED = '\033[31m'
 GREEN = '\033[32m'
-YELLOW = '\033[33m'
+WARNING = '\033[93m'
 BLUE = '\033[34m'
 RESET = '\033[0m'
 
@@ -31,7 +31,7 @@ def main():
         aihe = ""
 
     if aihe == "":
-        print("Haetaan 50 kysymystä mistä vaan aiheesta...")
+        print("\n Haetaan 50 kysymystä mistä vaan aiheesta...")
     else:
         print("Haetaan 50 kysymystä aiheesta " + sys.argv[1].lower() + "...")
 
@@ -42,7 +42,7 @@ def main():
     if response.status_code == 200:
         # Parse the JSON response if it was successful
         data = response.json()
-        print("Datan haku onnistui...")
+        print("Datan haku onnistui... \n")
     else:
         print(f"{RED}Datan haku epäonnistui: {RESET}", response.status_code)
 
@@ -51,6 +51,7 @@ def main():
 
     for item in data['results']:
         if (item in file_data):
+            print(f"{WARNING} kohde on jo datassa, ohitetaan {item}{RESET} \n")
             continue
         file_data.append(item)
 

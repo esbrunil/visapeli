@@ -12,7 +12,7 @@ CORS(app)
 # Palauttaa default-html:n, kun sivu ladataan
 @app.route("/", methods=['GET'])
 def index():
-    return render_template("index.html")
+    return redirect("main.cgi/ValitseAihe", 302)
 
 @app.route("/ValitseAihe", methods=['GET'])
 def ValitseAihe():
@@ -21,6 +21,12 @@ def ValitseAihe():
 @app.route("/Peli/<path:aihe>", methods=['GET'])
 def Peli(aihe):
     return render_template("peli.html")
+
+
+@app.route('/heartbeat', methods=['POST'])
+def Heartbeat():
+    return "", 200
+
 
 
 # Palauttaa clientille käyttäjäspesifin ID:n

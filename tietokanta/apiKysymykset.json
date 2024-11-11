@@ -1,435 +1,45 @@
 [
   {
     "type": "multiple",
-    "difficulty": "easy",
-    "category": "Entertainment: Board Games",
-    "question": "When was the board game Twister, released to the public?",
-    "correct_answer": "April 1966",
-    "incorrect_answers": [
-      "September 1965",
-      "January 1969",
-      "February 1966"
-    ]
-  },
-  {
-    "type": "multiple",
     "difficulty": "medium",
-    "category": "Entertainment: Video Games",
-    "question": "In &quot;Halo 2&quot;, what is the name of the monitor of Installation 05?",
-    "correct_answer": "2401 Penitent Tangent",
+    "category": "History",
+    "question": "On what day did Germany invade Poland?",
+    "correct_answer": "September 1, 1939",
     "incorrect_answers": [
-      "343 Guilty Spark",
-      "031 Exuberant Witness",
-      "252 Biodis Expolsion"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "hard",
-    "category": "Entertainment: Video Games",
-    "question": "How many copies of the notorious E.T. game for the Atari 2600 did Atari end up selling?",
-    "correct_answer": "1.5 Million",
-    "incorrect_answers": [
-      "1 Million",
-      "250 Thousand",
-      "Less than 250 Thousand"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "hard",
-    "category": "Entertainment: Film",
-    "question": "Which 1994 film did Roger Ebert famously despise, saying &quot;I hated hated hated hated hated this movie&quot;.",
-    "correct_answer": "North",
-    "incorrect_answers": [
-      "3 Ninjas Kick Back",
-      "The Santa Clause",
-      "Richie Rich"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "easy",
-    "category": "Entertainment: Television",
-    "question": "In which British seaside town was the BBC sitcom &quot;Fawlty Towers&quot; set?",
-    "correct_answer": "Torquay",
-    "incorrect_answers": [
-      "Blackpool",
-      "Bournemouth",
-      "Great Yarmouth"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Entertainment: Books",
-    "question": "Which American author was also a budding travel writer and wrote of his adventures with his dog Charley?",
-    "correct_answer": "John Steinbeck",
-    "incorrect_answers": [
-      "F. Scott Fitzgerald",
-      "Ernest Hemingway",
-      "William Faulkner"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Entertainment: Cartoon &amp; Animations",
-    "question": "Which of these is not a real character in the cartoon series My Little Pony: Friendship is Magic?",
-    "correct_answer": "Rose Marene",
-    "incorrect_answers": [
-      "Pinkie Pie",
-      "Maud Pie",
-      "Rainbow Dash"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Entertainment: Film",
-    "question": "Who plays &quot;Bruce Wayne&quot; in the 2008 movie &quot;The Dark Knight&quot;?",
-    "correct_answer": "Christian Bale",
-    "incorrect_answers": [
-      "Michael Caine",
-      "Ron Dean",
-      "Heath Ledger"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Science &amp; Nature",
-    "question": "At what temperature does water boil?",
-    "correct_answer": "212&deg;F",
-    "incorrect_answers": [
-      "200&deg;F",
-      "181&deg;F",
-      "178&deg;F"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "easy",
-    "category": "Sports",
-    "question": "The Rio 2016 Summer Olympics held it&#039;s closing ceremony on what date?",
-    "correct_answer": "August 21",
-    "incorrect_answers": [
-      "August 23",
-      "August 19",
-      "August 17"
+      "December 7, 1941",
+      "June 22, 1941",
+      "July 7, 1937"
     ]
   },
   {
     "type": "multiple",
     "difficulty": "medium",
     "category": "History",
-    "question": "When was the People&#039;s Republic of China founded?",
-    "correct_answer": "October 1, 1949",
+    "question": "Which of the following ancient Near Eastern peoples still exists as a modern ethnic group?",
+    "correct_answer": "Assyrians",
     "incorrect_answers": [
-      "April 3, 1947",
-      "May 7, 1945",
-      "December 6, 1950"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "easy",
-    "category": "History",
-    "question": "Which of the following countries was not an axis power during World War II?",
-    "correct_answer": " Soviet Union",
-    "incorrect_answers": [
-      "Italy",
-      "Germany",
-      "Japan"
+      "Babylonians",
+      "Hittites",
+      "Elamites"
     ]
   },
   {
     "type": "multiple",
     "difficulty": "hard",
     "category": "History",
-    "question": "During the Wars of the Roses (1455 - 1487) which Englishman was dubbed &quot;the Kingmaker&quot;?",
-    "correct_answer": "Richard Neville",
+    "question": "Who assassinated President James A. Garfield?",
+    "correct_answer": "Charles Guiteau",
     "incorrect_answers": [
-      "Richard III",
-      "Henry V",
-      "Thomas Warwick"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "hard",
-    "category": "History",
-    "question": "What was the real name of the Albanian national leader Skanderbeg?",
-    "correct_answer": "Gjergj Kastrioti",
-    "incorrect_answers": [
-      "Diturak Zhulati",
-      "Iskander Bejko",
-      "Mirash Krasniki"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "hard",
-    "category": "History",
-    "question": "What was the name of the spy ring that helped the United States win the Revolutionary War?",
-    "correct_answer": "Culper Ring",
-    "incorrect_answers": [
-      "New York Spy Ring",
-      "Washington&#039;s Spies",
-      "Unnamed"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "History",
-    "question": "How old was Lyndon B. Johnson when he assumed the role of President of the United States?",
-    "correct_answer": "55",
-    "incorrect_answers": [
-      "50",
-      "60",
-      "54"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "easy",
-    "category": "History",
-    "question": "The collapse of the Soviet Union took place in which year?",
-    "correct_answer": "1991",
-    "incorrect_answers": [
-      "1992",
-      "1891",
-      "1990"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "History",
-    "question": "Which country gifted the Statue of Liberty to the United States of America?",
-    "correct_answer": "France",
-    "incorrect_answers": [
-      "Spain",
-      "England",
-      "Germany"
-    ]
-  },
-  {
-    "type": "boolean",
-    "difficulty": "easy",
-    "category": "History",
-    "question": "The Cold War ended with Joseph Stalin&#039;s death.",
-    "correct_answer": "False",
-    "incorrect_answers": [
-      "True"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "History",
-    "question": " What Russian automatic gas-operated assault rifle was developed in the Soviet Union in 1947, and is still popularly used today?",
-    "correct_answer": "AK-47",
-    "incorrect_answers": [
-      "RPK",
-      "M16",
-      "MG 42"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "hard",
-    "category": "Geography",
-    "question": "When does Finland celebrate their independence day?",
-    "correct_answer": "December 6th",
-    "incorrect_answers": [
-      "January 2nd",
-      "November 12th",
-      "February 8th"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Geography",
-    "question": "How many provinces are in the Netherlands?",
-    "correct_answer": "12",
-    "incorrect_answers": [
-      "14",
-      "10",
-      "13"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Geography",
-    "question": "Which of these countries is located the FURTHEST away from the South China Sea?",
-    "correct_answer": "Bangladesh",
-    "incorrect_answers": [
-      "Malaysia",
-      "Vietnam",
-      "Philippines"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Geography",
-    "question": "What event led to Liechenstein adding a crown to its flag?",
-    "correct_answer": "The 1936 Olympics",
-    "incorrect_answers": [
-      "Coronation of Prince Johann I Joseph in 1805",
-      "Charles VI&#039;s decree in 1719",
-      "Signing of the 1862 Constitution of Liechtenstein"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "hard",
-    "category": "Geography",
-    "question": "Which of these island countries is located in the Caribbean?",
-    "correct_answer": "Barbados",
-    "incorrect_answers": [
-      "Fiji",
-      "Maldives",
-      "Seychelles"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Geography",
-    "question": "What is the capital of Estonia?",
-    "correct_answer": "Tallinn",
-    "incorrect_answers": [
-      "Helsinki",
-      "Tartu",
-      "Riga"
-    ]
-  },
-  {
-    "type": "boolean",
-    "difficulty": "easy",
-    "category": "Geography",
-    "question": "There are no deserts in Europe.",
-    "correct_answer": "True",
-    "incorrect_answers": [
-      "False"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "easy",
-    "category": "Geography",
-    "question": "What is the capital of India?",
-    "correct_answer": "New Delhi",
-    "incorrect_answers": [
-      "Bejing",
-      "Montreal",
-      "Tithi"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "easy",
-    "category": "Geography",
-    "question": "The body of the Egyptian Sphinx was based on which animal?",
-    "correct_answer": "Lion",
-    "incorrect_answers": [
-      "Bull",
-      "Horse",
-      "Dog"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Geography",
-    "question": "The Pyrenees mountains are located on the border of which two countries?",
-    "correct_answer": "France and Spain",
-    "incorrect_answers": [
-      "Italy and Switzerland",
-      "Norway and Sweden",
-      "Russia and Ukraine"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "hard",
-    "category": "Geography",
-    "question": "What is the name of the Canadian national anthem?",
-    "correct_answer": "O Canada",
-    "incorrect_answers": [
-      "O Red Maple",
-      "Leaf-Spangled Banner",
-      "March of the Puck Drop"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Geography",
-    "question": "Broome is a town in which state of Australia?",
-    "correct_answer": "Western Australia",
-    "incorrect_answers": [
-      "Northern Territory",
-      "South Australia",
-      "Tasmania"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Geography",
-    "question": "Which of the following language families is the most controversial amongst modern linguists?",
-    "correct_answer": "Altaic",
-    "incorrect_answers": [
-      "Sino-Tibetan",
-      "Dravidian",
-      "Indo-European"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Geography",
-    "question": "Which English county will you find the University of East Anglia?",
-    "correct_answer": "Norfolk",
-    "incorrect_answers": [
-      "Suffolk",
-      "Essex",
-      "Cambridgeshire"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Geography",
-    "question": "Which country has the abbreviation &quot;CH&quot;?",
-    "correct_answer": "Switzerland",
-    "incorrect_answers": [
-      "China",
-      "Canada",
-      "No Country"
+      "Sirhan Sirhan",
+      "Leon Czolgosz",
+      "John Wilkes Booth"
     ]
   },
   {
     "type": "boolean",
     "difficulty": "medium",
-    "category": "Geography",
-    "question": "You could walk from Norway to North Korea while only passing through Russia.",
-    "correct_answer": "True",
-    "incorrect_answers": [
-      "False"
-    ]
-  },
-  {
-    "type": "boolean",
-    "difficulty": "easy",
-    "category": "Geography",
-    "question": "The Republic of Malta is the smallest microstate worldwide.",
+    "category": "History",
+    "question": "The Korean War ended in 1953 without any ceasefire.",
     "correct_answer": "False",
     "incorrect_answers": [
       "True"
@@ -438,479 +48,73 @@
   {
     "type": "multiple",
     "difficulty": "hard",
-    "category": "Geography",
-    "question": "What country is not a part of Scandinavia?",
-    "correct_answer": "Finland",
+    "category": "History",
+    "question": "The pantheon in Rome was used to worship what god?",
+    "correct_answer": "Any god they wanted",
     "incorrect_answers": [
-      "Norway",
-      "Sweden",
-      "Denmark"
+      "Athena",
+      "Zeus",
+      "Both Athena and Zeus"
     ]
   },
   {
     "type": "multiple",
     "difficulty": "medium",
-    "category": "Geography",
-    "question": "Which of these countries is not a United Nations member state?",
-    "correct_answer": "Niue",
+    "category": "History",
+    "question": "When was &quot;The Gadget&quot;, the first nuclear device to be detonated, tested?",
+    "correct_answer": "July 16, 1945",
     "incorrect_answers": [
-      "Tuvalu",
-      "South Sudan",
-      "Montenegro"
+      "June 22, 1945",
+      "August 6, 1945",
+      "April 5, 1945"
     ]
   },
   {
     "type": "multiple",
     "difficulty": "medium",
-    "category": "Geography",
-    "question": "Kuala Lumpur is the capital of which country?",
-    "correct_answer": "Malaysia",
+    "category": "History",
+    "question": "The Thirty Years War ended with which treaty?",
+    "correct_answer": "Peace of Westphalia",
     "incorrect_answers": [
-      "Indonesia",
-      "Singapore",
-      "Thailand"
+      "Treaty of Versailles",
+      "Treaty of Paris",
+      "Peace of Prague"
     ]
   },
   {
     "type": "multiple",
     "difficulty": "medium",
-    "category": "Geography",
-    "question": "Bridgetown is the capital of which island country in the Carribean?",
-    "correct_answer": "Barbados",
+    "category": "History",
+    "question": "The seed drill was invented by which British inventor?",
+    "correct_answer": "Jethro Tull",
     "incorrect_answers": [
-      "Cuba",
-      "Jamaica&lrm;",
-      "Dominica"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "easy",
-    "category": "Geography",
-    "question": "Which nation claims ownership of Antarctica?",
-    "correct_answer": "No one, but there are claims.",
-    "incorrect_answers": [
-      "United States of America",
-      "United Nations",
-      "Australia"
+      "Charles Babbage",
+      "Isaac Newton",
+      "J.J Thomson"
     ]
   },
   {
     "type": "multiple",
     "difficulty": "hard",
-    "category": "Geography",
-    "question": "What is the capital city of Bermuda?",
-    "correct_answer": "Hamilton",
+    "category": "History",
+    "question": "What did the first vending machines in the early 1880&#039;s dispense?",
+    "correct_answer": "Post cards",
     "incorrect_answers": [
-      "Santo Dominigo",
-      "San Juan",
-      "Havana"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Geography",
-    "question": "What is the capital of Slovakia?",
-    "correct_answer": "Bratislava",
-    "incorrect_answers": [
-      "Sofia",
-      "Ljubljana",
-      "Sarajevo"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "hard",
-    "category": "Geography",
-    "question": "What is the name of the formerly rich fishing grounds off the island of Newfoundland, Canada?",
-    "correct_answer": "Grand Banks",
-    "incorrect_answers": [
-      "Great Barrier Reef",
-      "Mariana Trench",
-      "Hudson Bay"
+      "Alcohol",
+      "Cigarettes",
+      "Sodas "
     ]
   },
   {
     "type": "multiple",
     "difficulty": "easy",
-    "category": "Geography",
-    "question": "The Alps are a mountain range on which continent?",
-    "correct_answer": "Europe",
+    "category": "History",
+    "question": "Which one of these tanks was designed and operated by the United Kingdom?",
+    "correct_answer": "Tog II",
     "incorrect_answers": [
-      "North America",
-      "Asia",
-      "Africa"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "easy",
-    "category": "Geography",
-    "question": "Which UK country features a dragon on their flag?",
-    "correct_answer": "Wales",
-    "incorrect_answers": [
-      "England",
-      "North Ireland",
-      "Scotland"
-    ]
-  },
-  {
-    "type": "boolean",
-    "difficulty": "easy",
-    "category": "Geography",
-    "question": "San Marino is the only country completely surrounded by another country.",
-    "correct_answer": "False",
-    "incorrect_answers": [
-      "True"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Geography",
-    "question": "How many countries are inside the United Kingdom?",
-    "correct_answer": "Four",
-    "incorrect_answers": [
-      "Two",
-      "Three",
-      "One"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Geography",
-    "question": "Which Canadian province has Charlottetown as its capital?",
-    "correct_answer": "Prince Edward Island",
-    "incorrect_answers": [
-      "Saskachewan",
-      "Northwest Terrirories",
-      "Ontario"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Geography",
-    "question": "The historical city Timbuktu is located in which West African country?",
-    "correct_answer": "Mali",
-    "incorrect_answers": [
-      "Senegal",
-      "Niger",
-      "Burkina Faso"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Geography",
-    "question": "What island in the Canary Islands was the scene of one of the worst air disasters in history with the collision of two jumbo jets?",
-    "correct_answer": "Tenerife",
-    "incorrect_answers": [
-      "Fuerteventura",
-      "Gran Canaria",
-      "Maui"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Geography",
-    "question": "The Japanese district Akihabara is also known by what nickname?",
-    "correct_answer": "Electric Town",
-    "incorrect_answers": [
-      "Moon Walk River",
-      "Otaku Central ",
-      "Big Eyes"
-    ]
-  },
-  {
-    "type": "boolean",
-    "difficulty": "medium",
-    "category": "Geography",
-    "question": "Liechtenstein does not have an airport.",
-    "correct_answer": "True",
-    "incorrect_answers": [
-      "False"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Geography",
-    "question": "What is the capital of British Columbia, Canada?",
-    "correct_answer": "Victoria",
-    "incorrect_answers": [
-      "Vancouver",
-      "Hope",
-      "Kelowna"
-    ]
-  },
-  {
-    "type": "boolean",
-    "difficulty": "easy",
-    "category": "Geography",
-    "question": "California is larger than Japan.",
-    "correct_answer": "True",
-    "incorrect_answers": [
-      "False"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "Geography",
-    "question": "Colchester Overpass, otherwise known as &quot;Bunny Man Bridge&quot;, is located where?",
-    "correct_answer": "Fairfax County, Virginia",
-    "incorrect_answers": [
-      "Medford, Oregon",
-      "Braxton County, Virgina",
-      "Lemon Grove, California"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "easy",
-    "category": "Geography",
-    "question": "What is the name of New Zealand&#039;s indigenous people?",
-    "correct_answer": "Maori",
-    "incorrect_answers": [
-      "Vikings",
-      "Polynesians",
-      "Samoans"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "hard",
-    "category": "Geography",
-    "question": "The prefix Sino- (As in Sino-American) is used to refer to what nationality?",
-    "correct_answer": "Chinese",
-    "incorrect_answers": [
-      "Japanese",
-      "Russian",
-      "Indian"
-    ]
-  },
-  {
-    "type": "boolean",
-    "difficulty": "medium",
-    "category": "General Knowledge",
-    "question": "Fast food restaurant chains Carl&#039;s Jr. and Hardee&#039;s are owned by the same company.",
-    "correct_answer": "True",
-    "incorrect_answers": [
-      "False"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "easy",
-    "category": "General Knowledge",
-    "question": "Who is the author of Jurrasic Park?",
-    "correct_answer": "Michael Crichton",
-    "incorrect_answers": [
-      "Peter Benchley",
-      "Chuck Paluhniuk",
-      "Irvine Welsh"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "General Knowledge",
-    "question": "What was the destination of the missing flight MH370?",
-    "correct_answer": "Beijing",
-    "incorrect_answers": [
-      "Kuala Lumpur",
-      "Singapore",
-      "Tokyo"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "hard",
-    "category": "General Knowledge",
-    "question": "How long did it take the motorized window washers of the original World Trade Center to clean the entire exterior of the building?",
-    "correct_answer": "1 Month",
-    "incorrect_answers": [
-      "3 Weeks",
-      "1 Week",
-      "2 Months"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "easy",
-    "category": "General Knowledge",
-    "question": "What alcoholic drink is made from molasses?",
-    "correct_answer": "Rum",
-    "incorrect_answers": [
-      "Gin",
-      "Vodka",
-      "Whisky"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "hard",
-    "category": "General Knowledge",
-    "question": "Originally another word for poppy, coquelicot is a shade of what?",
-    "correct_answer": "Red",
-    "incorrect_answers": [
-      "Green",
-      "Blue",
-      "Pink"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "General Knowledge",
-    "question": "What was the name given to Japanese military dictators who ruled the country through the 12th and 19th Century?",
-    "correct_answer": "Shogun",
-    "incorrect_answers": [
-      "Ninja",
-      "Samurai",
-      "Shinobi"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "hard",
-    "category": "General Knowledge",
-    "question": "How many calories are in a 355 ml can of Pepsi Cola?",
-    "correct_answer": "150",
-    "incorrect_answers": [
-      "200",
-      "100",
-      "155"
-    ]
-  },
-  {
-    "type": "boolean",
-    "difficulty": "hard",
-    "category": "General Knowledge",
-    "question": "This is the correct spelling of &quot;Supercalifragilisticexpialidocious&quot;.",
-    "correct_answer": "True",
-    "incorrect_answers": [
-      "False"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "General Knowledge",
-    "question": "Scotch whisky and Drambuie make up which cocktail?",
-    "correct_answer": "Rusty Nail",
-    "incorrect_answers": [
-      "Screwdriver",
-      "Sex on the Beach",
-      "Manhattan"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "General Knowledge",
-    "question": "Amsterdam Centraal station is twinned with what station?",
-    "correct_answer": "London Liverpool Street",
-    "incorrect_answers": [
-      "Frankfurt (Main) Hauptbahnhof",
-      "Paris Gare du Nord",
-      "Brussels Midi"
-    ]
-  },
-  {
-    "type": "boolean",
-    "difficulty": "medium",
-    "category": "General Knowledge",
-    "question": "The French word to travel is &quot;Travail&quot;",
-    "correct_answer": "False",
-    "incorrect_answers": [
-      "True"
-    ]
-  },
-  {
-    "type": "boolean",
-    "difficulty": "easy",
-    "category": "General Knowledge",
-    "question": "It is automatically considered entrapment in the United States if the police sell you illegal substances without revealing themselves.",
-    "correct_answer": "False",
-    "incorrect_answers": [
-      "True"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "hard",
-    "category": "General Knowledge",
-    "question": "What type of dog is &#039;Handsome Dan&#039;, the mascot of Yale University?",
-    "correct_answer": "Bulldog",
-    "incorrect_answers": [
-      "Yorkshire Terrier",
-      "Boxer",
-      "Pug"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "easy",
-    "category": "General Knowledge",
-    "question": "Foie gras is a French delicacy typically made from what part of a duck or goose?",
-    "correct_answer": "Liver",
-    "incorrect_answers": [
-      "Heart",
-      "Stomach",
-      "Intestines"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "easy",
-    "category": "General Knowledge",
-    "question": "What is Tasmania?",
-    "correct_answer": "An Australian State",
-    "incorrect_answers": [
-      "A flavor of Ben and Jerry&#039;s ice-cream",
-      "A Psychological Disorder",
-      "The Name of a Warner Brothers Cartoon Character"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "General Knowledge",
-    "question": "Which of these words means &quot;idle spectator&quot;?",
-    "correct_answer": "Gongoozler",
-    "incorrect_answers": [
-      "Gossypiboma",
-      "Jentacular",
-      "Meupareunia"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "easy",
-    "category": "General Knowledge",
-    "question": "What zodiac sign is represented by a pair of scales?",
-    "correct_answer": "Libra",
-    "incorrect_answers": [
-      "Aries",
-      "Capricorn",
-      "Sagittarius"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "General Knowledge",
-    "question": "What name represents the letter &quot;M&quot; in the NATO phonetic alphabet?",
-    "correct_answer": "Mike",
-    "incorrect_answers": [
-      "Matthew",
-      "Mark",
-      "Max"
+      "M4 Sherman",
+      "Tiger H1",
+      "T-34"
     ]
   }
 ]
