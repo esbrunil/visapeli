@@ -1,3 +1,7 @@
+
+let uId;
+
+
 window.onload = async () => {
 
     const uId = await (await fetch("../main.cgi/annaID")).text();
@@ -34,4 +38,25 @@ window.onload = async () => {
             "Content-Type": "application/json"
         }
     }));
+
+    setInterval(async () => {
+        console.log("interval");
+        await heartbeat();
+    }, 3000);
+
+    const heartbeat = async () => {
+
+        const object = {
+            kayttajaID: uId
+        }
+
+        const data = await (await fetch("../main.cgi/heartbeat", {
+            method: "POST",
+            body: JSON.stringify(object),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })).json();
+        console.log(data);
+    }
 }

@@ -2,17 +2,21 @@
 from flask import Flask, request, redirect, render_template, session, url_for
 from flask_cors import CORS
 from functools import wraps
-import time, json, math, random
+from filelock  import FileLock, Timeout
+import time, json, math, random, uuid
 
 
 app = Flask(__name__)
 CORS(app)
 
 
+# Reitit ------------------------------------------------------------------------------------------------------------------------------------------
+
+
 # Palauttaa default-html:n, kun sivu ladataan
 @app.route("/", methods=['GET'])
 def index():
-    return redirect("main.cgi/ValitseAihe", 302)
+    return redirect("main.cgi/ValitseAihe", 301)
 
 @app.route("/ValitseAihe", methods=['GET'])
 def ValitseAihe():
@@ -25,6 +29,24 @@ def Peli(aihe):
 
 @app.route('/heartbeat', methods=['POST'])
 def Heartbeat():
+    aika = math.floor(time.time())
+    tied = "users.json"
+    lock_path = "users.json.lock"
+    id = request.json["kayttajaID"]
+
+    lock = FileLock(lock_path, timeout=5)
+
+    data = lueJSONTiedosto("users.json")
+
+    data[id]["heartbeat"] = aika
+
+    for user in list(data):
+        if (aika - data[user]["heartbeat"]) > 10:
+            del data[user]
+
+    kirjoitaJSONTiedostoon("users.json", data)
+
+            
     return "", 200
 
 
@@ -35,24 +57,13 @@ def Heartbeat():
 @app.route('/annaID', methods=['GET'])
 def annaID():
     id = None
-    with open('users.json', 'r') as users:
-        liveUsers = json.load(users)
+    liveUsers = lueJSONTiedosto("users.json")
 
-    #ID ajanhetken perusteella. Jos ID on jo varattu, pyöritetään silmukkaa, kunnes vapaa ID löytyy.
-    while True:
-        varattu = False
-        id = (str)(math.floor(time.time()))
+    id = (str)(uuid.uuid4())
 
-        if id in liveUsers:
-            varattu = True
-
-        if not varattu:
-            break
-
-    liveUsers[id] = {"aihe": ""}
+    liveUsers[id] = {"aihe": "", "heartbeat": time.time(), "nimi": ""}
     
-    with open('users.json', 'w') as users:
-        json.dump(liveUsers, users, indent=2)
+    kirjoitaJSONTiedostoon("users.json", liveUsers)
 
     return id, 200
 
@@ -65,17 +76,14 @@ def asetaAihe():
     id = request.json['kayttajaID']
     aihe = request.json['aihe']
 
-    with open('users.json', 'r') as users:
-        data = json.load(users)
+    data = lueJSONTiedosto("users.json")
     
     data[id]['aihe'] = aihe
 
-    with open('users.json', 'w') as users:
-        json.dump(data, users, indent=2)
+    kirjoitaJSONTiedostoon("users.json", data)
 
     kysymykset = []
-    with open('kysymykset.json',  'r') as qF:
-        qData = json.load(qF)
+    qData = lueJSONTiedosto("kysymykset.json")
     
     for q in qData[aihe]:
         kysymykset.append(q)
@@ -116,3 +124,35 @@ def tarkistaVastaus():
     # tarkista
     # palauta mitä?
     return data, 200
+
+
+# Yleiset funktiot ------------------------------------------------------------------------------------------------------------------------------------------
+
+
+def lueJSONTiedosto(tiedosto):
+    lock_tied = f"{tiedosto}.lock"
+
+    lock = FileLock(lock_tied, 5)
+
+    try:
+        with lock:
+            try:
+                with open(tiedosto, "r") as tied:
+                    return json.load(tied)
+            except json.JSONDecodeError:
+                return {}
+    except Timeout:
+        return "timeout"
+        
+
+def kirjoitaJSONTiedostoon(tiedosto, data):
+    lock_tied = f"{tiedosto}.lock"
+
+    lock = FileLock(lock_tied, 5)
+
+    try:
+        with lock:
+            with open(tiedosto, "w") as tied:
+                json.dump(data, tied, indent=2)
+    except Timeout:
+        return "timeout"
