@@ -16,6 +16,7 @@ CORS(app)
 # Palauttaa default-html:n, kun sivu ladataan
 @app.route("/", methods=['GET'])
 def index():
+    #testaa onko uusi päivä ja päivitä päivänvisa?
     return render_template("index.html")
     #return redirect("main.cgi/ValitseAihe", 301)
 
@@ -53,6 +54,9 @@ def Heartbeat():
 # return: id
 @app.route('/annaID', methods=['GET'])
 def annaID():
+    #luo indeksi, joka välillä 1 ja max lkm aiheista i mod h
+    #miten maksimi saadaan?
+    #pitää varmaan luoda joku kyselyhässäkkä, joka palauttaa maksimin?
     id = None
     liveUsers = lueJSONTiedosto("users.json")
 
@@ -84,7 +88,15 @@ def asetaAihe():
     
     for q in qData[aihe]:
         kysymykset.append(q)
+    #algoritmi:
+    #aloitusindeksi = käyttäjän indeksi
+    #kysymyslkm = montako kysymystä haetaan
+    #i = 0
+    #while i < kysymyslkm
+    #hae kysymyksiä
+    #i++
 
+    #päivitä users.json indeksi
     random.shuffle(kysymykset)
 
     return { "aiheData": data[id], "kysymykset": kysymykset }, 200
