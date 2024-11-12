@@ -16,7 +16,8 @@ CORS(app)
 # Palauttaa default-html:n, kun sivu ladataan
 @app.route("/", methods=['GET'])
 def index():
-    return redirect("main.cgi/ValitseAihe", 301)
+    return render_template("index.html")
+    #return redirect("main.cgi/ValitseAihe", 301)
 
 @app.route("/ValitseAihe", methods=['GET'])
 def ValitseAihe():
@@ -30,11 +31,7 @@ def Peli(aihe):
 @app.route('/heartbeat', methods=['POST'])
 def Heartbeat():
     aika = math.floor(time.time())
-    tied = "users.json"
-    lock_path = "users.json.lock"
     id = request.json["kayttajaID"]
-
-    lock = FileLock(lock_path, timeout=5)
 
     data = lueJSONTiedosto("users.json")
 

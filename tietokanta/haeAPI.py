@@ -22,7 +22,7 @@ def main():
     
     elif len(sys.argv) == 2:
         if (sys.argv[1].lower() not in aiheet):
-            print("Virheellinen aihe")
+            print(f"{RED}Virheellinen aihe{RESET}")
             return
        
         aihe = aiheet[sys.argv[1].lower()]

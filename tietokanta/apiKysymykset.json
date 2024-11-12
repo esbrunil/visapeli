@@ -116,5 +116,333 @@
       "Tiger H1",
       "T-34"
     ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "History",
+    "question": "List the following Iranic empires in chronological order:",
+    "correct_answer": "Median, Achaemenid, Parthian, Sassanid",
+    "incorrect_answers": [
+      "Median, Achaemenid, Sassanid, Parthian",
+      "Achaemenid, Median, Parthian, Sassanid",
+      "Achaemenid, Median, Sassanid, Parthian"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "The Battle of the Somme in World War I took place in which country?",
+    "correct_answer": "France",
+    "incorrect_answers": [
+      "Germany",
+      "Italy",
+      "Austria"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "What date was the first flight of the P-40 Warhawk?",
+    "correct_answer": "October 14 1938",
+    "incorrect_answers": [
+      "August 21 1939",
+      "January 12 1940",
+      "June 1 1939"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "When Christopher Columbus sailed to America, what was the first region he arrived in?",
+    "correct_answer": "The Bahamas Archipelago",
+    "incorrect_answers": [
+      "Florida",
+      "Isthmus of Panama",
+      "Nicaragua"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "Adolf Hitler was born on which date?",
+    "correct_answer": "April 20, 1889",
+    "incorrect_answers": [
+      "June 12, 1889",
+      "February 6, 1889",
+      "April 16, 1889"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "What was the name of the chemical that was dropped on Vietnam during the Vietnam war?",
+    "correct_answer": "Agent Orange",
+    "incorrect_answers": [
+      "Phosgene",
+      "Mustard Gas",
+      "Hydrogen Cyanide"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "History",
+    "question": "Before the American colonies switched to the Gregorian calendar in 1752, on what date did their new year start?",
+    "correct_answer": "March 25th",
+    "incorrect_answers": [
+      "June 1st",
+      "September 25th",
+      "December 1st"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "History",
+    "question": "Which country was Josef Stalin born in?",
+    "correct_answer": "Georgia",
+    "incorrect_answers": [
+      "Russia",
+      "Germany",
+      "Poland"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "The Korean War started in what year?",
+    "correct_answer": "1950",
+    "incorrect_answers": [
+      "1945",
+      "1960",
+      "1912"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "Geography",
+    "question": "Which of these countries is &quot;doubly landlocked&quot; (surrounded entirely by one or more landlocked countries)?",
+    "correct_answer": "Uzbekistan",
+    "incorrect_answers": [
+      "Switzerland",
+      "Bolivia",
+      "Ethiopia"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "Geography",
+    "question": "What is the capital of Greenland?",
+    "correct_answer": "Nuuk",
+    "incorrect_answers": [
+      "Sisimiut",
+      "Narsaq",
+      "Maniitsoq"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "Geography",
+    "question": "What continent is the country Lesotho in?",
+    "correct_answer": "Africa",
+    "incorrect_answers": [
+      "Asia",
+      "South America",
+      "Europe"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "Geography",
+    "question": "Which country was NOT formerly part of Yugoslavia?",
+    "correct_answer": "Albania",
+    "incorrect_answers": [
+      "Croatia",
+      "Serbia",
+      "Macedonia"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "Geography",
+    "question": "What is the largest country in the world?",
+    "correct_answer": "Russia",
+    "incorrect_answers": [
+      "Canada",
+      "China",
+      "United States"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "Geography",
+    "question": "Where is Hadrian&#039;s Wall located?",
+    "correct_answer": "Carlisle, England",
+    "incorrect_answers": [
+      "Rome, Italy",
+      "Alexandria, Egypt",
+      "Dublin, Ireland"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "Geography",
+    "question": "What is the busiest port in Europe?",
+    "correct_answer": "Port of Rotterdam",
+    "incorrect_answers": [
+      "Port of Antwerp",
+      "Port of Hamburg",
+      "Port of Amsterdam"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "Geography",
+    "question": "Which of the following is not a megadiverse country - one that harbors a high number of the earth&#039;s endemic species?",
+    "correct_answer": "Thailand",
+    "incorrect_answers": [
+      "Peru",
+      "Mexico",
+      "South Africa"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "Geography",
+    "question": "What is the capital of Jamaica?",
+    "correct_answer": "Kingston",
+    "incorrect_answers": [
+      "San Juan",
+      "Port-au-Prince",
+      "Bridgetown"
+    ]
+  },
+  {
+    "type": "boolean",
+    "difficulty": "easy",
+    "category": "Geography",
+    "question": "Toronto is the capital city of the North American country of Canada.",
+    "correct_answer": "False",
+    "incorrect_answers": [
+      "True"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "Geography",
+    "question": "Which European city has the highest mileage of canals in the world?",
+    "correct_answer": "Birmingham",
+    "incorrect_answers": [
+      "Venice",
+      "Amsterdam",
+      "Berlin"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "Geography",
+    "question": "What was the most populous city in the Americas in 2015?",
+    "correct_answer": "S&atilde;o Paulo",
+    "incorrect_answers": [
+      "New York",
+      "Mexico City",
+      "Los Angeles"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "Geography",
+    "question": "In which city, is the Big Nickel located in Canada?",
+    "correct_answer": "Sudbury, Ontario",
+    "incorrect_answers": [
+      "Calgary, Alberta",
+      "Halifax, Nova Scotia ",
+      "Victoria, British Columbia"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "Geography",
+    "question": "What is the second-largest city in Lithuania?",
+    "correct_answer": "Kaunas",
+    "incorrect_answers": [
+      "Panev\u0117\u017eys",
+      "Vilnius",
+      "Klaip\u0117da"
+    ]
+  },
+  {
+    "type": "boolean",
+    "difficulty": "easy",
+    "category": "Geography",
+    "question": "Nova Scotia is on the east coast of Canada.",
+    "correct_answer": "True",
+    "incorrect_answers": [
+      "False"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "Geography",
+    "question": "How many time zones does China have?",
+    "correct_answer": "1",
+    "incorrect_answers": [
+      "3",
+      "4",
+      "2"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "Geography",
+    "question": "Which country does Austria not border?",
+    "correct_answer": "France",
+    "incorrect_answers": [
+      "Slovenia",
+      "Switzerland",
+      "Slovakia"
+    ]
+  },
+  {
+    "type": "boolean",
+    "difficulty": "medium",
+    "category": "Geography",
+    "question": "The Southeast Asian island of Borneo is politically divided among 3 countries.",
+    "correct_answer": "True",
+    "incorrect_answers": [
+      "False"
+    ]
+  },
+  {
+    "type": "boolean",
+    "difficulty": "medium",
+    "category": "Geography",
+    "question": "Is Tartu the capital of Estonia?",
+    "correct_answer": "False",
+    "incorrect_answers": [
+      "True"
+    ]
   }
 ]
