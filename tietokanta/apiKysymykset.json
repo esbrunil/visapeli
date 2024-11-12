@@ -444,5 +444,229 @@
     "incorrect_answers": [
       "True"
     ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "History",
+    "question": "The &quot;Trail of Tears&quot; was a result of which United States President&#039;s Indian Removal Policy?",
+    "correct_answer": "Andrew Jackson",
+    "incorrect_answers": [
+      "Harry S. Truman",
+      "Martin Van Buren",
+      "John Quincy Adams"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "When was the United States National Security Agency established?",
+    "correct_answer": "November 4, 1952",
+    "incorrect_answers": [
+      "July 26, 1908",
+      " July 1, 1973",
+      " November 25, 2002"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "Which country gifted the Statue of Liberty to the United States of America?",
+    "correct_answer": "France",
+    "incorrect_answers": [
+      "Spain",
+      "England",
+      "Germany"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "History",
+    "question": "What did the abbreviation &quot;RMS&quot; stand for in the RMS Titanic in 1912?",
+    "correct_answer": "Royal Mail Ship",
+    "incorrect_answers": [
+      "Royal Majesty Service",
+      "Regular Maritime Schedule ",
+      "Regulated Maelstrom Sensor"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "History",
+    "question": "During the Roman Triumvirate of 42 BCE, what region of the Roman Republic was given to Lepidus?",
+    "correct_answer": "Hispania ",
+    "incorrect_answers": [
+      "Italia",
+      "Gallia",
+      "Asia"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "Which U.S. President was in office when the Gulf War began?",
+    "correct_answer": "George H. W. Bush",
+    "incorrect_answers": [
+      "Richard Nixon",
+      "George W. Bush ",
+      "Ronald Regan"
+    ]
+  },
+  {
+    "type": "boolean",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "Assyrian king Sennacherib&#039;s destruction of Babylon in 689 BCE was viewed as a triumph by other Assyrian citizens.",
+    "correct_answer": "False",
+    "incorrect_answers": [
+      "True"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "History",
+    "question": "In what year did the Wall Street Crash take place?",
+    "correct_answer": "1929",
+    "incorrect_answers": [
+      "1932",
+      "1930",
+      "1925"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "History",
+    "question": "The son of which pope supposedly held a lecherous f&ecirc;te involving 50 courtesans in the papal palace?",
+    "correct_answer": "Alexander VI",
+    "incorrect_answers": [
+      "Innocent V",
+      "Urban II",
+      "Pius III"
+    ]
+  },
+  {
+    "type": "boolean",
+    "difficulty": "medium",
+    "category": "General Knowledge",
+    "question": "Coca-Cola&#039;s original colour was green.",
+    "correct_answer": "False",
+    "incorrect_answers": [
+      "True"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "General Knowledge",
+    "question": "What was the destination of the missing flight MH370?",
+    "correct_answer": "Beijing",
+    "incorrect_answers": [
+      "Kuala Lumpur",
+      "Singapore",
+      "Tokyo"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "General Knowledge",
+    "question": "What word represents the letter &#039;T&#039; in the NATO phonetic alphabet?",
+    "correct_answer": "Tango",
+    "incorrect_answers": [
+      "Target",
+      "Taxi",
+      "Turkey"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "General Knowledge",
+    "question": "What is the name given to Indian food cooked over charcoal in a clay oven?",
+    "correct_answer": "Tandoori",
+    "incorrect_answers": [
+      "Biryani",
+      "Pani puri",
+      "Tiki masala"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "General Knowledge",
+    "question": "On average, Americans consume 100 pounds of what per second?",
+    "correct_answer": "Chocolate",
+    "incorrect_answers": [
+      "Potatoes",
+      "Donuts",
+      "Cocaine"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "General Knowledge",
+    "question": "What is the average life span of a garden ant?",
+    "correct_answer": "15 years",
+    "incorrect_answers": [
+      "24 hours",
+      "1 week",
+      "3 years"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "General Knowledge",
+    "question": "Red Vines is a brand of what type of candy?",
+    "correct_answer": "Licorice",
+    "incorrect_answers": [
+      "Lollipop",
+      "Chocolate",
+      "Bubblegum"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "General Knowledge",
+    "question": "What is the Portuguese word for &quot;Brazil&quot;?",
+    "correct_answer": "Brasil",
+    "incorrect_answers": [
+      "Brazil",
+      "Brasilia",
+      "Bras&iacute;l"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "General Knowledge",
+    "question": "What country saw a world record 315 million voters turn out for elections on May 20, 1991?",
+    "correct_answer": "India",
+    "incorrect_answers": [
+      "United States of America",
+      "Soviet Union",
+      "Poland"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "General Knowledge",
+    "question": "Linus Pauling, one of the only winners of multiple Nobel Prizes, earned his Nobel Prizes in Chemistry and what?",
+    "correct_answer": "Peace",
+    "incorrect_answers": [
+      "Physics",
+      "Economics",
+      "Physiology/Medicine"
+    ]
   }
 ]

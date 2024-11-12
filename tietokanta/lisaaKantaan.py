@@ -1,42 +1,12 @@
 import sqlite3, json
 from kysymyssetti import Kysymyssetti
 
+
 #suluissa :memory:, niin tekee vain muistiin
-conn = sqlite3.connect('kysymykset.db')
+conn = sqlite3.connect('tietokanta/tietokanta.db')
 #conn = sqlite3.connect(':memory:')
 
 c = conn.cursor()
-c.execute('''
-    CREATE TABLE IF NOT EXISTS Aiheet (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        aihe TEXT NOT NULL UNIQUE
-    )
-''')
-
-#Olk oikea_vastaus = ov, tällöin jos ov = 0 --> False,
-#ov = 1 --> True (vastauksia = 2), ov = 2 --> (vastauksia > 2) Custom --> 
-#Luodaan rivit tauluun Vastausvaihtoehdot
-c.execute('''
-    CREATE TABLE IF NOT EXISTS Kysymykset (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        aihe_id INTEGER,
-        vastauksia INTEGER,
-        oikea_vastaus INTEGER,
-        kysymys TEXT,
-        FOREIGN KEY (aihe_id) REFERENCES Aiheet (id) ON DELETE CASCADE
-    )
-''')
-
-c.execute('''
-          CREATE TABLE Vastausvaihtoehdot (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            kysymys_id INTEGER,
-            vve_teksti TEXT,
-            onko_oikein BOOLEAN,
-            FOREIGN KEY (kysymys_id) REFERENCES Kysymykset (id) ON DELETE CASCADE
-        )
-''')
-
 
 def insert_aihe(aihe):
     with conn:
@@ -71,6 +41,10 @@ def get_vve():
     c.execute("SELECT * FROM Vastausvaihtoehdot")
     return c.fetchall()
 
+def get_kysymys(kysymys):
+    c.execute('SELECT kysymys FROM Kysymykset WHERE kysymys = ?', (kysymys,))
+    return c.fetchone()
+
 def get_kysymys_id(kysymys):
     c.execute('SELECT id FROM Kysymykset WHERE kysymys = ?', (kysymys,))
     return c.fetchone()
@@ -93,31 +67,21 @@ c.execute('SELECT * FROM Vastausvaihtoehdot WHERE kysymys_id = (?) AND onko_oike
 print(c.fetchall())
 '''
 
-with open('./Visapeli/tietokanta/pk.json', 'r') as kysym:
+with open('./tietokanta/apiKysymykset.json', 'r') as kysym:
     data = json.load(kysym)
 ksetti = Kysymyssetti(data)
-
-print(get_aihe("historia") == None)
 
 for kysymys in ksetti.kysymykset:
     if(get_aihe(kysymys.aihe) == None):
         insert_aihe(kysymys.aihe)
-    insert_kysymys(get_aihe_id(kysymys.aihe)[0],kysymys.vastauksia,
-                   kysymys.oikea_vastaus,kysymys.kysymys)
-    if(kysymys.oikea_vastaus == 2):
-        k_id = get_kysymys_id(kysymys.kysymys)[0]
-        for key, value in kysymys.vve.items():
-            insert_vve(k_id, key, value)
+    #jos kysymys ei ole olemassa, niin lisätään se
 
-#loytyko = get_aiheet()
-#for row in loytyko:
-#    print(row)
+    if(get_kysymys(kysymys.kysymys) == None):
+        insert_kysymys(get_aihe_id(kysymys.aihe)[0],kysymys.vastauksia,
+                    kysymys.oikea_vastaus,kysymys.kysymys)
+        if(kysymys.oikea_vastaus == 2):
+            k_id = get_kysymys_id(kysymys.kysymys)[0]
+            for key, value in kysymys.vve.items():
+                insert_vve(k_id, key, value)
 
-#loytyko = get_kysymykset()
-#for row in loytyko:
-#    print(row)
-
-#loytyko = get_vve()
-#for row in loytyko:
-#    print(row)
-conn.close()
+conn.close() #??????
