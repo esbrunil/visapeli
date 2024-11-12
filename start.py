@@ -16,7 +16,8 @@ CORS(app)
 # Palauttaa default-html:n, kun sivu ladataan
 @app.route("/", methods=['GET'])
 def index():
-    return redirect("main.cgi/ValitseAihe", 301)
+    return render_template("peli.html")
+    # return redirect("main.cgi/ValitseAihe", 301)
 
 @app.route("/ValitseAihe", methods=['GET'])
 def ValitseAihe():

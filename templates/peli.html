@@ -186,6 +186,19 @@ const Peli = () => {
 
   React.useEffect(() => {
 
+    const interval = setInterval(() => {
+      heartbeat();
+    }, 5000);
+  
+    const hearbeat() = async => {
+      try {
+        const response = await fetch("../heartbeat");
+        if (!response.ok) {
+          throw new Error("Sydän ei lyö");
+        }
+      }
+    }
+
     const haeId = async () => {
       try {
         const response = await fetch("../annaID"); 
