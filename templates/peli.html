@@ -35,6 +35,7 @@ const Kysymys = ({userId, kysymys}) => {
   const [painettu, setPainettu] = React.useState(false);
   const [aktiivinen, setAktiivinen] = React.useState(-1);
   const [isCorrect, setIsCorrect] = React.useState(null);
+  const [aihe, setAihe] = React.useState("Ei asetettu")
 
   const haeKysymys = async (kysymysIndex) => {
     try {
@@ -48,6 +49,7 @@ const Kysymys = ({userId, kysymys}) => {
           throw new Error("Virhe");
         }
         const result = await response.json();
+        setAihe(kysymys.aiheData.aihe);
         setQuestion(result);
       } catch (error) {
         //
@@ -127,26 +129,26 @@ const Kysymys = ({userId, kysymys}) => {
   };
 
   let Kello = () => {
-    const handRef = React.useRef(null);
-    React.useEffect(() => {
-      handRef.current.style.animation = 'rotateHand 5s linear forwards';
-    }, []);
-
     return (
-      <div className="clock">
-        <div className="pie spinner" ref={handRef}></div>
-        <div className="pie paint"></div>
-        <div className="hand"></div>
-        <div className="mask"></div>
-      </div>
+     <div className="clock">
+      <div className="pie spinner"></div>
+      <div className="pie paint"></div>
+      <div className="mask"></div>
+     </div>
     );
   }
 
   let kysymysJaNapit = (question) => {
     return (
-    <div>
-      <Kello/>
-        <h1 className={"kysymys"}>{question.kysymys}</h1>
+    <div className="kysymysDiv">
+        <div className="tiedot">
+          
+          <div className="kelloDiv"><Kello/></div> 
+          <div>{aihe}</div> 
+        </div>
+        <div className="ylapalkki">
+          <h1 className={"kysymys"}>{question.kysymys}</h1>
+        </div>
       {Object.entries(question.vastausvaihtoehdot).map(([key, vastaus], index) => (
       <div 
         key={key} 
@@ -190,14 +192,14 @@ const Peli = () => {
       try {
         const response = await fetch("../annaID"); 
         if (!response.ok) {
-          throw new Error("");
+          throw new Error("Virhe response ei ole ok");
         }
-        const result = await response.json();
+        const result = await response.text();
         console.log(result);
         setUserId(result); 
         asetaAihe(result);
       } catch (error) {
-        //
+        console.error(error);
       }
     };
 
@@ -220,7 +222,7 @@ const Peli = () => {
         setKysymys(result);
 
       } catch (error) {
-        //
+        console.log("virhe ei onnistu");
       }
     };
 
