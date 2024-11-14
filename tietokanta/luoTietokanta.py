@@ -30,7 +30,7 @@ c.execute('''
 ''')
 
 c.execute('''
-          CREATE TABLE Vastausvaihtoehdot (
+          CREATE TABLE IF NOT EXISTS Vastausvaihtoehdot (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             kysymys_id INTEGER,
             vve_teksti TEXT,
@@ -38,6 +38,16 @@ c.execute('''
             FOREIGN KEY (kysymys_id) REFERENCES Kysymykset (id) ON DELETE CASCADE
         )
 ''')
+
+#Tämä kannattaa ajaa heti tehdessä
+c.execute('''
+    CREATE INDEX IF NOT EXISTS idx_aihe_id ON Kysymykset(aihe_id);
+''')
+
+#Tämän voi ajaa, jos tehty hyvin laajoja muokkauksia tietokantaan
+#c.execute('''
+#    REINDEX idx_aihe_id;
+#''')
 
 
 

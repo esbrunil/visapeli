@@ -3,9 +3,8 @@ from kysymyssetti import Kysymyssetti
 
 
 #suluissa :memory:, niin tekee vain muistiin
-conn = sqlite3.connect('tietokanta.db')
 #conn = sqlite3.connect(':memory:')
-
+conn = sqlite3.connect('tietokanta.db')
 c = conn.cursor()
 
 def insert_aihe(aihe):
