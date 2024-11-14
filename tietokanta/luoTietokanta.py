@@ -16,8 +16,6 @@ c.execute('''
 #Olk oikea_vastaus = ov, tällöin jos ov = 0 --> False,
 #ov = 1 --> True (vastauksia = 2), ov = 2 --> (vastauksia > 2) Custom --> 
 #Luodaan rivit tauluun Vastausvaihtoehdot
-
-#TODO: päivitä tuplakey tai selvitä, voiko tehdä muutoin
 c.execute('''
     CREATE TABLE IF NOT EXISTS Kysymykset (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -30,7 +28,7 @@ c.execute('''
 ''')
 
 c.execute('''
-          CREATE TABLE IF NOT EXISTS Vastausvaihtoehdot (
+          CREATE TABLE Vastausvaihtoehdot (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             kysymys_id INTEGER,
             vve_teksti TEXT,
@@ -48,9 +46,6 @@ c.execute('''
 #c.execute('''
 #    REINDEX idx_aihe_id;
 #''')
-
-
-
 
 #loytyko = get_aiheet()
 #for row in loytyko:

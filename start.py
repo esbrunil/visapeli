@@ -55,9 +55,13 @@ def Heartbeat():
 @app.route('/annaID', methods=['GET'])
 def annaID():
     #luo indeksi, joka välillä 1 ja max lkm aiheista i mod h
+<<<<<<< HEAD
+    #connect ja close
+=======
     #miten maksimi saadaan?
     #pitää varmaan luoda joku kyselyhässäkkä, joka palauttaa maksimin?
 
+>>>>>>> refs/remotes/origin/main
     id = None
     liveUsers = lueJSONTiedosto("users.json")
 
