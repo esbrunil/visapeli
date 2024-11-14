@@ -3,7 +3,7 @@ from flask import Flask, request, redirect, render_template, session, url_for
 from flask_cors import CORS
 from functools import wraps
 from filelock  import FileLock, Timeout
-import time, json, math, random, uuid
+import time, json, math, random, uuid, sqlite3
 
 
 app = Flask(__name__)
@@ -17,8 +17,8 @@ CORS(app)
 @app.route("/", methods=['GET'])
 def index():
     #testaa onko uusi päivä ja päivitä päivänvisa?
-    return render_template("index.html")
-    #return redirect("main.cgi/ValitseAihe", 301)
+    return redirect(request.base_url + "ValitseAihe", 301)
+
 
 @app.route("/ValitseAihe", methods=['GET'])
 def ValitseAihe():
@@ -55,13 +55,19 @@ def Heartbeat():
 @app.route('/annaID', methods=['GET'])
 def annaID():
     #luo indeksi, joka välillä 1 ja max lkm aiheista i mod h
+<<<<<<< HEAD
     #connect ja close
+=======
+    #miten maksimi saadaan?
+    #pitää varmaan luoda joku kyselyhässäkkä, joka palauttaa maksimin?
+
+>>>>>>> refs/remotes/origin/main
     id = None
     liveUsers = lueJSONTiedosto("users.json")
 
     id = (str)(uuid.uuid4())
 
-    liveUsers[id] = {"aihe": "", "heartbeat": time.time(), "nimi": ""}
+    liveUsers[id] = {"aihe": "", "heartbeat": math.floor(time.time()), "nimi": ""}
     
     kirjoitaJSONTiedostoon("users.json", liveUsers)
 
@@ -121,20 +127,30 @@ def haeKysymys():
 # return oikeiden määrä?
 @app.route('/tarkistaVastaus', methods=['POST'])
 def tarkistaVastaus():
-    vastaus = request.json['vastaus']
-    kysymysID = request.json['kysymysID']
-    kayttajaID = request.json['kayttajaID'] #tai aihe?
+    vastaus = request.json['vastausID']
 
-    with open('kysymykset.json', 'r') as kysymykset:
-        data = json.load(kysymykset)
+    oikein = tarkista_onko_oikein(vastaus)
     
     # hae tässä datasta haluttu tieto, eli oikeiden vastausten taulukko
     # tarkista
     # palauta mitä?
-    return data, 200
+    return (str)(oikein), 200
 
 
 # Yleiset funktiot ------------------------------------------------------------------------------------------------------------------------------------------
+
+def haeKannasta(query):
+    conn = sqlite3.connect('tietokanta/tietokanta.db')
+    c = conn.cursor()
+    c.execute(query)
+    res = c.fetchall()
+    conn.close()
+    return res
+
+
+def tarkista_onko_oikein(vastausID):
+    q = f"SELECT onko_oikein FROM (SELECT * FROM Vastausvaihtoehdot WHERE id = {vastausID})"
+    return haeKannasta(q)[0]
 
 
 def lueJSONTiedosto(tiedosto):

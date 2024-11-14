@@ -3,8 +3,13 @@ from kysymyssetti import Kysymyssetti
 
 
 #suluissa :memory:, niin tekee vain muistiin
+<<<<<<< HEAD
 #conn = sqlite3.connect('tietokanta/tietokanta.db')
 conn = sqlite3.connect(':memory:')
+=======
+conn = sqlite3.connect('tietokanta.db')
+#conn = sqlite3.connect(':memory:')
+>>>>>>> refs/remotes/origin/main
 
 c = conn.cursor()
 
@@ -98,7 +103,11 @@ c.execute('SELECT * FROM Vastausvaihtoehdot WHERE kysymys_id = (?) AND onko_oike
 print(c.fetchall())
 '''
 
+<<<<<<< HEAD
 with open('./Visapeli/tietokanta/testikysymykset.json', 'r') as kysym:
+=======
+with open('apiKysymykset.json', 'r') as kysym:
+>>>>>>> refs/remotes/origin/main
     data = json.load(kysym)
 ksetti = Kysymyssetti(data)
 
