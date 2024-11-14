@@ -4,8 +4,31 @@ let uId;
 
 window.onload = async () => {
 
+
     // Requesti "annaID"
     const uId = await (await fetch("../main.cgi/annaID")).text();
+
+        // Lähetetään heartbeat joka 3. sekunti
+        setInterval(async () => {
+            console.log("interval");
+            await heartbeat();
+        }, 3000);
+    
+        // Heartbeat-toteutus
+        const heartbeat = async () => {
+            const object = {
+                kayttajaID: uId
+            }
+    
+            const data = await (await fetch("../main.cgi/heartbeat", {
+                method: "POST",
+                body: JSON.stringify(object),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })).json();
+            console.log(data);
+        }
 
     // Tehdään objekti, jossa käyttäjän id ja aiheena hissa
     const obj = {
@@ -44,25 +67,16 @@ window.onload = async () => {
         }
     }));
 
-    // Lähetetään heartbeat joka 3. sekunti
-    setInterval(async () => {
-        console.log("interval");
-        await heartbeat();
-    }, 3000);
-
-    // Heartbeat-toteutus
-    const heartbeat = async () => {
-        const object = {
-            kayttajaID: uId
-        }
-
-        const data = await (await fetch("../main.cgi/heartbeat", {
-            method: "POST",
-            body: JSON.stringify(object),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })).json();
-        console.log(data);
+    // Testataan vastaus
+    const vastausTark = {
+        vastausID: 866
     }
+
+    await (await fetch("../main.cgi/tarkistaVastaus", {
+        method: "POST",
+        body: JSON.stringify(vastausTark),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }));
 }
