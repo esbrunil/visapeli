@@ -3538,5 +3538,123 @@
       "Merlin 50",
       "Merlin X"
     ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "Geography",
+    "question": "Kuala Lumpur is the capital of which country?",
+    "correct_answer": "Malaysia",
+    "incorrect_answers": [
+      "Indonesia",
+      "Singapore",
+      "Thailand"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "Geography",
+    "question": "What is the capital of Peru?",
+    "correct_answer": "Lima",
+    "incorrect_answers": [
+      "Santiago",
+      "Montevideo",
+      "Buenos Aires"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "Geography",
+    "question": "Which country does Austria not border?",
+    "correct_answer": "France",
+    "incorrect_answers": [
+      "Slovenia",
+      "Switzerland",
+      "Slovakia"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "Geography",
+    "question": "What is the county seat of King County, Washington?",
+    "correct_answer": "Seattle",
+    "incorrect_answers": [
+      "Bellevue",
+      "Enumclaw",
+      "Skykomish"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "Geography",
+    "question": "What is the second-largest city in Lithuania?",
+    "correct_answer": "Kaunas",
+    "incorrect_answers": [
+      "Panev\u0117\u017eys",
+      "Vilnius",
+      "Klaip\u0117da"
+    ]
+  },
+  {
+    "type": "boolean",
+    "difficulty": "medium",
+    "category": "Geography",
+    "question": "The title of the 1969 film &quot;Krakatoa, East_of Java&quot; is incorrect, as Krakatoa is in fact west of Java.",
+    "correct_answer": "True",
+    "incorrect_answers": [
+      "False"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "Geography",
+    "question": "What is the capital of Denmark?",
+    "correct_answer": "Copenhagen",
+    "incorrect_answers": [
+      "Aarhus",
+      "Odense",
+      "Aalborg"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "Geography",
+    "question": "How many countries does Spain have a land border with?",
+    "correct_answer": "5",
+    "incorrect_answers": [
+      "2",
+      "3",
+      "4"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "Geography",
+    "question": "Which Canadian province has Charlottetown as its capital?",
+    "correct_answer": "Prince Edward Island",
+    "incorrect_answers": [
+      "Saskachewan",
+      "Northwest Terrirories",
+      "Ontario"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "Geography",
+    "question": "Which country is completely landlocked by South Africa?",
+    "correct_answer": "Lesotho",
+    "incorrect_answers": [
+      "Swaziland",
+      "Botswana",
+      "Zimbabwe"
+    ]
   }
 ]

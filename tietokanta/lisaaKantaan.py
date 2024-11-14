@@ -3,7 +3,7 @@ from kysymyssetti import Kysymyssetti
 
 
 #suluissa :memory:, niin tekee vain muistiin
-conn = sqlite3.connect('tietokanta/tietokanta.db')
+conn = sqlite3.connect('tietokanta.db')
 #conn = sqlite3.connect(':memory:')
 
 c = conn.cursor()
@@ -67,7 +67,7 @@ c.execute('SELECT * FROM Vastausvaihtoehdot WHERE kysymys_id = (?) AND onko_oike
 print(c.fetchall())
 '''
 
-with open('./tietokanta/apiKysymykset.json', 'r') as kysym:
+with open('apiKysymykset.json', 'r') as kysym:
     data = json.load(kysym)
 ksetti = Kysymyssetti(data)
 

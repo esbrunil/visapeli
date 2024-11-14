@@ -3,5 +3,970 @@
     "aihe": "history",
     "heartbeat": 1731424270,
     "nimi": ""
+  },
+  "e04b6632-ce5b-4bd7-a09b-a40d0b11d581": {
+    "aihe": "",
+    "heartbeat": 1731425071.3840485,
+    "nimi": ""
+  },
+  "6bb59d45-f706-4d32-95dc-5a29386bb970": {
+    "aihe": "",
+    "heartbeat": 1731425121.6018338,
+    "nimi": ""
+  },
+  "6b2bf8b9-70e7-4947-8998-9e120036cc05": {
+    "aihe": "",
+    "heartbeat": 1731425165.520031,
+    "nimi": ""
+  },
+  "95d3aa9a-0e6f-45cb-b7ec-2e2373a023b9": {
+    "aihe": "",
+    "heartbeat": 1731425176.1588686,
+    "nimi": ""
+  },
+  "950ef85e-8abf-40b7-9f66-ac887a1ba56b": {
+    "aihe": "",
+    "heartbeat": 1731425245.9539957,
+    "nimi": ""
+  },
+  "df6c6531-2ae9-4908-96ff-0416ee6f3919": {
+    "aihe": "",
+    "heartbeat": 1731425310.57921,
+    "nimi": ""
+  },
+  "77cbed9e-e7c0-4a23-b50f-f9ee9616c1af": {
+    "aihe": "",
+    "heartbeat": 1731425420.0758812,
+    "nimi": ""
+  },
+  "f590e09f-d6c6-4f99-9c54-c8bb2b049840": {
+    "aihe": "",
+    "heartbeat": 1731425423.0466456,
+    "nimi": ""
+  },
+  "fccbc35c-2cbc-48a3-b46a-a695f6261758": {
+    "aihe": "",
+    "heartbeat": 1731425437.6736937,
+    "nimi": ""
+  },
+  "c38c2b51-026a-49fa-9dac-d174a6db720f": {
+    "aihe": "",
+    "heartbeat": 1731425565.645559,
+    "nimi": ""
+  },
+  "82532436-5f41-49c5-b7a1-f91256bc6ec7": {
+    "aihe": "history",
+    "heartbeat": 1731425589.6096613,
+    "nimi": ""
+  },
+  "f6b225ae-47ed-426c-b920-deb477a29959": {
+    "aihe": "geography",
+    "heartbeat": 1731425984.7471483,
+    "nimi": ""
+  },
+  "504de2b5-1249-4948-846b-ff3249785155": {
+    "aihe": "geography",
+    "heartbeat": 1731426005.7891548,
+    "nimi": ""
+  },
+  "85806e5d-d342-4d35-bd06-db92d761da45": {
+    "aihe": "geography",
+    "heartbeat": 1731426032.2304125,
+    "nimi": ""
+  },
+  "76267d0c-6675-4405-b183-b6b371fb289d": {
+    "aihe": "geography",
+    "heartbeat": 1731426039.3142095,
+    "nimi": ""
+  },
+  "e36d1f9d-715e-4fa1-99f9-108b0f7cc9e2": {
+    "aihe": "geography",
+    "heartbeat": 1731426100.9274263,
+    "nimi": ""
+  },
+  "3f565bec-b49c-4536-9a0a-86bc91a1ac7b": {
+    "aihe": "geography",
+    "heartbeat": 1731426182.3986475,
+    "nimi": ""
+  },
+  "2b27c0a2-ce61-4fe4-bbf4-7ca768685312": {
+    "aihe": "geography",
+    "heartbeat": 1731426183.810156,
+    "nimi": ""
+  },
+  "3158f8b3-6a73-4990-a3a8-55950972eb3d": {
+    "aihe": "geography",
+    "heartbeat": 1731426210.8904314,
+    "nimi": ""
+  },
+  "583ad4ed-aa13-4b58-8a58-b2a54c68cf97": {
+    "aihe": "geography",
+    "heartbeat": 1731426245.3293302,
+    "nimi": ""
+  },
+  "355cf845-afa3-418e-aa6a-375dad8ead53": {
+    "aihe": "geography",
+    "heartbeat": 1731426276.4184356,
+    "nimi": ""
+  },
+  "9af125bb-6a5f-45c0-8e36-5ade4b25a582": {
+    "aihe": "geography",
+    "heartbeat": 1731426294.940008,
+    "nimi": ""
+  },
+  "bbc93d97-b6c2-408b-b426-3c402b61073c": {
+    "aihe": "geography",
+    "heartbeat": 1731426405.763745,
+    "nimi": ""
+  },
+  "26e78385-2fdf-44f6-ba86-8463ed83c703": {
+    "aihe": "geography",
+    "heartbeat": 1731426472.8067207,
+    "nimi": ""
+  },
+  "aca85c5a-bdf4-4dcc-b8e9-0f3bd4480162": {
+    "aihe": "geography",
+    "heartbeat": 1731426496.773856,
+    "nimi": ""
+  },
+  "3fcd5233-03b1-4564-9617-ce044cb76e0d": {
+    "aihe": "geography",
+    "heartbeat": 1731426606.53775,
+    "nimi": ""
+  },
+  "395b1e72-16b9-4785-a72d-8e82483b7156": {
+    "aihe": "geography",
+    "heartbeat": 1731426669.9110436,
+    "nimi": ""
+  },
+  "b31cb9fc-5f57-4118-b6eb-e0989b494f4b": {
+    "aihe": "geography",
+    "heartbeat": 1731426788.1474354,
+    "nimi": ""
+  },
+  "0f06bc3d-1a5f-43a2-92cd-1dabd487e97a": {
+    "aihe": "geography",
+    "heartbeat": 1731426795.6348062,
+    "nimi": ""
+  },
+  "117669e4-b541-4eeb-ae04-7d54b1293ee0": {
+    "aihe": "geography",
+    "heartbeat": 1731426834.2123005,
+    "nimi": ""
+  },
+  "ee8413c9-1413-46bd-b53e-4eec7ae94009": {
+    "aihe": "geography",
+    "heartbeat": 1731426885.3898275,
+    "nimi": ""
+  },
+  "27c786fd-74a8-42bf-9507-6f70f48f57f0": {
+    "aihe": "geography",
+    "heartbeat": 1731426909.045136,
+    "nimi": ""
+  },
+  "f06e5e75-031e-4d91-86b4-bd50561ec569": {
+    "aihe": "geography",
+    "heartbeat": 1731426954.331862,
+    "nimi": ""
+  },
+  "4e9575e4-241b-4934-827b-821f55d25dd5": {
+    "aihe": "geography",
+    "heartbeat": 1731426978.5827518,
+    "nimi": ""
+  },
+  "ecf3962f-86cb-4557-afca-d3a36825aeeb": {
+    "aihe": "geography",
+    "heartbeat": 1731427030.8171256,
+    "nimi": ""
+  },
+  "f4875c42-9042-4ba6-aa70-1d7f31e0de7c": {
+    "aihe": "geography",
+    "heartbeat": 1731427047.4162662,
+    "nimi": ""
+  },
+  "7a4f3c45-fb7a-4b38-9fe5-f6d2800740d8": {
+    "aihe": "geography",
+    "heartbeat": 1731427096.9354222,
+    "nimi": ""
+  },
+  "7ab295ab-0855-4f22-8389-ee24c465c5b7": {
+    "aihe": "geography",
+    "heartbeat": 1731427123.5878987,
+    "nimi": ""
+  },
+  "d49e3d46-0b02-4df2-992e-ebf15131e0bd": {
+    "aihe": "geography",
+    "heartbeat": 1731427247.8763533,
+    "nimi": ""
+  },
+  "c696fb61-6b9d-4d4f-91a9-9c069b97aacb": {
+    "aihe": "geography",
+    "heartbeat": 1731427319.072725,
+    "nimi": ""
+  },
+  "13dc7149-4afb-4bb3-aed1-b9283ccd280d": {
+    "aihe": "geography",
+    "heartbeat": 1731427368.223398,
+    "nimi": ""
+  },
+  "e04e46d4-2bf4-4a44-b079-a1a0fc64d27a": {
+    "aihe": "geography",
+    "heartbeat": 1731427387.6269405,
+    "nimi": ""
+  },
+  "fa0c21c3-132c-4c59-a696-0a533ff924c7": {
+    "aihe": "geography",
+    "heartbeat": 1731427395.8627415,
+    "nimi": ""
+  },
+  "c2a2e705-4b94-4201-a497-29a46f4e465a": {
+    "aihe": "geography",
+    "heartbeat": 1731427707.4048755,
+    "nimi": ""
+  },
+  "7250d6b7-7d68-42f3-b23c-361f845f2e73": {
+    "aihe": "geography",
+    "heartbeat": 1731427742.6426356,
+    "nimi": ""
+  },
+  "32129f73-71e7-4478-b5a3-d79b8dc30a6d": {
+    "aihe": "geography",
+    "heartbeat": 1731427787.2928412,
+    "nimi": ""
+  },
+  "99d06fe2-2572-4fe6-99ed-0d29c9f8bb07": {
+    "aihe": "geography",
+    "heartbeat": 1731427822.660395,
+    "nimi": ""
+  },
+  "8f9bb2a7-a9f6-4809-95dc-d45317491ac8": {
+    "aihe": "geography",
+    "heartbeat": 1731427840.3556495,
+    "nimi": ""
+  },
+  "38c71eb2-5f43-4965-8750-0a6ba21de099": {
+    "aihe": "geography",
+    "heartbeat": 1731427890.3587635,
+    "nimi": ""
+  },
+  "a4d81b1d-c0e5-47e7-af2e-072b132b7f01": {
+    "aihe": "geography",
+    "heartbeat": 1731427951.7617,
+    "nimi": ""
+  },
+  "195dae27-f2de-4f13-8d15-79bbc78ac05d": {
+    "aihe": "geography",
+    "heartbeat": 1731427991.015427,
+    "nimi": ""
+  },
+  "601310c7-38da-4dc9-9fc3-66d3da31908e": {
+    "aihe": "geography",
+    "heartbeat": 1731428035.1538713,
+    "nimi": ""
+  },
+  "4f75cd8e-5f91-43e5-bdc8-dcfa0729d648": {
+    "aihe": "geography",
+    "heartbeat": 1731428112.9921122,
+    "nimi": ""
+  },
+  "762d0c8f-85fb-4c37-a728-ffff6b4d25bc": {
+    "aihe": "geography",
+    "heartbeat": 1731428154.5518415,
+    "nimi": ""
+  },
+  "9a7e2487-f57b-4fa4-95bc-e564b7bc8756": {
+    "aihe": "geography",
+    "heartbeat": 1731428212.195337,
+    "nimi": ""
+  },
+  "c726abb3-c979-4295-94f7-2ea790052ef4": {
+    "aihe": "geography",
+    "heartbeat": 1731428237.7203164,
+    "nimi": ""
+  },
+  "036b12f8-0263-43df-b9dc-9b338f8b6605": {
+    "aihe": "geography",
+    "heartbeat": 1731428271.7019236,
+    "nimi": ""
+  },
+  "56ea772e-e5db-41bf-81ac-5790329881dc": {
+    "aihe": "geography",
+    "heartbeat": 1731428288.2271047,
+    "nimi": ""
+  },
+  "c9554b22-0ba3-42cf-950b-bb980492aa30": {
+    "aihe": "geography",
+    "heartbeat": 1731428299.4037182,
+    "nimi": ""
+  },
+  "9f573a54-93a9-4c73-a290-cd043cbf52c7": {
+    "aihe": "geography",
+    "heartbeat": 1731428317.4441216,
+    "nimi": ""
+  },
+  "0ae9bb95-6e10-4bc6-b70d-4100652f48ea": {
+    "aihe": "geography",
+    "heartbeat": 1731428347.0942693,
+    "nimi": ""
+  },
+  "4c57560b-dc92-41e1-83ec-77731dbbb4ad": {
+    "aihe": "geography",
+    "heartbeat": 1731428359.5733068,
+    "nimi": ""
+  },
+  "8378556b-df00-4456-a3b8-9f447141c3d6": {
+    "aihe": "geography",
+    "heartbeat": 1731428426.8132179,
+    "nimi": ""
+  },
+  "f23786d5-9b87-4d94-9c43-da03539e2706": {
+    "aihe": "geography",
+    "heartbeat": 1731428496.9769955,
+    "nimi": ""
+  },
+  "47366f11-4764-41bf-9a6e-6db20174d8d5": {
+    "aihe": "geography",
+    "heartbeat": 1731428565.9531224,
+    "nimi": ""
+  },
+  "59c6f6dc-d50d-4507-bc1a-ea7ef03f64ba": {
+    "aihe": "geography",
+    "heartbeat": 1731428592.0660424,
+    "nimi": ""
+  },
+  "66074178-4ede-4e9f-8d23-5a45147d7a53": {
+    "aihe": "geography",
+    "heartbeat": 1731428601.7100377,
+    "nimi": ""
+  },
+  "c9ec257a-337d-4443-a66c-1f4211a18283": {
+    "aihe": "geography",
+    "heartbeat": 1731428617.019849,
+    "nimi": ""
+  },
+  "4d133154-de7d-4218-b9d8-e437ab3e5955": {
+    "aihe": "geography",
+    "heartbeat": 1731428647.7840376,
+    "nimi": ""
+  },
+  "d6613d3e-30cf-4a3c-a808-01330b40276c": {
+    "aihe": "geography",
+    "heartbeat": 1731428663.1293223,
+    "nimi": ""
+  },
+  "633e7bce-74a3-40ff-ad23-db20cb1ca8ee": {
+    "aihe": "geography",
+    "heartbeat": 1731428685.381845,
+    "nimi": ""
+  },
+  "25e5eac7-f7e4-4362-bd6f-224a008c55cb": {
+    "aihe": "geography",
+    "heartbeat": 1731428696.8410265,
+    "nimi": ""
+  },
+  "989ab0c7-5f78-424a-9c09-0de96b729700": {
+    "aihe": "geography",
+    "heartbeat": 1731428712.535883,
+    "nimi": ""
+  },
+  "6f50df39-4d9e-4738-b3d4-62df5725c318": {
+    "aihe": "geography",
+    "heartbeat": 1731428756.5313163,
+    "nimi": ""
+  },
+  "871c1ede-d545-4990-ae5d-9810fe31ead2": {
+    "aihe": "geography",
+    "heartbeat": 1731428779.9344368,
+    "nimi": ""
+  },
+  "8922aabc-2a98-417c-addc-c65737951221": {
+    "aihe": "geography",
+    "heartbeat": 1731428827.2508724,
+    "nimi": ""
+  },
+  "bb0d48a1-e919-4ebe-89af-4ff855695a92": {
+    "aihe": "geography",
+    "heartbeat": 1731428850.3547852,
+    "nimi": ""
+  },
+  "54488e0e-0ec9-46bf-acf8-e6c6a6c0b1c2": {
+    "aihe": "geography",
+    "heartbeat": 1731428857.646653,
+    "nimi": ""
+  },
+  "1dd7a138-31d9-4b37-bd04-3c408ff8716b": {
+    "aihe": "history",
+    "heartbeat": 1731428869.6998723,
+    "nimi": ""
+  },
+  "93d75611-dd65-48c5-8bab-c351159c4a4a": {
+    "aihe": "history",
+    "heartbeat": 1731428906.500812,
+    "nimi": ""
+  },
+  "cbb35a83-821e-4199-987e-785f68ce598e": {
+    "aihe": "history",
+    "heartbeat": 1731428918.3290548,
+    "nimi": ""
+  },
+  "30b25b4d-5c48-421b-8994-c0516c6133ab": {
+    "aihe": "history",
+    "heartbeat": 1731428929.54376,
+    "nimi": ""
+  },
+  "08da210a-1922-42d5-8201-841a8fba2eb9": {
+    "aihe": "history",
+    "heartbeat": 1731429027.0788956,
+    "nimi": ""
+  },
+  "5485315a-1b99-4a24-9b91-86a26200fdb1": {
+    "aihe": "history",
+    "heartbeat": 1731429105.892424,
+    "nimi": ""
+  },
+  "964135bf-195e-400f-ab31-527bf8786127": {
+    "aihe": "history",
+    "heartbeat": 1731429188.9560006,
+    "nimi": ""
+  },
+  "93fb6723-3355-40df-b208-9892cc1276de": {
+    "aihe": "history",
+    "heartbeat": 1731429215.7514825,
+    "nimi": ""
+  },
+  "860401a0-478e-473f-bd05-b9adce69758d": {
+    "aihe": "history",
+    "heartbeat": 1731429223.4575202,
+    "nimi": ""
+  },
+  "2f49d6bc-9116-4126-838b-de91724f3ee1": {
+    "aihe": "history",
+    "heartbeat": 1731429231.0238378,
+    "nimi": ""
+  },
+  "cd067bd8-9a6b-4d55-820e-319c8ca24030": {
+    "aihe": "history",
+    "heartbeat": 1731429251.1201293,
+    "nimi": ""
+  },
+  "c56f9182-49f6-474d-8ef9-8e585dcd3ae9": {
+    "aihe": "history",
+    "heartbeat": 1731429271.8667693,
+    "nimi": ""
+  },
+  "f8a5fc4e-1f34-4e94-9f2d-7c374d15bad1": {
+    "aihe": "history",
+    "heartbeat": 1731429282.3674436,
+    "nimi": ""
+  },
+  "e02417ce-5bda-4065-b892-fa7241b7c0e6": {
+    "aihe": "history",
+    "heartbeat": 1731429292.9970176,
+    "nimi": ""
+  },
+  "22d96ef1-abb1-4f41-b3e3-45ac95cf0cb0": {
+    "aihe": "history",
+    "heartbeat": 1731429322.0403812,
+    "nimi": ""
+  },
+  "82dff786-8f2c-49c1-8b37-edaacaafb313": {
+    "aihe": "history",
+    "heartbeat": 1731429363.7088263,
+    "nimi": ""
+  },
+  "a13e3709-f8d5-4fae-9c67-4be38f09ba87": {
+    "aihe": "geography",
+    "heartbeat": 1731429376.432239,
+    "nimi": ""
+  },
+  "f642567a-259e-489d-8d16-8387e52655db": {
+    "aihe": "history",
+    "heartbeat": 1731429381.852541,
+    "nimi": ""
+  },
+  "ae1a8185-37f4-4dda-b4ac-e71475e4e82d": {
+    "aihe": "history",
+    "heartbeat": 1731429489.0688756,
+    "nimi": ""
+  },
+  "b24b1e91-3d76-4f86-a76b-f60fbaffd896": {
+    "aihe": "history",
+    "heartbeat": 1731429560.69588,
+    "nimi": ""
+  },
+  "de577b98-2dca-486e-9909-bd1ae290ced7": {
+    "aihe": "history",
+    "heartbeat": 1731429673.013434,
+    "nimi": ""
+  },
+  "dc117095-1c28-47f3-a117-26f90699a978": {
+    "aihe": "history",
+    "heartbeat": 1731429710.546398,
+    "nimi": ""
+  },
+  "32724daf-e039-4d81-b355-cfef5c67151d": {
+    "aihe": "history",
+    "heartbeat": 1731429774.3457816,
+    "nimi": ""
+  },
+  "a31668b3-442e-422a-abb4-bef7513a67fe": {
+    "aihe": "history",
+    "heartbeat": 1731429787.6054652,
+    "nimi": ""
+  },
+  "347373ec-a646-4136-99f6-fafe07d78b6a": {
+    "aihe": "history",
+    "heartbeat": 1731429816.4066887,
+    "nimi": ""
+  },
+  "61c92dc7-3740-4dab-8cc4-8c85127d68b2": {
+    "aihe": "history",
+    "heartbeat": 1731429849.5850625,
+    "nimi": ""
+  },
+  "5a9f4341-77d1-410b-9fdf-dc0089e0a9ea": {
+    "aihe": "history",
+    "heartbeat": 1731429867.7021644,
+    "nimi": ""
+  },
+  "a4127ca8-6101-4062-b874-13a6bc5e52fc": {
+    "aihe": "history",
+    "heartbeat": 1731429938.6807933,
+    "nimi": ""
+  },
+  "bca1a391-2412-487a-a867-68e3b925797f": {
+    "aihe": "history",
+    "heartbeat": 1731429957.463593,
+    "nimi": ""
+  },
+  "1abfd0a2-08c8-470e-96eb-5e0af1278807": {
+    "aihe": "history",
+    "heartbeat": 1731429980.1649995,
+    "nimi": ""
+  },
+  "cb4fc28f-1fa4-4bdb-b02d-dedb33f9c718": {
+    "aihe": "history",
+    "heartbeat": 1731429994.7124362,
+    "nimi": ""
+  },
+  "c67aae4e-efbf-4511-959c-d973608be378": {
+    "aihe": "history",
+    "heartbeat": 1731430067.076518,
+    "nimi": ""
+  },
+  "f511cee1-0f33-4cc0-bfcf-792367529ff9": {
+    "aihe": "history",
+    "heartbeat": 1731430085.9447076,
+    "nimi": ""
+  },
+  "25a05858-4e03-4906-8c13-6bb64a816e6a": {
+    "aihe": "history",
+    "heartbeat": 1731430094.8986576,
+    "nimi": ""
+  },
+  "3aaad66c-e0af-42ad-95f6-ff2a4553e603": {
+    "aihe": "history",
+    "heartbeat": 1731430105.7668514,
+    "nimi": ""
+  },
+  "9b1d5f5c-aa15-498e-b2b3-6543bf763dc5": {
+    "aihe": "history",
+    "heartbeat": 1731430190.3849804,
+    "nimi": ""
+  },
+  "031b4413-9e79-44b6-9e41-862798359a13": {
+    "aihe": "history",
+    "heartbeat": 1731430231.3783824,
+    "nimi": ""
+  },
+  "f5e54246-2cd2-4742-9f9f-5c40d190f416": {
+    "aihe": "history",
+    "heartbeat": 1731430247.9632301,
+    "nimi": ""
+  },
+  "c0c3c9a6-12f7-4595-b028-225f39ba9fae": {
+    "aihe": "history",
+    "heartbeat": 1731430258.2459,
+    "nimi": ""
+  },
+  "040170c9-461a-4a5c-b5e0-ca17c5e0f562": {
+    "aihe": "history",
+    "heartbeat": 1731430284.1392968,
+    "nimi": ""
+  },
+  "c80b344a-05a3-4e87-a821-bc6b59985653": {
+    "aihe": "history",
+    "heartbeat": 1731430305.2475667,
+    "nimi": ""
+  },
+  "2d48f804-c205-4c44-9658-8bae214bd978": {
+    "aihe": "history",
+    "heartbeat": 1731430319.7537556,
+    "nimi": ""
+  },
+  "94fa30ea-39dc-4431-97a7-abf886bf27cf": {
+    "aihe": "history",
+    "heartbeat": 1731430331.4349353,
+    "nimi": ""
+  },
+  "6f38deee-113e-425e-bae3-910d5bdf0a36": {
+    "aihe": "history",
+    "heartbeat": 1731430343.4573617,
+    "nimi": ""
+  },
+  "e9d4d82b-0f2f-40de-b53f-fef79abebe5b": {
+    "aihe": "history",
+    "heartbeat": 1731430356.2449877,
+    "nimi": ""
+  },
+  "f243208c-6cae-4195-b06e-a8b167248f24": {
+    "aihe": "history",
+    "heartbeat": 1731430389.7887692,
+    "nimi": ""
+  },
+  "ddceeb89-9dce-41e9-be7b-8f3dd1e1176c": {
+    "aihe": "history",
+    "heartbeat": 1731430403.7930188,
+    "nimi": ""
+  },
+  "27335060-fd18-43d3-a6d8-bdaf56d0b22a": {
+    "aihe": "history",
+    "heartbeat": 1731430421.680314,
+    "nimi": ""
+  },
+  "162d0955-0b66-4629-9173-19c764ff641c": {
+    "aihe": "history",
+    "heartbeat": 1731430435.0978217,
+    "nimi": ""
+  },
+  "956e7705-07e7-4547-90dd-d946161df81f": {
+    "aihe": "history",
+    "heartbeat": 1731430444.8935614,
+    "nimi": ""
+  },
+  "fd7c48d4-4e4b-4c6e-b37e-afd2ce098264": {
+    "aihe": "history",
+    "heartbeat": 1731430456.852939,
+    "nimi": ""
+  },
+  "ae629948-8efd-4b6c-b2bf-343ebd1d5fa3": {
+    "aihe": "history",
+    "heartbeat": 1731430476.0287786,
+    "nimi": ""
+  },
+  "763edbbe-f3f2-4bae-ac6f-40f0b6c4d853": {
+    "aihe": "history",
+    "heartbeat": 1731430489.2573435,
+    "nimi": ""
+  },
+  "ebcae574-3626-4100-9d88-a6e512eabbe6": {
+    "aihe": "history",
+    "heartbeat": 1731430523.7597158,
+    "nimi": ""
+  },
+  "542f4e03-a161-4e10-8ab3-1261869d94ab": {
+    "aihe": "history",
+    "heartbeat": 1731430547.5050578,
+    "nimi": ""
+  },
+  "f4eefc49-3cc7-47b8-93a0-26fd005ae17b": {
+    "aihe": "history",
+    "heartbeat": 1731430589.6114187,
+    "nimi": ""
+  },
+  "4ca7248c-2514-4200-9820-61d887ea3472": {
+    "aihe": "history",
+    "heartbeat": 1731430635.1864657,
+    "nimi": ""
+  },
+  "94a72746-b581-4c1b-a50c-815c3397167c": {
+    "aihe": "history",
+    "heartbeat": 1731430683.463464,
+    "nimi": ""
+  },
+  "c02a7140-885d-42c4-bacf-b7c4995ccff4": {
+    "aihe": "history",
+    "heartbeat": 1731430719.6401086,
+    "nimi": ""
+  },
+  "ef9411e2-455a-42a9-9f28-9791bca06c8e": {
+    "aihe": "history",
+    "heartbeat": 1731430742.8779154,
+    "nimi": ""
+  },
+  "c8b2d767-acb6-427b-b4e1-aedea514d87a": {
+    "aihe": "history",
+    "heartbeat": 1731430760.3009884,
+    "nimi": ""
+  },
+  "ce56f013-ef7c-451b-b08f-c7bcdd239050": {
+    "aihe": "history",
+    "heartbeat": 1731430773.1125073,
+    "nimi": ""
+  },
+  "715697fb-c09f-4342-9bdf-a019fc65153c": {
+    "aihe": "history",
+    "heartbeat": 1731430796.8471775,
+    "nimi": ""
+  },
+  "8b2a85ee-7823-44c2-8363-81963fc194a2": {
+    "aihe": "history",
+    "heartbeat": 1731430796.8984938,
+    "nimi": ""
+  },
+  "6c6d1819-bfca-49da-9e29-067f07dbba41": {
+    "aihe": "history",
+    "heartbeat": 1731430828.2590349,
+    "nimi": ""
+  },
+  "15027c9a-8b2f-4597-8c20-18f18b277a31": {
+    "aihe": "history",
+    "heartbeat": 1731430845.860049,
+    "nimi": ""
+  },
+  "e1fa54a7-53c9-461a-a887-cf7188be7b3a": {
+    "aihe": "history",
+    "heartbeat": 1731430853.7635057,
+    "nimi": ""
+  },
+  "bf989f95-d0d9-4264-98fd-82596e9fa0de": {
+    "aihe": "history",
+    "heartbeat": 1731430862.713911,
+    "nimi": ""
+  },
+  "808c1d00-0682-4656-959d-4a1f62654e32": {
+    "aihe": "history",
+    "heartbeat": 1731430878.3602688,
+    "nimi": ""
+  },
+  "c0b883da-1918-492f-8441-e3e647598e94": {
+    "aihe": "history",
+    "heartbeat": 1731430890.8327327,
+    "nimi": ""
+  },
+  "a3bae481-9fb4-417a-8dc7-21082be32e08": {
+    "aihe": "history",
+    "heartbeat": 1731430903.014124,
+    "nimi": ""
+  },
+  "1d914d33-e053-4963-a721-8ba717393cb2": {
+    "aihe": "history",
+    "heartbeat": 1731430911.4059799,
+    "nimi": ""
+  },
+  "ba31ca0b-3227-4711-9cff-97a22ddb1344": {
+    "aihe": "history",
+    "heartbeat": 1731430924.5303204,
+    "nimi": ""
+  },
+  "da1394d1-86d0-4247-8283-4e45ce9e6c0f": {
+    "aihe": "history",
+    "heartbeat": 1731430938.7110214,
+    "nimi": ""
+  },
+  "cd70d9cf-53f4-43c3-a424-0813ec728da0": {
+    "aihe": "history",
+    "heartbeat": 1731430979.556111,
+    "nimi": ""
+  },
+  "9aca068e-d805-4f95-a516-ad77a32dc639": {
+    "aihe": "history",
+    "heartbeat": 1731431018.7311428,
+    "nimi": ""
+  },
+  "e77fa6a1-443c-4d49-91ff-3c9e48a16d5f": {
+    "aihe": "history",
+    "heartbeat": 1731431053.722634,
+    "nimi": ""
+  },
+  "b189afa7-9082-4a54-950d-5343cd33b9a0": {
+    "aihe": "history",
+    "heartbeat": 1731431076.436645,
+    "nimi": ""
+  },
+  "6df57f8a-24c2-46e3-88c4-34a369d83168": {
+    "aihe": "history",
+    "heartbeat": 1731431106.277848,
+    "nimi": ""
+  },
+  "acfc6ecc-5e49-444c-bcc3-588eda35d89f": {
+    "aihe": "history",
+    "heartbeat": 1731431140.9793274,
+    "nimi": ""
+  },
+  "080acf04-206d-4c3b-afb2-3f641ed93e46": {
+    "aihe": "history",
+    "heartbeat": 1731431168.0151772,
+    "nimi": ""
+  },
+  "5372660b-0a29-4c58-863a-ddbff3521e02": {
+    "aihe": "history",
+    "heartbeat": 1731431181.9419835,
+    "nimi": ""
+  },
+  "edd8a15d-f423-4f5d-aaf7-b2882c172ed1": {
+    "aihe": "history",
+    "heartbeat": 1731431197.1315286,
+    "nimi": ""
+  },
+  "a31c19fa-6ef7-48dd-99a3-13f759be78b4": {
+    "aihe": "history",
+    "heartbeat": 1731431205.4332094,
+    "nimi": ""
+  },
+  "1e5351bd-d60e-447f-99fe-903a65c3f23d": {
+    "aihe": "history",
+    "heartbeat": 1731431224.744151,
+    "nimi": ""
+  },
+  "0a2e98aa-aa05-417f-8c94-3dbeee706ba1": {
+    "aihe": "history",
+    "heartbeat": 1731431238.8439662,
+    "nimi": ""
+  },
+  "5196b110-5286-4565-8b6b-01bb3329e833": {
+    "aihe": "history",
+    "heartbeat": 1731431270.1130364,
+    "nimi": ""
+  },
+  "6f7f95f3-94b3-479b-9228-8d6d6d72717f": {
+    "aihe": "history",
+    "heartbeat": 1731431297.796507,
+    "nimi": ""
+  },
+  "dc1fa92e-887f-42e1-a646-f441b3c82956": {
+    "aihe": "history",
+    "heartbeat": 1731431311.3188074,
+    "nimi": ""
+  },
+  "537a9954-45b4-4f59-89a3-5ed7ec2007ba": {
+    "aihe": "history",
+    "heartbeat": 1731431360.7391293,
+    "nimi": ""
+  },
+  "1238fb4c-deaa-473f-b726-5c42b02c66de": {
+    "aihe": "history",
+    "heartbeat": 1731431400.1225896,
+    "nimi": ""
+  },
+  "c10b9229-f13d-4629-81ea-6270f730b8ac": {
+    "aihe": "history",
+    "heartbeat": 1731431431.3823638,
+    "nimi": ""
+  },
+  "25df026c-21c2-4f3d-b755-1f8e15357501": {
+    "aihe": "history",
+    "heartbeat": 1731431491.496609,
+    "nimi": ""
+  },
+  "5808b5da-3a63-46b4-8431-ed1d99c2d58c": {
+    "aihe": "history",
+    "heartbeat": 1731431504.17702,
+    "nimi": ""
+  },
+  "855ac4c5-5008-4600-a64d-8285076eaf2c": {
+    "aihe": "history",
+    "heartbeat": 1731431564.7444255,
+    "nimi": ""
+  },
+  "d8247a19-f5ea-40b7-a92d-835997141adb": {
+    "aihe": "history",
+    "heartbeat": 1731431649.1044211,
+    "nimi": ""
+  },
+  "2704234a-b7c1-46fc-baff-06d841fcd3ab": {
+    "aihe": "history",
+    "heartbeat": 1731431669.8484774,
+    "nimi": ""
+  },
+  "99af82f7-7269-4f55-a285-8553c02c3996": {
+    "aihe": "history",
+    "heartbeat": 1731431718.6604455,
+    "nimi": ""
+  },
+  "c774551d-0101-4415-97c9-c4fcddf20ed0": {
+    "aihe": "history",
+    "heartbeat": 1731431733.660408,
+    "nimi": ""
+  },
+  "ebab90c4-a3af-411e-9271-23e3d76f2015": {
+    "aihe": "history",
+    "heartbeat": 1731431795.1901796,
+    "nimi": ""
+  },
+  "fd4a4e9e-5d2e-4285-9cb5-c6766a93099e": {
+    "aihe": "history",
+    "heartbeat": 1731431795.823078,
+    "nimi": ""
+  },
+  "3e0cea65-63b6-42cf-925a-8d96eab397fa": {
+    "aihe": "history",
+    "heartbeat": 1731431807.4692276,
+    "nimi": ""
+  },
+  "422ceedd-a29e-496b-86aa-afb23294bb82": {
+    "aihe": "history",
+    "heartbeat": 1731431815.0015368,
+    "nimi": ""
+  },
+  "658c37c4-a648-4f0d-9ccb-2f46c3181df7": {
+    "aihe": "history",
+    "heartbeat": 1731431833.7109408,
+    "nimi": ""
+  },
+  "2af8ce18-4123-41ec-a565-a8a58fba0e05": {
+    "aihe": "history",
+    "heartbeat": 1731431863.6062899,
+    "nimi": ""
+  },
+  "9853c59f-0f19-4529-82da-eb61ce8bf9d1": {
+    "aihe": "history",
+    "heartbeat": 1731431915.8572536,
+    "nimi": ""
+  },
+  "b37b2806-3358-48cd-9462-a625c6681fff": {
+    "aihe": "history",
+    "heartbeat": 1731431919.2014816,
+    "nimi": ""
+  },
+  "42081122-bedd-4a53-b876-8238e2cc295e": {
+    "aihe": "history",
+    "heartbeat": 1731431941.0290244,
+    "nimi": ""
+  },
+  "3f2eb864-a65f-4453-9b5b-943e8441bd3f": {
+    "aihe": "history",
+    "heartbeat": 1731431967.2739468,
+    "nimi": ""
+  },
+  "3e779817-871d-48f0-a6c5-5fb8c937796e": {
+    "aihe": "history",
+    "heartbeat": 1731431993.2248552,
+    "nimi": ""
+  },
+  "776b045b-6e60-42fc-b0a7-46afd067756c": {
+    "aihe": "history",
+    "heartbeat": 1731431996.394798,
+    "nimi": ""
+  },
+  "70a41648-11a8-41ac-8bd8-d5e672932454": {
+    "aihe": "history",
+    "heartbeat": 1731432001.9556818,
+    "nimi": ""
+  },
+  "3735b9cd-cf13-470f-8ce5-b14dc31cfe5b": {
+    "aihe": "history",
+    "heartbeat": 1731432017.9808764,
+    "nimi": ""
+  },
+  "1b5ff6d5-ccc4-46e7-82e9-13d515a91b80": {
+    "aihe": "history",
+    "heartbeat": 1731432054.852667,
+    "nimi": ""
+  },
+  "c79c5c40-a0e6-4760-834e-7bd5e954794b": {
+    "aihe": "history",
+    "heartbeat": 1731432087.6728404,
+    "nimi": ""
   }
 }

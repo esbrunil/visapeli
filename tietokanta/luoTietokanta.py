@@ -16,6 +16,8 @@ c.execute('''
 #Olk oikea_vastaus = ov, tällöin jos ov = 0 --> False,
 #ov = 1 --> True (vastauksia = 2), ov = 2 --> (vastauksia > 2) Custom --> 
 #Luodaan rivit tauluun Vastausvaihtoehdot
+
+#TODO: päivitä tuplakey tai selvitä, voiko tehdä muutoin
 c.execute('''
     CREATE TABLE IF NOT EXISTS Kysymykset (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
