@@ -139,7 +139,7 @@ def haeKannasta(query):
     conn = sqlite3.connect('tietokanta/tietokanta.db')
     c = conn.cursor()
     c.execute(query)
-    res = c.fetchone()
+    res = c.fetchall()
     conn.close()
     return res
 

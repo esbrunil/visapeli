@@ -35,8 +35,6 @@ return (
     <div>
       <Routes>
         <Route path={path + "/ValitseAihe"} element={<ValitseAihe />} />
-          <Route path={path + "/"} element={<Navigate to={path + "/ValitseAihe"} replace /> }/>
-          <Route path={path} element={<Navigate to={path + "/ValitseAihe"} replace /> }/>
       </Routes>
     </div>
   </BrowserRouter>
