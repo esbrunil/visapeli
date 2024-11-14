@@ -17,8 +17,8 @@ CORS(app)
 @app.route("/", methods=['GET'])
 def index():
     #testaa onko uusi päivä ja päivitä päivänvisa?
-    return render_template("index.html")
-    #return redirect("main.cgi/ValitseAihe", 301)
+    return redirect(request.base_url + "ValitseAihe", 301)
+
 
 @app.route("/ValitseAihe", methods=['GET'])
 def ValitseAihe():
