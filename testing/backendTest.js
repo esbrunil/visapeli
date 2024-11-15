@@ -26,8 +26,7 @@ window.onload = async () => {
                 headers: {
                     "Content-Type": "application/json"
                 }
-            })).json();
-            console.log(data);
+            })).text();
         }
 
     // Tehdään objekti, jossa käyttäjän id ja aiheena hissa

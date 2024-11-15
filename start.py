@@ -1,8 +1,10 @@
+#!../visapeli-venv/venv/bin/python
 # -*- coding: utf-8 -*-
 from flask import Flask, request, redirect, render_template, session, url_for
 from flask_cors import CORS
 from functools import wraps
 from filelock  import FileLock, Timeout
+#from tietokanta.lisaaKantaan import get_kysymyksia_lkm_looppaamalla, haeKannasta, tarkista_onko_oikein
 import time, json, math, random, uuid, sqlite3
 
 
@@ -55,19 +57,15 @@ def Heartbeat():
 @app.route('/annaID', methods=['GET'])
 def annaID():
     #luo indeksi, joka välillä 1 ja max lkm aiheista i mod h
-<<<<<<< HEAD
     #connect ja close
-=======
-    #miten maksimi saadaan?
-    #pitää varmaan luoda joku kyselyhässäkkä, joka palauttaa maksimin?
-
->>>>>>> refs/remotes/origin/main
     id = None
     liveUsers = lueJSONTiedosto("users.json")
 
     id = (str)(uuid.uuid4())
 
-    liveUsers[id] = {"aihe": "", "heartbeat": math.floor(time.time()), "nimi": ""}
+    maksimi = math.floor(random.random() * haeKannasta(lambda c: hae_taulujen_maksimi(c)))
+
+    liveUsers[id] = {"aihe": "", "heartbeat": math.floor(time.time()), "nimi": "", "indeksi": maksimi}
     
     kirjoitaJSONTiedostoon("users.json", liveUsers)
 
@@ -127,30 +125,53 @@ def haeKysymys():
 # return oikeiden määrä?
 @app.route('/tarkistaVastaus', methods=['POST'])
 def tarkistaVastaus():
-    vastaus = request.json['vastausID']
+    #vastaus = request.json['vastausID']
+    vastaus = 251
 
-    oikein = tarkista_onko_oikein(vastaus)
+    onko_oikein = haeKannasta(lambda c: tarkista_onko_oikein(vastaus, c))
+
+    print(onko_oikein)
     
     # hae tässä datasta haluttu tieto, eli oikeiden vastausten taulukko
     # tarkista
     # palauta mitä?
-    return (str)(oikein), 200
+    return (str)(onko_oikein), 200
 
 
 # Yleiset funktiot ------------------------------------------------------------------------------------------------------------------------------------------
 
-def haeKannasta(query):
+# Tietokanta ------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# Hakee tietokannasta siten, että kanta avataan ja suljetaan vain kerran. Argumentin funktio määrittelee tietokantaoperaation
+def haeKannasta(func):
     conn = sqlite3.connect('tietokanta/tietokanta.db')
     c = conn.cursor()
-    c.execute(query)
-    res = c.fetchall()
+    res = func(c)
     conn.close()
     return res
 
 
-def tarkista_onko_oikein(vastausID):
-    q = f"SELECT onko_oikein FROM (SELECT * FROM Vastausvaihtoehdot WHERE id = {vastausID})"
-    return haeKannasta(q)[0]
+# Tarkistaa, onko vastaus oikein
+def tarkista_onko_oikein(vastausID, c):
+    c.execute(f"SELECT onko_oikein FROM (SELECT * FROM Vastausvaihtoehdot WHERE id = {vastausID})")
+    return c.fetchall()
+
+
+# Hakee maksimimäärän kysymyksiä per aihe
+def hae_taulujen_maksimi(c):
+    c.execute(f"SELECT * FROM Aiheet")
+    aiheet = c.fetchall()
+    maksimi = 0
+    for aihe in aiheet:
+        c.execute(f"SELECT COUNT(*) FROM Kysymykset WHERE aihe_id = {aihe[0]}")
+        maara = c.fetchone()
+        if maara[0] > maksimi:
+            maksimi = maara[0]
+
+    return maksimi
+
+# Muut ------------------------------------------------------------------------------------------------------------------------------------------
 
 
 def lueJSONTiedosto(tiedosto):

@@ -1,17 +1,13 @@
-import sqlite3, json
-from kysymyssetti import Kysymyssetti
+import sqlite3, json, os
+from tietokanta.kysymyssetti import Kysymyssetti
 
 
 #suluissa :memory:, niin tekee vain muistiin
-<<<<<<< HEAD
-#conn = sqlite3.connect('tietokanta/tietokanta.db')
-conn = sqlite3.connect(':memory:')
-=======
-conn = sqlite3.connect('tietokanta.db')
+conn = sqlite3.connect('tietokanta/tietokanta.db')
 #conn = sqlite3.connect(':memory:')
->>>>>>> refs/remotes/origin/main
-
 c = conn.cursor()
+
+print(os.getcwd())
 
 def insert_aihe(aihe):
     with conn:
@@ -89,6 +85,21 @@ def get_vastauksia(id):
     c.execute('SELECT vastauksia FROM Kysymykset WHERE id = ?', (id,))
     return c.fetchone()
 
+
+def haeKannasta(query):
+    conn = sqlite3.connect('tietokanta/tietokanta.db')
+    c = conn.cursor()
+    c.execute(query)
+    res = c.fetchall()
+    conn.close()
+    return res
+
+
+def tarkista_onko_oikein(vastausID):
+    q = f"SELECT onko_oikein FROM (SELECT * FROM Vastausvaihtoehdot WHERE id = {vastausID})"
+    return haeKannasta(q)[0]
+
+
 '''
 aihe = "Historia"
 insert_aihe(aihe)
@@ -103,11 +114,7 @@ c.execute('SELECT * FROM Vastausvaihtoehdot WHERE kysymys_id = (?) AND onko_oike
 print(c.fetchall())
 '''
 
-<<<<<<< HEAD
-with open('./Visapeli/tietokanta/testikysymykset.json', 'r') as kysym:
-=======
-with open('apiKysymykset.json', 'r') as kysym:
->>>>>>> refs/remotes/origin/main
+with open('tietokanta/apiKysymykset.json', 'r') as kysym:
     data = json.load(kysym)
 ksetti = Kysymyssetti(data)
 
