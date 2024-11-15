@@ -80,6 +80,8 @@ def asetaAihe():
     id = request.json['kayttajaID']
     aihe = request.json['aihe']
 
+    maara = 10
+
     data = lueJSONTiedosto("users.json")
     
     data[id]['aihe'] = aihe
@@ -87,7 +89,14 @@ def asetaAihe():
     kirjoitaJSONTiedostoon("users.json", data)
 
     aihe_id = haeKannasta(lambda c: hae_aihe_id(aihe, c))
-    kysymykset = haeKannasta(lambda c: hae_n_kysymys_id(aihe_id[0], data[id]["indeksi"], 10, c))
+    kysymykset = haeKannasta(lambda c: hae_n_kysymys_id(aihe_id[0], data[id]["indeksi"], maara, c))
+
+    if len(kysymykset) < maara:
+        kysymykset.extend(haeKannasta(lambda c: hae_n_kysymys_id(aihe_id[0], 0, maara - len(kysymykset), c)))
+
+    if len(kysymykset) > 0:
+        data[id]["indeksi"] = kysymykset[len(kysymykset) - 1]
+
     #qData = lueJSONTiedosto("kysymykset.json")
     
     #for q in qData[aihe]:
@@ -159,14 +168,19 @@ def haeKannasta(func):
     return res
 
 
+# Hakee n-kysymyksen id:t jostain luvusta lähtien tietyltä aiheelta
 def hae_n_kysymys_id(aihe, alku, maara, c):
     c.execute(f"SELECT id FROM Kysymykset WHERE id > {alku} AND aihe_id = {aihe} LIMIT {maara}")
     return [item[0] for item in c.fetchall()]
 
+
+# Hakee aiheen id:n tekstin perusteella
 def hae_aihe_id(aihe, c):
     c.execute(f"SELECT id FROM Aiheet WHERE aihe = ?", (aihe,))
     return c.fetchone()
 
+
+# Hakee kysymyksen ja vastausvaihtoehdot kysymyksen id:n perusteella
 def hae_kysymys(kysymysID, c):
     obj = { kysymysID: {
         "kysymys": "",
@@ -186,6 +200,8 @@ def hae_kysymys(kysymysID, c):
 
     return obj
 
+
+# Hakee kysymyksen tekstin ja oikean vastauksen tyypin kysymyksen id:n perusteella
 def hae_kysymys_ksm_ov(kysymysID, c):
     c.execute(f"SELECT kysymys, oikea_vastaus FROM Kysymykset WHERE id = {kysymysID}")
     return c.fetchall()
@@ -239,3 +255,5 @@ def kirjoitaJSONTiedostoon(tiedosto, data):
                 json.dump(data, tied, indent=2)
     except Timeout:
         return "timeout"
+    
+print(haeKannasta(lambda c: hae_n_kysymys_id(1, 300, 10, c)))

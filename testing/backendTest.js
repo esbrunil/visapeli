@@ -55,7 +55,7 @@ window.onload = async () => {
     }
 
     // Requesti kysymyksen hakemiselle annetulla id:llä
-    await (await fetch("../main.cgi/haeKysymys", {
+    const kyssari = await (await fetch("../main.cgi/haeKysymys", {
         method: "POST",
         body: JSON.stringify(kysymHaku),
         headers: {
@@ -65,7 +65,8 @@ window.onload = async () => {
 
     // Testataan vastaus
     const vastausTark = {
-        vastausID: 866
+        kysymysID: kysymHaku.kysymysID,
+        vastausID: 55
     }
 
     await (await fetch("../main.cgi/tarkistaVastaus", {
