@@ -133,20 +133,15 @@ def haeKysymys():
 # return oikeiden määrä?
 @app.route('/tarkistaVastaus', methods=['POST'])
 def tarkistaVastaus():
-    #kysymys = request.json["kysymysID"]
-    #vastaus = request.json['vastausID']
-
-    kysymys = 204
-    vastaus = 1
+    kysymys = request.json["kysymysID"]
+    vastaus = request.json['vastausID']
 
     ov = haeKannasta(lambda c: hae_kysymys_ksm_ov(kysymys, c))[0][1]
     print(ov)
     if ov <= 1:
         onko_oikein = vastaus == ov
 
-    else: onko_oikein = haeKannasta(lambda c: tarkista_onko_oikein(vastaus, c))
-
-    print(onko_oikein)
+    else: onko_oikein = haeKannasta(lambda c: tarkista_onko_oikein(vastaus, c))[0][0]
     
     # hae tässä datasta haluttu tieto, eli oikeiden vastausten taulukko
     # tarkista

@@ -48,6 +48,7 @@ const Kysymys = ({userId, kysymys}) => {
   }, [kysymysIndex]);
 
   const tarkistaVastaus = async (vastausId) => {
+    console.log(vastausId);
     try {
       const response = await fetch("../tarkistaVastaus", {
         method: 'POST',
@@ -57,7 +58,7 @@ const Kysymys = ({userId, kysymys}) => {
         body: JSON.stringify({
           kayttajaID: userId.toString(),
           kysymysID: kysymykset[kysymysIndex].toString(),
-          vastaus: vastausId.toString(),
+          vastausID: vastausId.toString(),
         }),
       });
       if (!response.ok) {
