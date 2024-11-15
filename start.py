@@ -86,11 +86,15 @@ def asetaAihe():
 
     kirjoitaJSONTiedostoon("users.json", data)
 
-    kysymykset = []
-    qData = lueJSONTiedosto("kysymykset.json")
+    aihe_id = haeKannasta(lambda c: hae_aihe_id(aihe, c))
+    kysymykset = haeKannasta(lambda c: hae_n_kysymys_id(aihe_id[0], data[id]["indeksi"], 10, c))
+    #qData = lueJSONTiedosto("kysymykset.json")
     
-    for q in qData[aihe]:
-        kysymykset.append(q)
+    #for q in qData[aihe]:
+    #    kysymykset.append(q)
+
+    
+
     #algoritmi:
     #aloitusindeksi = käyttäjän indeksi
     #kysymyslkm = montako kysymystä haetaan
@@ -100,21 +104,16 @@ def asetaAihe():
     #i++
 
     #päivitä users.json indeksi
-    random.shuffle(kysymykset)
 
-    return { "aiheData": data[id], "kysymykset": kysymykset }, 200
+    return kysymykset, 200
 
 
 @app.route('/haeKysymys', methods=['POST'])
 def haeKysymys():
     userID = request.json['kayttajaID']
     qID = request.json['kysymysID']
-    aihe = request.json['aihe']
 
-    with open('kysymykset.json', 'r') as kysym:
-        data = json.load(kysym)
-        kysymys = data[aihe][qID]
-        del kysymys['o']
+    kysymys = haeKannasta(lambda c: hae_kysymys(qID, c))
 
     return kysymys, 200
 
@@ -125,10 +124,18 @@ def haeKysymys():
 # return oikeiden määrä?
 @app.route('/tarkistaVastaus', methods=['POST'])
 def tarkistaVastaus():
+    #kysymys = request.json["kysymysID"]
     #vastaus = request.json['vastausID']
-    vastaus = 251
 
-    onko_oikein = haeKannasta(lambda c: tarkista_onko_oikein(vastaus, c))
+    kysymys = 204
+    vastaus = 1
+
+    ov = haeKannasta(lambda c: hae_kysymys_ksm_ov(kysymys, c))[0][1]
+    print(ov)
+    if ov <= 1:
+        onko_oikein = vastaus == ov
+
+    else: onko_oikein = haeKannasta(lambda c: tarkista_onko_oikein(vastaus, c))
 
     print(onko_oikein)
     
@@ -152,6 +159,38 @@ def haeKannasta(func):
     return res
 
 
+def hae_n_kysymys_id(aihe, alku, maara, c):
+    c.execute(f"SELECT id FROM Kysymykset WHERE id > {alku} AND aihe_id = {aihe} LIMIT {maara}")
+    return [item[0] for item in c.fetchall()]
+
+def hae_aihe_id(aihe, c):
+    c.execute(f"SELECT id FROM Aiheet WHERE aihe = ?", (aihe,))
+    return c.fetchone()
+
+def hae_kysymys(kysymysID, c):
+    obj = { kysymysID: {
+        "kysymys": "",
+        "vastausvaihtoehdot": {}
+    }}
+    kysymys = hae_kysymys_ksm_ov(kysymysID, c)
+    obj[kysymysID]["kysymys"] = kysymys[0][0]
+
+    if kysymys[0][1] > 1:
+        c.execute(f"SELECT id, vve_teksti FROM Vastausvaihtoehdot WHERE kysymys_id = {kysymysID}")
+        vvet = c.fetchall()
+        for vve in vvet:
+            obj[kysymysID]["vastausvaihtoehdot"][vve[0]] = vve[1]
+
+    else:
+        obj[kysymysID]["vastausvaihtoehdot"] = { 0: "False", 1: "True" }
+
+    return obj
+
+def hae_kysymys_ksm_ov(kysymysID, c):
+    c.execute(f"SELECT kysymys, oikea_vastaus FROM Kysymykset WHERE id = {kysymysID}")
+    return c.fetchall()
+
+
 # Tarkistaa, onko vastaus oikein
 def tarkista_onko_oikein(vastausID, c):
     c.execute(f"SELECT onko_oikein FROM (SELECT * FROM Vastausvaihtoehdot WHERE id = {vastausID})")
@@ -168,7 +207,6 @@ def hae_taulujen_maksimi(c):
         maara = c.fetchone()
         if maara[0] > maksimi:
             maksimi = maara[0]
-
     return maksimi
 
 # Muut ------------------------------------------------------------------------------------------------------------------------------------------

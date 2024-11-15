@@ -32,7 +32,7 @@ window.onload = async () => {
     // Tehdään objekti, jossa käyttäjän id ja aiheena hissa
     const obj = {
         kayttajaID: uId,
-        aihe: "history"
+        aihe: "History"
     }
 
     // Requesti - asetetaan aiheeksi edellisen objektin aihe
@@ -46,15 +46,12 @@ window.onload = async () => {
 
     // Printataan vastaus, asetetaan aiheeksi vastauksesta saatu aihe ja kysymyksiin lista kysymysten id:istä
     console.log(resp);
-    let aihe = resp["aiheData"]["aihe"];
-    let kysymykset = resp["kysymykset"];
 
 
     // Olio kysymysten hakuun
     const kysymHaku = {
         kayttajaID: uId,
-        aihe: aihe,
-        kysymysID: kysymykset[0]
+        kysymysID: resp[0]
     }
 
     // Requesti kysymyksen hakemiselle annetulla id:llä
