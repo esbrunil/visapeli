@@ -32,7 +32,7 @@ window.onload = async () => {
     // Tehdään objekti, jossa käyttäjän id ja aiheena hissa
     const obj = {
         kayttajaID: uId,
-        aihe: "History"
+        aihe: "history"
     }
 
     // Requesti - asetetaan aiheeksi edellisen objektin aihe

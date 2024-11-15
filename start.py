@@ -114,7 +114,7 @@ def asetaAihe():
 
     #päivitä users.json indeksi
 
-    return kysymykset, 200
+    return { "aiheData": data[id], "kysymykset": kysymykset }, 200
 
 
 @app.route('/haeKysymys', methods=['POST'])
@@ -124,7 +124,7 @@ def haeKysymys():
 
     kysymys = haeKannasta(lambda c: hae_kysymys(qID, c))
 
-    return kysymys, 200
+    return kysymys[qID], 200
 
 
 

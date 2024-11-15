@@ -14,6 +14,8 @@ const Kysymys = ({userId, kysymys}) => {
   const [isCorrect, setIsCorrect] = React.useState(null);
   const [aihe, setAihe] = React.useState("Ei asetettu")
 
+  console.log(kysymys, kysymysIndex);
+
   const haeKysymys = async (kysymysIndex) => {
     try {
       const response = await fetch("../haeKysymys", {
@@ -21,7 +23,8 @@ const Kysymys = ({userId, kysymys}) => {
         headers: {
           'Content-Type': 'application/json',
         },
-          body: JSON.stringify({ kayttajaID: userId.toString(), kysymysID: kysymykset[kysymysIndex].toString() , aihe: kysymys.aiheData.aihe}), });
+          body: JSON.stringify({ kayttajaID: userId.toString(), kysymysID: kysymykset[kysymysIndex].toString()}) 
+        });
         if (!response.ok) {
           throw new Error("Virhe");
         }
@@ -29,12 +32,12 @@ const Kysymys = ({userId, kysymys}) => {
         setAihe(kysymys.aiheData.aihe);
         setQuestion(result);
       } catch (error) {
-        //
+        console.log(error);
       }
     };
 
     React.useEffect(() => {
-    console.log(kysymykset);
+    console.log("kyssärit: " + kysymykset);
     if (kysymysIndex < kysymykset.length) {
       haeKysymys(kysymysIndex);
       
@@ -197,7 +200,6 @@ const Peli = () => {
         }
         const result = await response.json();
         setKysymys(result);
-
       } catch (error) {
         console.log("virhe ei onnistu");
       }
@@ -207,7 +209,10 @@ const Peli = () => {
 
   }, []);
 
-  return (<div> {userId && kysymys && (<Kysymys userId={userId} kysymys={kysymys} />)} </div>);
+  return (
+  <div> 
+    {userId && kysymys && (<Kysymys userId={userId} kysymys={kysymys} />)} 
+  </div>);
 };
 
 const App = () => {
