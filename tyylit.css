@@ -1,5 +1,6 @@
 body {
   font-size: 2em;
+  overflow: scroll;
 }
 
 .kysymysJaNapit {
@@ -9,11 +10,11 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  
+
 }
 
-.kysymysJaNapit > div {
-  background-color: #f7f6e2;
+.kysymysJaNapit>div {
+  background-color: #488be0;
   border-radius: 1.5em;
   max-width: 85%;
 }
@@ -21,7 +22,7 @@ body {
 .vastaus {
   cursor: pointer;
   padding: 0.5em;
-  margin-top. 0.6em;
+  margin-top: 0.6em;
   margin-bottom: 0.6em;
   margin-left: 3em;
   margin-right: 3em;
@@ -29,7 +30,7 @@ body {
   text-align: center;
   border-radius: 0em;
   background-color: white;
-  
+
 }
 
 .vaarin {
@@ -64,6 +65,7 @@ body {
 
 .kysymys {
   text-align: center;
+  font-weight: 1.5em;
 }
 
 .aihe {
@@ -85,73 +87,107 @@ body {
   margin-top: 0;
 }
 
+
 .clock {
   position: relative;
-  width: 4em;
-  height: 4em;
-  margin-top: 0.6em;
-  margin-left: 0.6em;
+  width: 1.5em;
+  height: 1.5em;
+  padding: 0;
+  margin: 0;
+  background: #488be0;
+  box-sizing: border-box;
   border-radius: 50%;
   overflow: hidden;
-  background-color: white;
 }
+
+.pie {
+  width: 50%;
+  height: 100%;
+  transform-origin: 100% 50%;
+  position: absolute;
+  background: white;
+  box-sizing: border-box;
+}
+
 .spinner {
-  border-radius: 50% 0 0 50%;
+  border-radius: 100% 0 0 100% / 50% 0 0 50%;
   z-index: 200;
   border-right: none;
-  animation: rotateHand 5s forwards;
+  animation: rotate 10s linear infinite;
+  box-sizing: border-box;
 }
+
 .paint {
-  z-index: 100;
-  border-radius: 0 50% 50% 0;
-  border-left: none;
-  animation: fill 5s steps(1, end) forwards;
+  border-radius: 0 100% 100% 0 / 0 50% 50% 0;
   left: 50%;
   opacity: 0;
-}
-.pie {
+  z-index: 100;
+  animation: nakyvyys 10s steps(1, end) infinite reverse;
+  border-left: none;
   box-sizing: border-box;
-  width: 50%;
-  height: 100%;
-  position: absolute;
-  background: #08C;
-  transform-origin: 100% 50%;
-  border: 1px solid #08C;
 }
+
 .mask {
-  box-sizing: border-box;
   width: 50%;
   height: 100%;
   position: absolute;
-  z-index: 300;
-  opacity: 1;
   background: inherit;
-  animation: mask 5s steps(1, end) forwards;
-  border: 1px solid white
+  opacity: 1;
+  z-index: 300;
+  animation: mask 10s steps(1, end) infinite;
+  box-sizing: border-box;
 }
-.hand {
-  position: absolute;
-  width: 3%;
-  height: 49%;
-  background-color: black;
-  left: 49%;
-  transform-origin: bottom center;
-  animation: rotateHand 5s linear forwards;
-  z-index: 400;
-}
-@keyframes fill {
-  0% { opacity: 0;}
-  50%, 100% { opacity: 1;}
-}
-@keyframes rotateHand {
+
+@keyframes rotate {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
+
+@keyframes nakyvyys {
+  0% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
 @keyframes mask {
-  0% { opacity: 1;}
-  50%, 100% { opacity: 0;}
+  0% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.ylapalkki {
+  background: #c3daf7;
+}
+
+.kysymysDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.tiedot {
+  display: flex;
+}
+
+.tiedot>div:last-of-type {
+  color: white;
+  margin: 0;
+  padding: 0;
+  margin: 0.5em;
+  margin-top: 0.8em;
+  margin-left: auto;
 }

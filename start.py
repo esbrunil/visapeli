@@ -1,9 +1,12 @@
+
+#!../visapeli-venv/venv/bin/python
 # -*- coding: utf-8 -*-
 from flask import Flask, request, redirect, render_template, session, url_for
 from flask_cors import CORS
 from functools import wraps
 from filelock  import FileLock, Timeout
-import time, json, math, random, uuid
+#from tietokanta.lisaaKantaan import get_kysymyksia_lkm_looppaamalla, haeKannasta, tarkista_onko_oikein
+import time, json, math, random, uuid, sqlite3
 
 
 app = Flask(__name__)
@@ -16,8 +19,9 @@ CORS(app)
 # Palauttaa default-html:n, kun sivu ladataan
 @app.route("/", methods=['GET'])
 def index():
-    return render_template("peli.html")
-    # return redirect("main.cgi/ValitseAihe", 301)
+    #testaa onko uusi päivä ja päivitä päivänvisa?
+    return redirect(request.base_url + "ValitseAihe", 301)
+
 
 @app.route("/ValitseAihe", methods=['GET'])
 def ValitseAihe():
@@ -31,11 +35,7 @@ def Peli(aihe):
 @app.route('/heartbeat', methods=['POST'])
 def Heartbeat():
     aika = math.floor(time.time())
-    tied = "users.json"
-    lock_path = "users.json.lock"
     id = request.json["kayttajaID"]
-
-    lock = FileLock(lock_path, timeout=5)
 
     data = lueJSONTiedosto("users.json")
 
@@ -57,12 +57,16 @@ def Heartbeat():
 # return: id
 @app.route('/annaID', methods=['GET'])
 def annaID():
+    #luo indeksi, joka välillä 1 ja max lkm aiheista i mod h
+    #connect ja close
     id = None
     liveUsers = lueJSONTiedosto("users.json")
 
     id = (str)(uuid.uuid4())
 
-    liveUsers[id] = {"aihe": "", "heartbeat": time.time(), "nimi": ""}
+    maksimi = math.floor(random.random() * haeKannasta(lambda c: hae_taulujen_maksimi(c)))
+
+    liveUsers[id] = {"aihe": "", "heartbeat": math.floor(time.time()), "nimi": "", "indeksi": maksimi}
     
     kirjoitaJSONTiedostoon("users.json", liveUsers)
 
@@ -77,19 +81,22 @@ def asetaAihe():
     id = request.json['kayttajaID']
     aihe = request.json['aihe']
 
+    maara = 10
+
     data = lueJSONTiedosto("users.json")
     
     data[id]['aihe'] = aihe
 
     kirjoitaJSONTiedostoon("users.json", data)
 
-    kysymykset = []
-    qData = lueJSONTiedosto("kysymykset.json")
-    
-    for q in qData[aihe]:
-        kysymykset.append(q)
+    aihe_id = haeKannasta(lambda c: hae_aihe_id(aihe, c))
+    kysymykset = haeKannasta(lambda c: hae_n_kysymys_id(aihe_id[0], data[id]["indeksi"], maara, c))
 
-    random.shuffle(kysymykset)
+    if len(kysymykset) < maara:
+        kysymykset.extend(haeKannasta(lambda c: hae_n_kysymys_id(aihe_id[0], 0, maara - len(kysymykset), c)))
+
+    if len(kysymykset) > 0:
+        data[id]["indeksi"] = kysymykset[len(kysymykset) - 1]
 
     return { "aiheData": data[id], "kysymykset": kysymykset }, 200
 
@@ -98,14 +105,10 @@ def asetaAihe():
 def haeKysymys():
     userID = request.json['kayttajaID']
     qID = request.json['kysymysID']
-    aihe = request.json['aihe']
 
-    with open('kysymykset.json', 'r') as kysym:
-        data = json.load(kysym)
-        kysymys = data[aihe][qID]
-        del kysymys['o']
+    kysymys = haeKannasta(lambda c: hae_kysymys(qID, c))
 
-    return kysymys, 200
+    return kysymys[qID], 200
 
 
 
@@ -114,20 +117,94 @@ def haeKysymys():
 # return oikeiden määrä?
 @app.route('/tarkistaVastaus', methods=['POST'])
 def tarkistaVastaus():
-    vastaus = request.json['vastaus']
-    kysymysID = request.json['kysymysID']
-    kayttajaID = request.json['kayttajaID'] #tai aihe?
+    kysymys = request.json["kysymysID"]
+    vastaus = request.json['vastausID']
 
-    with open('kysymykset.json', 'r') as kysymykset:
-        data = json.load(kysymykset)
+    ov = haeKannasta(lambda c: hae_kysymys_ksm_ov(kysymys, c))[0][1]
+    print(ov)
+    if ov <= 1:
+        onko_oikein = vastaus == ov
+
+    else: onko_oikein = haeKannasta(lambda c: tarkista_onko_oikein(vastaus, c))[0][0]
     
     # hae tässä datasta haluttu tieto, eli oikeiden vastausten taulukko
     # tarkista
     # palauta mitä?
-    return data, 200
+    return (str)(onko_oikein), 200
 
 
 # Yleiset funktiot ------------------------------------------------------------------------------------------------------------------------------------------
+
+# Tietokanta ------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# Hakee tietokannasta siten, että kanta avataan ja suljetaan vain kerran. Argumentin funktio määrittelee tietokantaoperaation
+def haeKannasta(func):
+    conn = sqlite3.connect('tietokanta/tietokanta.db')
+    c = conn.cursor()
+    res = func(c)
+    conn.close()
+    return res
+
+
+# Hakee n-kysymyksen id:t jostain luvusta lähtien tietyltä aiheelta
+def hae_n_kysymys_id(aihe, alku, maara, c):
+    c.execute(f"SELECT id FROM Kysymykset WHERE id > {alku} AND aihe_id = {aihe} LIMIT {maara}")
+    return [item[0] for item in c.fetchall()]
+
+
+# Hakee aiheen id:n tekstin perusteella
+def hae_aihe_id(aihe, c):
+    c.execute(f"SELECT id FROM Aiheet WHERE aihe = ?", (aihe,))
+    return c.fetchone()
+
+
+# Hakee kysymyksen ja vastausvaihtoehdot kysymyksen id:n perusteella
+def hae_kysymys(kysymysID, c):
+    obj = { kysymysID: {
+        "kysymys": "",
+        "vastausvaihtoehdot": {}
+    }}
+    kysymys = hae_kysymys_ksm_ov(kysymysID, c)
+    obj[kysymysID]["kysymys"] = kysymys[0][0]
+
+    if kysymys[0][1] > 1:
+        c.execute(f"SELECT id, vve_teksti FROM Vastausvaihtoehdot WHERE kysymys_id = {kysymysID}")
+        vvet = c.fetchall()
+        for vve in vvet:
+            obj[kysymysID]["vastausvaihtoehdot"][vve[0]] = vve[1]
+
+    else:
+        obj[kysymysID]["vastausvaihtoehdot"] = { 0: "False", 1: "True" }
+
+    return obj
+
+
+# Hakee kysymyksen tekstin ja oikean vastauksen tyypin kysymyksen id:n perusteella
+def hae_kysymys_ksm_ov(kysymysID, c):
+    c.execute(f"SELECT kysymys, oikea_vastaus FROM Kysymykset WHERE id = {kysymysID}")
+    return c.fetchall()
+
+
+# Tarkistaa, onko vastaus oikein
+def tarkista_onko_oikein(vastausID, c):
+    c.execute(f"SELECT onko_oikein FROM (SELECT * FROM Vastausvaihtoehdot WHERE id = {vastausID})")
+    return c.fetchall()
+
+
+# Hakee maksimimäärän kysymyksiä per aihe
+def hae_taulujen_maksimi(c):
+    c.execute(f"SELECT * FROM Aiheet")
+    aiheet = c.fetchall()
+    maksimi = 0
+    for aihe in aiheet:
+        c.execute(f"SELECT COUNT(*) FROM Kysymykset WHERE aihe_id = {aihe[0]}")
+        maara = c.fetchone()
+        if maara[0] > maksimi:
+            maksimi = maara[0]
+    return maksimi
+
+# Muut ------------------------------------------------------------------------------------------------------------------------------------------
 
 
 def lueJSONTiedosto(tiedosto):

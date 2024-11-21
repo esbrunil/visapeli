@@ -1,48 +1,48 @@
 [
   {
     "type": "multiple",
-    "difficulty": "medium",
+    "difficulty": "easy",
     "category": "History",
-    "question": "On what day did Germany invade Poland?",
-    "correct_answer": "September 1, 1939",
+    "question": "In 1939, Britain and France declared war on Germany after it invaded which country?",
+    "correct_answer": "Poland",
     "incorrect_answers": [
-      "December 7, 1941",
-      "June 22, 1941",
-      "July 7, 1937"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "medium",
-    "category": "History",
-    "question": "Which of the following ancient Near Eastern peoples still exists as a modern ethnic group?",
-    "correct_answer": "Assyrians",
-    "incorrect_answers": [
-      "Babylonians",
-      "Hittites",
-      "Elamites"
-    ]
-  },
-  {
-    "type": "multiple",
-    "difficulty": "hard",
-    "category": "History",
-    "question": "Who assassinated President James A. Garfield?",
-    "correct_answer": "Charles Guiteau",
-    "incorrect_answers": [
-      "Sirhan Sirhan",
-      "Leon Czolgosz",
-      "John Wilkes Booth"
+      "Czechoslovakia",
+      "Austria",
+      "Hungary"
     ]
   },
   {
     "type": "boolean",
-    "difficulty": "medium",
+    "difficulty": "hard",
     "category": "History",
-    "question": "The Korean War ended in 1953 without any ceasefire.",
+    "question": "The Kingdom of Prussia briefly held land in Estonia.",
     "correct_answer": "False",
     "incorrect_answers": [
       "True"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "Which Las Vegas casino was originally constructed and operated by mobster Bugsy Siegel?",
+    "correct_answer": "The Flamingo",
+    "incorrect_answers": [
+      "The MGM Grand",
+      "The Sands",
+      "The Sahara"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "History",
+    "question": "Which one of these tanks was designed and operated by the United Kingdom?",
+    "correct_answer": "Tog II",
+    "incorrect_answers": [
+      "M4 Sherman",
+      "Tiger H1",
+      "T-34"
     ]
   },
   {
@@ -59,9 +59,375 @@
   },
   {
     "type": "multiple",
+    "difficulty": "hard",
+    "category": "History",
+    "question": "When was the \"Siege of Leningrad\" lifted during World War II?",
+    "correct_answer": "January 1944",
+    "incorrect_answers": [
+      "September 1943",
+      "November 1943",
+      "March 1944"
+    ]
+  },
+  {
+    "type": "multiple",
     "difficulty": "medium",
     "category": "History",
-    "question": "When was &quot;The Gadget&quot;, the first nuclear device to be detonated, tested?",
+    "question": "In World War I, what was the name of the alliance of Germany, Austria-Hungary, the Ottoman Empire, and Bulgaria?",
+    "correct_answer": "The Central Powers",
+    "incorrect_answers": [
+      "The Axis Powers",
+      "The Federation of Empires",
+      "Authoritarian Alliance"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "In what year did Kentucky become the 15th state to join the union?",
+    "correct_answer": "1792",
+    "incorrect_answers": [
+      "1782",
+      "1798",
+      "1788"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "History",
+    "question": "The collapse of the Soviet Union took place in which year?",
+    "correct_answer": "1991",
+    "incorrect_answers": [
+      "1992",
+      "1891",
+      "1990"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "History",
+    "question": "List the following Iranic empires in chronological order:",
+    "correct_answer": "Median, Achaemenid, Parthian, Sassanid",
+    "incorrect_answers": [
+      "Median, Achaemenid, Sassanid, Parthian",
+      "Achaemenid, Median, Parthian, Sassanid",
+      "Achaemenid, Median, Sassanid, Parthian"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "History",
+    "question": "The coat of arms of the King of Spain contains the arms from the monarchs of Castille, Leon, Aragon and which other former Iberian kingdom?",
+    "correct_answer": "Navarre",
+    "incorrect_answers": [
+      "Galicia",
+      "Granada",
+      "Catalonia"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "One of the deadliest pandemics, the \"Spanish Flu\", killed off what percentage of the human world population at the time?",
+    "correct_answer": "3 to 6 percent",
+    "incorrect_answers": [
+      "6 to 10 percent",
+      "1 to 3 percent",
+      "less than 1 percent"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "History",
+    "question": "Who led the Communist Revolution of Russia?",
+    "correct_answer": "Vladimir Lenin",
+    "incorrect_answers": [
+      "Joseph Stalin",
+      "Vladimir Putin",
+      "Mikhail Gorbachev"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "History",
+    "question": "How was Socrates executed?",
+    "correct_answer": "Poison",
+    "incorrect_answers": [
+      "Decapitation",
+      "Firing squad",
+      "Crucifixion "
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "What year did the Battle of Agincourt take place?",
+    "correct_answer": "1415",
+    "incorrect_answers": [
+      "1463",
+      "1401",
+      "1422"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "Joseph Stalin had a criminal past doing what?",
+    "correct_answer": "Robbing Trains",
+    "incorrect_answers": [
+      "Murder for Hire",
+      "Tax Evasion",
+      "Identity Fraud"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "Which of the following Presidents of the United States was assassinated?",
+    "correct_answer": "William McKinley",
+    "incorrect_answers": [
+      "Lyndon Johnson",
+      "Chester Arthur",
+      "Franklin Roosevelt"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "What year did Skoal, a smokeless Tobacco company, release their first line of Pouches, known as \"Skoal Bandits\"?",
+    "correct_answer": "1983",
+    "incorrect_answers": [
+      "1934",
+      "1984",
+      "1822"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "History",
+    "question": "What was the last colony the UK ceded marking the end of the British Empire?",
+    "correct_answer": "Hong Kong",
+    "incorrect_answers": [
+      "India",
+      "Australia",
+      "Ireland"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "History",
+    "question": "In what year did the Great Northern War, between Russia and Sweden, end?",
+    "correct_answer": "1721",
+    "incorrect_answers": [
+      "1726",
+      "1727",
+      "1724"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "The Korean War started in what year?",
+    "correct_answer": "1950",
+    "incorrect_answers": [
+      "1945",
+      "1960",
+      "1912"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "During the Mongolian invasions of Japan, what were the Mongol boats mostly stopped by?",
+    "correct_answer": "Typhoons",
+    "incorrect_answers": [
+      "Tornados",
+      "Economic depression",
+      "Samurai"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "History",
+    "question": "What year was Canada founded in?",
+    "correct_answer": "1867",
+    "incorrect_answers": [
+      "1798",
+      "1859",
+      "1668"
+    ]
+  },
+  {
+    "type": "boolean",
+    "difficulty": "hard",
+    "category": "History",
+    "question": "Japan was part of the Allied Powers during World War I.",
+    "correct_answer": "True",
+    "incorrect_answers": [
+      "False"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "Who tutored Alexander the Great?",
+    "correct_answer": "Aristotle",
+    "incorrect_answers": [
+      "Socrates",
+      "Plato",
+      "King Philip"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "History",
+    "question": "Which country was Josef Stalin born in?",
+    "correct_answer": "Georgia",
+    "incorrect_answers": [
+      "Russia",
+      "Germany",
+      "Poland"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "History",
+    "question": "The Ottoman Empire was dissolved after their loss in which war?",
+    "correct_answer": "World War I",
+    "incorrect_answers": [
+      "Crimean War",
+      "Serbian Revolution",
+      "Second Balkan War"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "Which of the following ancient Near Eastern peoples still exists as a modern ethnic group?",
+    "correct_answer": "Assyrians",
+    "incorrect_answers": [
+      "Babylonians",
+      "Hittites",
+      "Elamites"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "In what year did Texas secede from Mexico?",
+    "correct_answer": "1836",
+    "incorrect_answers": [
+      "1838",
+      "1845",
+      "1844"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "History",
+    "question": "During World War I, which nation's monarchs were blood related?",
+    "correct_answer": "England, Germany, Russia",
+    "incorrect_answers": [
+      "France, Russia, Germany",
+      "Serbia, Russia, Croatia",
+      "Germany, Spain, Austria"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "What year did the Vietnam War end?",
+    "correct_answer": "1975",
+    "incorrect_answers": [
+      "1978",
+      "1967",
+      "1969"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "History",
+    "question": "Which German field marshal was known as the `Desert Fox`?",
+    "correct_answer": "Erwin Rommel",
+    "incorrect_answers": [
+      "Ernst Busch",
+      "Wolfram Freiherr von Richthofen",
+      "Wilhelm List"
+    ]
+  },
+  {
+    "type": "boolean",
+    "difficulty": "easy",
+    "category": "History",
+    "question": "The French Kingdom helped the United States gain their independence over Great Britain during the Revolutionary War.",
+    "correct_answer": "True",
+    "incorrect_answers": [
+      "False"
+    ]
+  },
+  {
+    "type": "boolean",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "In World War II, Hawker Typhoons served in the Pacific theater.",
+    "correct_answer": "False",
+    "incorrect_answers": [
+      "True"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "When did Jamaica recieve its independence from England? ",
+    "correct_answer": "1962",
+    "incorrect_answers": [
+      "1492",
+      "1963",
+      "1987"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "After his loss at the Battle of Waterloo, Napoleon Bonaparte was exiled to which island?",
+    "correct_answer": "St. Helena",
+    "incorrect_answers": [
+      "Elba",
+      "Corsica",
+      "Canary"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "When was \"The Gadget\", the first nuclear device to be detonated, tested?",
     "correct_answer": "July 16, 1945",
     "incorrect_answers": [
       "June 22, 1945",
@@ -73,31 +439,43 @@
     "type": "multiple",
     "difficulty": "medium",
     "category": "History",
-    "question": "The Thirty Years War ended with which treaty?",
-    "correct_answer": "Peace of Westphalia",
+    "question": "When did O, Canada officially become the national anthem?",
+    "correct_answer": "1980",
     "incorrect_answers": [
-      "Treaty of Versailles",
-      "Treaty of Paris",
-      "Peace of Prague"
+      "1950",
+      "1920",
+      "1880"
     ]
   },
   {
     "type": "multiple",
     "difficulty": "medium",
     "category": "History",
-    "question": "The seed drill was invented by which British inventor?",
-    "correct_answer": "Jethro Tull",
+    "question": "On which day did the attempted coup d'etat of 1991 in the Soviet Union begin?",
+    "correct_answer": "August 19",
     "incorrect_answers": [
-      "Charles Babbage",
-      "Isaac Newton",
-      "J.J Thomson"
+      "August 21",
+      "December 26",
+      "December 24"
     ]
   },
   {
     "type": "multiple",
     "difficulty": "hard",
     "category": "History",
-    "question": "What did the first vending machines in the early 1880&#039;s dispense?",
+    "question": "Who invented the \"Flying Shuttle\" in 1738; one of the key developments in the industrialization of weaving?",
+    "correct_answer": "John Kay",
+    "incorrect_answers": [
+      "James Hargreaves",
+      "Richard Arkwright",
+      "John Deere"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "History",
+    "question": "What did the first vending machines in the early 1880's dispense?",
     "correct_answer": "Post cards",
     "incorrect_answers": [
       "Alcohol",
@@ -107,14 +485,110 @@
   },
   {
     "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "Who crowned Charlemagne as Holy Roman Emperor on Christmas Day in 800?",
+    "correct_answer": "Pope Leo III",
+    "incorrect_answers": [
+      "Pope Urban IV",
+      "Pope Stephen V",
+      "Pope Valentine"
+    ]
+  },
+  {
+    "type": "multiple",
     "difficulty": "easy",
     "category": "History",
-    "question": "Which one of these tanks was designed and operated by the United Kingdom?",
-    "correct_answer": "Tog II",
+    "question": "How old was Adolf Hitler when he died?",
+    "correct_answer": "56",
     "incorrect_answers": [
-      "M4 Sherman",
-      "Tiger H1",
-      "T-34"
+      "43",
+      "65",
+      "47"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "hard",
+    "category": "History",
+    "question": "Who assassinated President James A. Garfield?",
+    "correct_answer": "Charles Guiteau",
+    "incorrect_answers": [
+      "Sirhan Sirhan",
+      "Leon Czolgosz",
+      "John Wilkes Booth"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "Which U.S. President was in office when the Gulf War began?",
+    "correct_answer": "George H. W. Bush",
+    "incorrect_answers": [
+      "Richard Nixon",
+      "George W. Bush ",
+      "Ronald Regan"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "History",
+    "question": "Who discovered Penicillin?",
+    "correct_answer": "Alexander Flemming",
+    "incorrect_answers": [
+      "Marie Curie",
+      "Alfred Nobel",
+      "Louis Pasteur"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "When did L. L. Zamenhof first publish \"Unua Libro\", the first publication describing his international language Esperanto?",
+    "correct_answer": "1887",
+    "incorrect_answers": [
+      "1897",
+      "1905",
+      "1915"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "In which year did the First World War begin?",
+    "correct_answer": "1914",
+    "incorrect_answers": [
+      "1930",
+      "1917",
+      "1939"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "easy",
+    "category": "History",
+    "question": "Abolitionist John Brown raided the arsenal in which Virginia Town?",
+    "correct_answer": "Harper's Ferry",
+    "incorrect_answers": [
+      "Richmond",
+      "Harrisonburg",
+      "Martinsburg"
+    ]
+  },
+  {
+    "type": "multiple",
+    "difficulty": "medium",
+    "category": "History",
+    "question": "What was Genghis Khan's real name?",
+    "correct_answer": "Temüjin",
+    "incorrect_answers": [
+      "Möngke",
+      "Ögedei",
+      "Temür"
     ]
   }
 ]
