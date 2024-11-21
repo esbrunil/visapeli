@@ -66,8 +66,8 @@ const Kysymys = ({userId, kysymys}) => {
         return true;
       }
       const result = await response.json();
-      return true; 
-      //return result;
+      //return true; 
+      return result;
     } catch (error) {
       console.log(error);
     }

@@ -1,44 +1,8 @@
 {
-  "petteri": {
-    "aihe": "Historia",
-    "heartbeat": 1731690083,
-    "nimi": "",
-    "indeksi": 11
-  },
-  "057c361f-ec83-4ec5-9438-7d94e54524aa": {
-    "aihe": "",
-    "heartbeat": 1732183627,
-    "nimi": "",
-    "indeksi": 30
-  },
-  "4caf0b3f-7b17-490f-b108-d92fa8b1caa9": {
-    "aihe": "",
-    "heartbeat": 1732183708,
-    "nimi": "",
-    "indeksi": 30
-  },
-  "cf6d9566-c76e-4bbe-bee9-e353c7f764b2": {
-    "aihe": "",
-    "heartbeat": 1732183715,
-    "nimi": "",
-    "indeksi": 32
-  },
-  "c507386b-f518-414a-9c54-2f8d83051b2e": {
-    "aihe": "",
-    "heartbeat": 1732183931,
-    "nimi": "",
-    "indeksi": 22
-  },
-  "d2ecaba4-f5a0-4fb1-8370-2d8012321c5c": {
-    "aihe": "",
-    "heartbeat": 1732183961,
-    "nimi": "",
-    "indeksi": 24
-  },
-  "799dc879-8568-4688-8f63-f5fd53f4bafc": {
+  "c98f1e95-bba1-4e75-9d10-5361fd95d053": {
     "aihe": "History",
-    "heartbeat": 1732183980,
+    "heartbeat": 1732196801,
     "nimi": "",
-    "indeksi": 2
+    "indeksi": 48
   }
 }

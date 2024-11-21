@@ -1,17 +1,5 @@
 [
   {
-    "type": "multiple",
-    "difficulty": "easy",
-    "category": "History",
-    "question": "In 1939, Britain and France declared war on Germany after it invaded which country?",
-    "correct_answer": "Poland",
-    "incorrect_answers": [
-      "Czechoslovakia",
-      "Austria",
-      "Hungary"
-    ]
-  },
-  {
     "type": "boolean",
     "difficulty": "hard",
     "category": "History",
