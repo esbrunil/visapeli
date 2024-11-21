@@ -66,8 +66,8 @@ const Kysymys = ({userId, kysymys}) => {
         return true;
       }
       const result = await response.json();
-      return true; 
-      //return result;
+      // return true; 
+      return result;
     } catch (error) {
       console.log(error);
     }
@@ -168,7 +168,7 @@ const Peli = () => {
   const [kysymys, setKysymys] = React.useState();
 
   React.useEffect(() => {
-
+    let  id = "";
     const haeId = async () => {
       try {
         const response = await fetch("../annaID"); 
@@ -177,7 +177,8 @@ const Peli = () => {
         }
         const result = await response.text();
         console.log(result);
-        setUserId(result); 
+        await setUserId(result);
+        id = result;
         asetaAihe(result);
       } catch (error) {
         console.error(error);
@@ -201,13 +202,37 @@ const Peli = () => {
         }
         const result = await response.json();
         setKysymys(result);
+        console.log(userId);
+        const interval = setInterval(async () => {
+          console.log("Sending heartbeat...");
+          try {
+            const response = await fetch("../heartbeat", { 
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                kayttajaID: id.toString(),
+              }), 
+            });
+            console.log(response);
+            
+            if (!response.ok) {
+              throw new Error("virhe");
+            }
+    
+          } catch (error) {
+            console.log(error);
+          }
+        }, 5000);
+
+
+
       } catch (error) {
         console.log("virhe ei onnistu");
       }
     };
-
     haeId();
-
   }, []);
 
   return (

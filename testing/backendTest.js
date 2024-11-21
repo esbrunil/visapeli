@@ -32,7 +32,7 @@ window.onload = async () => {
     // Tehdään objekti, jossa käyttäjän id ja aiheena hissa
     const obj = {
         kayttajaID: uId,
-        aihe: "history"
+        aihe: "History"
     }
 
     // Requesti - asetetaan aiheeksi edellisen objektin aihe
@@ -51,7 +51,7 @@ window.onload = async () => {
     // Olio kysymysten hakuun
     const kysymHaku = {
         kayttajaID: uId,
-        kysymysID: resp[0]
+        kysymysID: resp["kysymykset"][0]
     }
 
     // Requesti kysymyksen hakemiselle annetulla id:llä
@@ -65,8 +65,8 @@ window.onload = async () => {
 
     // Testataan vastaus
     const vastausTark = {
-        kysymysID: kysymHaku.kysymysID,
-        vastausID: 55
+        kysymysID: "1",
+        vastausID: "0"
     }
 
     await (await fetch("../main.cgi/tarkistaVastaus", {
