@@ -12,9 +12,11 @@ const Kysymys = ({userId, kysymys}) => {
   const [painettu, setPainettu] = React.useState(false);
   const [aktiivinen, setAktiivinen] = React.useState(-1);
   const [isCorrect, setIsCorrect] = React.useState(null);
-  const [aihe, setAihe] = React.useState("Ei asetettu")
+  const [aihe, setAihe] = React.useState("Ei asetettu");
+  const [voikoMenna, setVoikoMenna] = React.useState(false);
 
   console.log(kysymys, kysymysIndex);
+
 
   const haeKysymys = async (kysymysIndex) => {
     try {
@@ -31,21 +33,25 @@ const Kysymys = ({userId, kysymys}) => {
         const result = await response.json();
         setAihe(kysymys.aiheData.aihe);
         setQuestion(result);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+        setPainettu(false);
+        setAktiivinen(-1);
+        setVoikoMenna(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    React.useEffect(() => {
+
+  React.useEffect(() => {
     console.log("kyssärit: " + kysymykset);
     if (kysymysIndex < kysymykset.length) {
       haeKysymys(kysymysIndex);
-      
     }
     else {
       window.location.href = path + "/ValitseAihe";
     }
   }, [kysymysIndex]);
+
 
   const tarkistaVastaus = async (vastausId) => {
     console.log(vastausId);
@@ -75,10 +81,13 @@ const Kysymys = ({userId, kysymys}) => {
 
   const timeout = "";
 
+
   let handleRootClick = () => {
-      clearTimeout(timeout);
+    document.getElementById("root").removeEventListener("click", handleRootClick);  
+    clearTimeout(timeout);
       seuraavaKysymys();
   }
+
 
   let handleAnswerClick = async (e, key, index) => {
     if (painettu) {
@@ -98,16 +107,20 @@ const Kysymys = ({userId, kysymys}) => {
 
     let root = document.getElementById("root");
 
-    root.addEventListener("click", handleRootClick);
+    root.addEventListener("click", (event) => {
+      if (voikoMenna) {
+        handleRootClick();
+        setVoikoMenna(false);
+      }
+    });
   };
 
+
   let seuraavaKysymys = () => {
-      document.getElementById("root").removeEventListener("click", handleRootClick);
       let uusiIndex = kysymysIndex+1
       setKysymysIndex(uusiIndex);
-      setPainettu(false);
-      setAktiivinen(-1);
   };
+
 
   let Kello = () => {
     return (
@@ -118,6 +131,7 @@ const Kysymys = ({userId, kysymys}) => {
      </div>
     );
   }
+
 
   let kysymysJaNapit = (question) => {
     return (
@@ -140,10 +154,7 @@ const Kysymys = ({userId, kysymys}) => {
       >
       {vastaus}
       </div>
-  ))}
-      {painettu && isCorrect !== null && (
-         <p>{isCorrect ? "Oikea vastaus" : "Väärä vastaus"}</p>
-      )}
+      ))}
     </div>
     );
   };
@@ -167,6 +178,7 @@ const Peli = () => {
   const [userId, setUserId] = React.useState("");
   const [kysymys, setKysymys] = React.useState();
 
+
   React.useEffect(() => {
     let  id = "";
     const haeId = async () => {
@@ -184,6 +196,7 @@ const Peli = () => {
         console.error(error);
       }
     };
+
 
     const asetaAihe = async (kayttajaId) => {
       try {
