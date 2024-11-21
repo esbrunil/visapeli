@@ -129,30 +129,4 @@ print(get_aiheen_kysymysten_lkm(1)[0])
 
 #tästä alaspäin periaatteessa tarkistamisen toteutus
 
-kysymysID = 1
-vastaus = 1
-#kysymysID = int(request.json['kysymysID'])
-#vastaus = int(request.json['vastaus'])
-#pitää tsekata vastauksia arvo
-#muodosta vastausten lkm pituinen taulukko
-vastausten_lkm = get_vastauksia(kysymysID)[0]
-tarkistettu = [0] * vastausten_lkm
-#vasemmalla false ja oikealla true
-
-if(vastausten_lkm == 2):
-    oikeavastaus = get_kysymyksen_oikea_vastaus(kysymysID)
-    tarkistettu[oikeavastaus] = 1
-else:
-    i = 0
-    totuusarvot = get_vve_totuudet(1)
-    while(i < vastausten_lkm):
-        tarkistettu[i] = totuusarvot[i][0]
-        i += 1
-#Ei mahdollista useamman vastauksen tarkistamista
-if(tarkistettu[vastaus] == 1):
-    tarkistettu[vastaus] += 1
-else:
-    tarkistettu[vastaus] -= 1
-print(tarkistettu)
-
 conn.close()

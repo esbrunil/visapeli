@@ -66,7 +66,7 @@ def annaID():
 
     maksimi = math.floor(random.random() * haeKannasta(lambda c: hae_taulujen_maksimi(c)))
 
-    liveUsers[id] = {"aihe": "", "heartbeat": math.floor(time.time()), "nimi": "", "indeksi": maksimi}
+    liveUsers[id] = {"aihe": "", "heartbeat": math.floor(time.time()), "nimi": "", "indeksi": 0}
     
     kirjoitaJSONTiedostoon("users.json", liveUsers)
 
@@ -127,7 +127,7 @@ def tarkistaVastaus():
 
     else: onko_oikein = haeKannasta(lambda c: tarkista_onko_oikein(vastaus, c))[0][0]
 
-    return (str)(onko_oikein), 200
+    return ((str)(onko_oikein)).lower(), 200
 
 
 # Yleiset funktiot ------------------------------------------------------------------------------------------------------------------------------------------
