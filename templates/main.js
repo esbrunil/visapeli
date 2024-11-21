@@ -5,7 +5,7 @@ let path = url.slice(0, url.lastIndexOf("/"));
 const { BrowserRouter, Routes, Route, Navigate, Link, useParams } = ReactRouterDOM;
 
 const ValitseAihe = () => {
-  const aiheet = ["history", "geography"];
+  const aiheet = ["History", "Geography"];
  
   const handleClick = (aihe) => {
     window.location.href = `${path}/Peli/${aihe}`; 

@@ -1,5 +1,5 @@
 import sqlite3, json, os
-from tietokanta.kysymyssetti import Kysymyssetti
+from kysymyssetti import Kysymyssetti
 
 
 #suluissa :memory:, niin tekee vain muistiin
@@ -84,20 +84,6 @@ def get_kysymyksia_lkm_aloittaenIdsta(aihe_id, aloitusId, lkm):
 def get_vastauksia(id):
     c.execute('SELECT vastauksia FROM Kysymykset WHERE id = ?', (id,))
     return c.fetchone()
-
-
-def haeKannasta(query):
-    conn = sqlite3.connect('tietokanta/tietokanta.db')
-    c = conn.cursor()
-    c.execute(query)
-    res = c.fetchall()
-    conn.close()
-    return res
-
-
-def tarkista_onko_oikein(vastausID):
-    q = f"SELECT onko_oikein FROM (SELECT * FROM Vastausvaihtoehdot WHERE id = {vastausID})"
-    return haeKannasta(q)[0]
 
 
 '''

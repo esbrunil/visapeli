@@ -1,140 +1,44 @@
 {
-  "ce1af1f2-8e9c-47ab-8d78-e29b4a58c065": {
-    "aihe": "history",
+  "petteri": {
+    "aihe": "Historia",
     "heartbeat": 1731690083,
     "nimi": "",
     "indeksi": 11
   },
-  "ee9e530a-12b4-47b9-9a8b-e221a13ef6fe": {
-    "aihe": "geography",
-    "heartbeat": 1731690088,
-    "nimi": "",
-    "indeksi": 231
-  },
-  "378eb40b-a280-4016-a85d-3a30087440dd": {
-    "aihe": "geography",
-    "heartbeat": 1731690190,
-    "nimi": "",
-    "indeksi": 223
-  },
-  "51cb2eb0-86b1-4562-b0c1-26a6f7a57349": {
-    "aihe": "geography",
-    "heartbeat": 1731690291,
-    "nimi": "",
-    "indeksi": 279
-  },
-  "cc823dea-d9d8-48ec-ba52-3f96903e16a4": {
-    "aihe": "geography",
-    "heartbeat": 1731690300,
-    "nimi": "",
-    "indeksi": 169
-  },
-  "13be6a85-b222-444f-898e-4e7843d09a11": {
-    "aihe": "history",
-    "heartbeat": 1731690304,
-    "nimi": "",
-    "indeksi": 46
-  },
-  "d6bb8925-e5e6-4970-8c30-6df5047e4461": {
-    "aihe": "history",
-    "heartbeat": 1731690380,
-    "nimi": "",
-    "indeksi": 187
-  },
-  "32d073e7-187b-468b-9c24-0e74450a2ae8": {
-    "aihe": "history",
-    "heartbeat": 1731690385,
-    "nimi": "",
-    "indeksi": 259
-  },
-  "45ce03af-e527-4f2e-a874-e902033d473a": {
-    "aihe": "history",
-    "heartbeat": 1731690472,
-    "nimi": "",
-    "indeksi": 95
-  },
-  "356dfa95-5439-42dd-b276-db6cc98c5328": {
-    "aihe": "history",
-    "heartbeat": 1731690487,
-    "nimi": "",
-    "indeksi": 257
-  },
-  "0530da8b-52fa-4be0-b547-ccf7c8ea3f7d": {
-    "aihe": "history",
-    "heartbeat": 1731690504,
-    "nimi": "",
-    "indeksi": 28
-  },
-  "318355d8-0501-459e-a5e7-0b9ccac7f3d4": {
-    "aihe": "history",
-    "heartbeat": 1731690533,
-    "nimi": "",
-    "indeksi": 158
-  },
-  "e40aee96-2351-48eb-ad53-ca1cea7a2878": {
-    "aihe": "history",
-    "heartbeat": 1731690547,
-    "nimi": "",
-    "indeksi": 278
-  },
-  "ec472c79-6bca-44d3-be63-ce7b948e98c0": {
-    "aihe": "history",
-    "heartbeat": 1731690596,
-    "nimi": "",
-    "indeksi": 284
-  },
-  "41e0bee3-3b53-42ff-839a-74af29f964a5": {
-    "aihe": "history",
-    "heartbeat": 1731690640,
+  "057c361f-ec83-4ec5-9438-7d94e54524aa": {
+    "aihe": "",
+    "heartbeat": 1732183627,
     "nimi": "",
     "indeksi": 30
   },
-  "527d34e1-589e-4e6b-adbc-37c928a7d187": {
-    "aihe": "history",
-    "heartbeat": 1731690674,
+  "4caf0b3f-7b17-490f-b108-d92fa8b1caa9": {
+    "aihe": "",
+    "heartbeat": 1732183708,
     "nimi": "",
-    "indeksi": 43
+    "indeksi": 30
   },
-  "83c797d5-b67e-4f9a-8c25-d3f1d334b64e": {
-    "aihe": "history",
-    "heartbeat": 1731690746,
+  "cf6d9566-c76e-4bbe-bee9-e353c7f764b2": {
+    "aihe": "",
+    "heartbeat": 1732183715,
     "nimi": "",
-    "indeksi": 134
+    "indeksi": 32
   },
-  "eb6d5454-368c-4c54-9cd9-7c7fce0522e5": {
-    "aihe": "history",
-    "heartbeat": 1731690756,
+  "c507386b-f518-414a-9c54-2f8d83051b2e": {
+    "aihe": "",
+    "heartbeat": 1732183931,
     "nimi": "",
-    "indeksi": 178
+    "indeksi": 22
   },
-  "95d68946-aa41-431d-aed1-78bbf47be4e3": {
-    "aihe": "history",
-    "heartbeat": 1731690788,
+  "d2ecaba4-f5a0-4fb1-8370-2d8012321c5c": {
+    "aihe": "",
+    "heartbeat": 1732183961,
     "nimi": "",
-    "indeksi": 228
+    "indeksi": 24
   },
-  "b5622f62-c29f-402c-b095-ede2d70569fd": {
-    "aihe": "history",
-    "heartbeat": 1731690923,
+  "799dc879-8568-4688-8f63-f5fd53f4bafc": {
+    "aihe": "History",
+    "heartbeat": 1732183980,
     "nimi": "",
-    "indeksi": 202
-  },
-  "8e727cc0-d0de-4239-84a2-1ff820d785ef": {
-    "aihe": "history",
-    "heartbeat": 1731690997,
-    "nimi": "",
-    "indeksi": 266
-  },
-  "e8b96c0f-1118-4068-a406-c4b4ade1e232": {
-    "aihe": "history",
-    "heartbeat": 1731691021,
-    "nimi": "",
-    "indeksi": 206
-  },
-  "0c5afb94-1f47-4829-851c-625cb7c1c533": {
-    "aihe": "history",
-    "heartbeat": 1731691024,
-    "nimi": "",
-    "indeksi": 185
+    "indeksi": 2
   }
 }

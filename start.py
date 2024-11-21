@@ -97,23 +97,6 @@ def asetaAihe():
     if len(kysymykset) > 0:
         data[id]["indeksi"] = kysymykset[len(kysymykset) - 1]
 
-    #qData = lueJSONTiedosto("kysymykset.json")
-    
-    #for q in qData[aihe]:
-    #    kysymykset.append(q)
-
-    
-
-    #algoritmi:
-    #aloitusindeksi = käyttäjän indeksi
-    #kysymyslkm = montako kysymystä haetaan
-    #i = 0
-    #while i < kysymyslkm
-    #hae kysymyksiä
-    #i++
-
-    #päivitä users.json indeksi
-
     return { "aiheData": data[id], "kysymykset": kysymykset }, 200
 
 
@@ -250,5 +233,3 @@ def kirjoitaJSONTiedostoon(tiedosto, data):
                 json.dump(data, tied, indent=2)
     except Timeout:
         return "timeout"
-    
-print(haeKannasta(lambda c: hae_n_kysymys_id(1, 300, 10, c)))
