@@ -1,36 +1,31 @@
 body {
   font-size: 2em;
-  overflow: scroll;
 }
 
 .kysymysJaNapit {
   display: flex;
-  flex-direction: column;
-  height: 100%;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
-
 }
+
 
 .kysymysJaNapit>div {
   background-color: #488be0;
-  border-radius: 1.5em;
-  max-width: 85%;
+  border-radius: 2vh;
+  margin-top: 1vh;
+  box-sizing: border-box;
 }
 
 .vastaus {
+  display: flex;
   cursor: pointer;
-  padding: 0.5em;
-  margin-top: 0.6em;
-  margin-bottom: 0.6em;
-  margin-left: 3em;
-  margin-right: 3em;
-  border: 0.1em solid black;
-  text-align: center;
+  border: calc(0.1vw + 0.1vh) solid black;
+  margin: calc(0.2vw + 0.2vh);
   border-radius: 0em;
   background-color: white;
-
+  height: calc(5vw + 5vh);
+  font-size: calc(1vw + 1vh);
+  justify-content: center;
+  align-items: center;
 }
 
 .vaarin {
@@ -171,6 +166,15 @@ body {
 }
 
 .ylapalkki {
+  display: flex;
+  width: 100%;
+  height: 30vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  word-wrap: break-word;
+  font-size: clamp(0.1vw, 3vh);
   background: #c3daf7;
 }
 
@@ -181,6 +185,7 @@ body {
 
 .tiedot {
   display: flex;
+  height: 5vh;
 }
 
 .tiedot>div:last-of-type {
@@ -190,4 +195,36 @@ body {
   margin: 0.5em;
   margin-top: 0.8em;
   margin-left: auto;
+}
+
+@media (max-width: 1000px) {
+  .kysymysJaNapit>div {
+    border-radius: 2vh;
+    margin-top: 1vh;
+    min-width: 87vw;
+    max-width: 87vw;
+    min-height: 87vh;
+    max-height: 87vh;
+  }
+
+  .ylapalkki {
+    height: 30vh;
+    font-size: 2vw;
+  }
+
+  .vastaus {
+    font-size: 5vw;
+    height: 10vh;
+  }
+}
+
+@media (min-width: 999px) {
+  .kysymysJaNapit>div {
+    border-radius: 2vh;
+    margin-top: 1vh;
+    max-width: 95vw;
+    width: 1000px;
+    height: 1000px;
+    max-height: 95vh;
+  }
 }
