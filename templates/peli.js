@@ -12,7 +12,7 @@ const Kysymys = ({userId, kysymys}) => {
   const [painettu, setPainettu] = React.useState(false);
   const [aktiivinen, setAktiivinen] = React.useState(-1);
   const [isCorrect, setIsCorrect] = React.useState(null);
-  const [aihe, setAihe] = React.useState("Ei asetettu")
+  const [aihe, setAihe] = React.useState("Ei asetettu");
 
   console.log(kysymys, kysymysIndex);
 
