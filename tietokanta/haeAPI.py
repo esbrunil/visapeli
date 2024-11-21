@@ -35,7 +35,7 @@ def main():
     else:
         print("Haetaan 50 kysymystä aiheesta " + sys.argv[1].lower() + "...")
 
-    url = 'https://opentdb.com/api.php?amount=10' + aihe
+    url = 'https://opentdb.com/api.php?amount=50' + aihe
 
     response = requests.get(url)
 
