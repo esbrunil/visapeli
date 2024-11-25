@@ -1,7 +1,5 @@
 let url = window.location.pathname;
-let a = url.slice(0, url.lastIndexOf("/"));
-let path = a.slice(0, a.lastIndexOf("/"));
-
+let path = url.slice(0, url.lastIndexOf('/'));
 const { BrowserRouter, Routes, Route, Navigate, Link, useParams } = ReactRouterDOM;
 
 const LoadingKuvake = () => {
@@ -17,14 +15,11 @@ const laskeFonttiKoko = (str, elementWidth, fonttiKoko) => {
   const mult = elementWidth / (fonttiKoko * length);
   let fontSize = fonttiKoko * mult * 2.5;
   if (fontSize > fonttiKoko) fontSize = fonttiKoko;
-  console.log("uuusi fottn", fonttiKoko);
   return Math.round(fontSize);
 };
 
 const Kysymys = ({ userId, kysymys }) => {
-  let url = window.location.pathname;
-  let a = url.slice(0, url.lastIndexOf("/"));
-  let path = a.slice(0, a.lastIndexOf("/"));
+
   const [kysymysIndex, setKysymysIndex] = React.useState(0);
   const [question, setQuestion] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
@@ -56,17 +51,18 @@ const Kysymys = ({ userId, kysymys }) => {
         setLoading(false);
       }
     };
-
-    if (kysymysIndex < kysymys.kysymykset.length - 1) {
-      console.log("haetaan uusi", kysymysIndex, kysymys.kysymykset.length);
-      haeKysymys();
-    } else {
-      window.location.href = path + "/ValitseAihe";
-    }
+    console.log("hae");
+    haeKysymys();
   }, [kysymysIndex]);
 
   const luoSeuraavaKysymys = () => {
-    setKysymysIndex((prevIndex) => prevIndex + 1);
+    console.log(kysymysIndex, kysymys.kysymykset.length);
+    if (kysymysIndex === kysymys.kysymykset.length - 1) {
+      window.location.href = path + "/Results";
+    }
+    else {
+      setKysymysIndex((kysymysIndex) => kysymysIndex + 1);
+    }
   };
 
   return (
@@ -79,6 +75,7 @@ const Kysymys = ({ userId, kysymys }) => {
           aihe={kysymys.aiheData.aihe}
           seuraavaKysymys={luoSeuraavaKysymys}
           kysymysId={kysymys.kysymykset[kysymysIndex].toString()}
+          kysymyksetPituus={kysymys.kysymykset.length}
           key={kysymys.kysymykset[kysymysIndex].toString()}
         />
       ) : (
@@ -88,7 +85,7 @@ const Kysymys = ({ userId, kysymys }) => {
   );
 };
 
-const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId }) => {
+const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymyksetPituus }) => {
   const [aktiivinen, setAktiivinen] = React.useState(false);
   const [isCorrect, setIsCorrect] = React.useState(null);
   const [painettu, setPainettu] = React.useState(false);
@@ -210,12 +207,14 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId }) => {
   return (
     <div className="kysymysJaNapit">
       <div className="kysymysDiv">
-        <div className="tiedot">
-          <div className="kello">{sekunnit}</div>
-          <div>{aihe}</div>
-        </div>
-        <div className="ylapalkki">
-          <h1 className="kysymys">{question.kysymys}</h1>
+        <div className="tausta">
+          <div className="tiedot">
+            <div className="kello">{sekunnit}</div>
+            <div>{kysymysId}/10  {aihe}</div>
+          </div>
+          <div className="ylapalkki">
+            <h1 className="kysymys">{question.kysymys}</h1>
+          </div>
         </div>
         {Object.entries(question.vastausvaihtoehdot).map(([key, vastaus], index) => (
           <div
@@ -233,6 +232,17 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId }) => {
           </div>
         ))}
       </div>
+    </div>
+  );
+};
+
+const Results = () => {
+  return (
+    <div>
+      <h1>Pisteet</h1>
+      <button onClick={() =>
+        window.location.href = `${path.slice(0, path.lastIndexOf("/"))}/ValitseAihe`
+      }>Valikko</button>
     </div>
   );
 };
@@ -322,7 +332,17 @@ const Peli = () => {
 };
 
 const App = () => {
-  return <Peli />;
+
+  return (
+    <BrowserRouter>
+      <div>
+        <Routes>
+          <Route path={`${path}/Results`} element={<Results />} />
+          <Route path={`${path}/:aihe`} element={<Peli />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
 };
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
