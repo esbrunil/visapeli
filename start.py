@@ -29,11 +29,11 @@ def ValitseAihe():
 
 @app.route("/Peli/Results", methods=['GET'])
 def Results():
-    return render_template("peli.html")
+    return render_template("index.html")
 
 @app.route("/Peli/<path:aihe>", methods=['GET'])
 def Peli(aihe):
-    return render_template("peli.html")
+    return render_template("index.html")
 
 @app.route('/heartbeat', methods=['POST'])
 def Heartbeat():
