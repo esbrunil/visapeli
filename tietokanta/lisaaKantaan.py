@@ -85,6 +85,21 @@ def get_vastauksia(id):
     c.execute('SELECT vastauksia FROM Kysymykset WHERE id = ?', (id,))
     return c.fetchone()
 
+
+'''
+aihe = "Historia"
+insert_aihe(aihe)
+insert_kysymys(get_aihe_id(aihe)[0], 4, 2, "Mitä värejä on Suomen lipussa?")
+k_id = get_kysymys_id("Mitä värejä on Suomen lipussa?")[0]
+insert_vve(k_id, False, "punainen")
+insert_vve(k_id, False, "vihreä")
+insert_vve(k_id, True, "valkoinen")
+insert_vve(k_id, True, "sininen")
+
+c.execute('SELECT * FROM Vastausvaihtoehdot WHERE kysymys_id = (?) AND onko_oikein = TRUE', (k_id,))
+print(c.fetchall())
+'''
+
 with open('tietokanta/apiKysymykset.json', 'r') as kysym:
     data = json.load(kysym)
 ksetti = Kysymyssetti(data)
@@ -100,18 +115,44 @@ for kysymys in ksetti.kysymykset:
             for key, value in kysymys.vve.items():
                 insert_vve(k_id, key, value)
 
-if __name__ == "__main__":
-    print(get_aiheet())
-    print(get_kysymykset())
-    print(get_vve())
-    result = get_kysymyksia_lkm_looppaamalla("History", 2, 3)
-    #result2 = get_kysymyksia_lkm_aloittaenIdsta("History", 2, 3)
-    #result3 = result + result2
-    ids = [row[0] for row in result]
-    print(ids)
-    #print(result3)
-    print(get_aiheen_kysymysten_lkm(1)[0])
+
+print(get_aiheet())
+print(get_kysymykset())
+print(get_vve())
+result = get_kysymyksia_lkm_looppaamalla("History", 2, 3)
+#result2 = get_kysymyksia_lkm_aloittaenIdsta("History", 2, 3)
+#result3 = result + result2
+ids = [row[0] for row in result]
+print(ids)
+#print(result3)
+print(get_aiheen_kysymysten_lkm(1)[0])
 
 #tästä alaspäin periaatteessa tarkistamisen toteutus
+
+kysymysID = 1
+vastaus = 1
+#kysymysID = int(request.json['kysymysID'])
+#vastaus = int(request.json['vastaus'])
+#pitää tsekata vastauksia arvo
+#muodosta vastausten lkm pituinen taulukko
+vastausten_lkm = get_vastauksia(kysymysID)[0]
+tarkistettu = [0] * vastausten_lkm
+#vasemmalla false ja oikealla true
+
+if(vastausten_lkm == 2):
+    oikeavastaus = get_kysymyksen_oikea_vastaus(kysymysID)
+    tarkistettu[oikeavastaus] = 1
+else:
+    i = 0
+    totuusarvot = get_vve_totuudet(1)
+    while(i < vastausten_lkm):
+        tarkistettu[i] = totuusarvot[i][0]
+        i += 1
+#Ei mahdollista useamman vastauksen tarkistamista
+if(tarkistettu[vastaus] == 1):
+    tarkistettu[vastaus] += 1
+else:
+    tarkistettu[vastaus] -= 1
+print(tarkistettu)
 
 conn.close()
