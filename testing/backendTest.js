@@ -8,26 +8,33 @@ window.onload = async () => {
     // Requesti "annaID"
     const uId = await (await fetch("../main.cgi/annaID")).text();
 
-        // Lähetetään heartbeat joka 3. sekunti
-        setInterval(async () => {
-            console.log("interval");
-            await heartbeat();
-        }, 3000);
-    
-        // Heartbeat-toteutus
-        const heartbeat = async () => {
-            const object = {
-                kayttajaID: uId
-            }
-    
-            const data = await (await fetch("../main.cgi/heartbeat", {
-                method: "POST",
-                body: JSON.stringify(object),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })).text();
+    // Lähetetään heartbeat joka 3. sekunti
+    setInterval(async () => {
+        console.log("interval");
+        await heartbeat();
+    }, 3000);
+
+    // Heartbeat-toteutus
+    const heartbeat = async () => {
+        const object = {
+            kayttajaID: uId
         }
+
+        const data = await (await fetch("../main.cgi/heartbeat", {
+            method: "POST",
+            body: JSON.stringify(object),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })).text();
+    }
+
+    console.log(await (await fetch("../main.cgi/asetaNimi", {
+        method: "POST",
+        body: JSON.stringify({ "kayttajaID": uId, "nimi": "gamer1", "rnd": false }),
+        headers: { "Content-Type": "application/json" }
+    })));
+        
 
     // Tehdään objekti, jossa käyttäjän id ja aiheena hissa
     const obj = {
@@ -66,14 +73,18 @@ window.onload = async () => {
     // Testataan vastaus
     const vastausTark = {
         kysymysID: "1",
-        vastausID: "0"
+        vastausID: "0",
+        aika: 3900,
+        kayttajaID: uId
     }
 
-    await (await fetch("../main.cgi/tarkistaVastaus", {
-        method: "POST",
-        body: JSON.stringify(vastausTark),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }));
+    for (let i = 0; i < 2; i++) {
+        await (await fetch("../main.cgi/tarkistaVastaus", {
+            method: "POST",
+            body: JSON.stringify(vastausTark),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }));
+    }
 }

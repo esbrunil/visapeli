@@ -1,7 +1,7 @@
 
 #!../visapeli-venv/venv/bin/python
 # -*- coding: utf-8 -*-
-from flask import Flask, request, redirect, render_template, session, url_for
+from flask import Flask, request, redirect, render_template, session, url_for, jsonify
 from flask_cors import CORS
 from functools import wraps
 from filelock  import FileLock, Timeout
@@ -54,6 +54,29 @@ def Heartbeat():
     return "", 200
 
 
+# Asettaa käyttäjälle käyttäjänimen, tai valitsee randomin. Palauttaa käyttäjänimen.
+# attr: nimi, random, käyttäjän_id
+# return: nimi
+@app.route("/asetaNimi", methods={"POST"})
+def asetaNimi():
+    id = request.json["kayttajaID"]
+    rnd = request.json["rnd"]
+    nimi = request.json["nimi"]
+
+    #if rnd:
+        # TODO! Hae nimi Raulin nimihärvelistä
+
+    data = lueJSONTiedosto("users.json")
+    
+    exists = 200
+    if not id in data:
+        exists = 201
+
+    data[id]["nimi"] = nimi
+
+    kirjoitaJSONTiedostoon("users.json", data)
+
+    return nimi, exists
 
 # Palauttaa clientille käyttäjäspesifin ID:n
 # attr: None
@@ -69,7 +92,7 @@ def annaID():
 
     maksimi = math.floor(random.random() * haeKannasta(lambda c: hae_taulujen_maksimi(c)))
 
-    liveUsers[id] = {"aihe": "", "heartbeat": math.floor(time.time()), "nimi": "", "indeksi": 0}
+    liveUsers[id] = { "aihe": "", "heartbeat": math.floor(time.time()), "nimi": "", "indeksi": 0, "pisteet": 0 }
     
     kirjoitaJSONTiedostoon("users.json", liveUsers)
 
@@ -89,6 +112,7 @@ def asetaAihe():
     data = lueJSONTiedosto("users.json")
     
     data[id]['aihe'] = aihe
+    data[id]['pisteet'] = 0
 
     kirjoitaJSONTiedostoon("users.json", data)
 
@@ -122,15 +146,30 @@ def haeKysymys():
 def tarkistaVastaus():
     kysymys = (int)(request.json["kysymysID"])
     vastaus = (int)(request.json['vastausID'])
+    aika = (int)(request.json["aika"])
+    id = request.json["kayttajaID"]
 
-    ov = haeKannasta(lambda c: hae_kysymys_ksm_ov(kysymys, c))[0][1]
-    print(ov)
-    if ov <= 1:
-        onko_oikein = vastaus == ov
+    if vastaus >= 0:
+        ov = haeKannasta(lambda c: hae_kysymys_ksm_ov(kysymys, c))[0][1]
+        print(ov)
+        if ov <= 1:
+            onko_oikein = vastaus == ov
 
-    else: onko_oikein = haeKannasta(lambda c: tarkista_onko_oikein(vastaus, c))[0][0]
+        else: onko_oikein = haeKannasta(lambda c: tarkista_onko_oikein(vastaus, c))[0][0]
+
+    else: 
+        onko_oikein = False
+
+    pisteet = 0
+    if onko_oikein:
+        pisteet = min(10000, (12000 - aika))
+        data = lueJSONTiedosto("users.json")
+        data[id]["pisteet"] += pisteet
+        kirjoitaJSONTiedostoon("users.json", data)
+
 
     return ((str)(onko_oikein)).lower(), 200
+    #return jsonify({ "onkoOikein": ((str)(onko_oikein)).lower(), "pisteet": pisteet }), 200
 
 
 # Yleiset funktiot ------------------------------------------------------------------------------------------------------------------------------------------
