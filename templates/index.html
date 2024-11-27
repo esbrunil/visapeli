@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>React Hello World</title>
+  <title>VISAPELI</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='../../static/css/tyylit.css') }}">
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -43,7 +43,7 @@ const ValitseAihe = () => {
 
   return (
     <div className="valitseAihe">
-      <h2 className="h1">VISAPELI</h2>
+      <h2 className="h1">AIHEET</h2>
       <div className="aiheet">
         {aiheet.map((aihe, index) => (
           <div
@@ -65,15 +65,29 @@ const ValitseAihe = () => {
 const NavMenu = () => {
   const [auki, setAuki] = React.useState(false);
 
+  const navigate = useNavigate();
+  const handleClick = () => {
+    const nykyinenPath = window.location.pathname;
+    const osat = nykyinenPath.split("/");
+
+    const indeksi = osat.findIndex(osa => osa === "main.cgi");
+
+    const uusiPath = osat.slice(0, indeksi + 1).join("/") + "/ValitseAihe"
+    setAuki(() => false);
+    navigate(uusiPath); 
+
+  };
+
   return (
-    <div className="navMenu">
-      <div className="menu" onClick={() => {
-        setAuki(auki => !auki);
-      }}>
-        Menu
+    <div className="nav">
+      <div className={`icon ${auki ? "auki" : ''}`} onClick={() => setAuki(edellinen => !edellinen)}>
+        <span className="line"></span>
+        <span className="line"></span>
+        <span className="line"></span>
       </div>
-      <div className={`sivupalkki ${auki ? 'auki' : ''}`}>
-        <a href="#">Etusivu</a>
+      <div onClick={handleClick} className="nimi">VISAPELI</div>
+      <div className={`sivupalkki ${auki ? "auki" : ''}`}>
+        <a onClick={handleClick}>Etusivu</a>
       </div>
     </div>
   );
@@ -90,7 +104,7 @@ const LoadingKuvake = () => {
 const laskeFonttiKoko = (str, elementWidth, fonttiKoko) => {
   const length = str.length;
   const mult = elementWidth / (fonttiKoko * length);
-  let fontSize = fonttiKoko * mult * 2.5;
+  let fontSize = fonttiKoko * mult * 1.5;
   if (fontSize > fonttiKoko) fontSize = fonttiKoko;
   return Math.round(fontSize);
 };
@@ -175,7 +189,8 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
   const [pause, setPause] = React.useState(false);
   const [startAika, setStartAika] = React.useState(null);
   const [kutsuSeuraavaKysymys, setKutsuSeuraavaKysymys] = React.useState(false);
-  const [sekunnit, setSekunnit] = React.useState(5);
+  const [sekunnit, setSekunnit] = React.useState(10);
+  const [kysymysNakyviin, setKysymysNakyviin] = React.useState(false);
 
   const muutaFonttiKoko = (elementId) => {
     const elementit = document.querySelectorAll(elementId);
@@ -188,8 +203,14 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
   };
 
   React.useEffect(() => {
+    setKysymysNakyviin(() => true);
     muutaFonttiKoko(".ylapalkki");
     muutaFonttiKoko(".vastaus");
+    window.addEventListener("resize", () => {
+      muutaFonttiKoko(".ylapalkki");
+      muutaFonttiKoko(".vastaus");
+    });
+
     setStart(true);
     setStartAika(performance.now());
 
@@ -238,6 +259,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
         throw new Error("Virhe tarkistuksessa");
       }
       const result = await response.json();
+      console.log(result);
       return result;
     } catch (error) {
       console.log(error);
@@ -271,7 +293,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
     setPainettu(true);
     //TODO HAE OIKEA VASTAUA
     // await haeVastauus 
-    document.getElementById("root").addEventListener('click', () => { setKutsuSeuraavaKysymys("true"); });
+    document.body.addEventListener('click', () => { setKutsuSeuraavaKysymys("true"); });
     setTimeout(() => {
       setKutsuSeuraavaKysymys("true");
     }, 3000);
@@ -287,7 +309,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
   }
 
   return (
-    <div className="kysymysJaNapit">
+    <div className={`kysymysJaNapit havitys ${kysymysNakyviin ? 'nakyviin' : ''}`}>
       <div className="kysymysDiv">
         <div className="tausta">
           <div className="tiedot">
