@@ -6,7 +6,7 @@ from flask_cors import CORS
 from functools import wraps
 from filelock  import FileLock, Timeout
 #from tietokanta.lisaaKantaan import get_kysymyksia_lkm_looppaamalla, haeKannasta, tarkista_onko_oikein
-import time, json, math, random, uuid, sqlite3
+import time, json, math, random, uuid, sqlite3, requests
 
 
 app = Flask(__name__)
@@ -20,7 +20,8 @@ CORS(app)
 @app.route("/", methods=['GET'])
 def index():
     #testaa onko uusi päivä ja päivitä päivänvisa?
-    return redirect(request.base_url + "ValitseAihe", 301)
+    #return redirect(request.base_url + "ValitseAihe", 301)
+    return "helou", 200
 
 
 @app.route("/ValitseAihe", methods=['GET'])
@@ -64,12 +65,16 @@ def asetaNimi():
     nimi = request.json["nimi"]
 
     #if rnd:
-        # TODO! Hae nimi Raulin nimihärvelistä
+    # nimi = requests.get("http://users.jyu.fi/~rajuruok/cgi-bin/visanimi/nimi.cgi/", headers={
+    #     "Accept": "text/plain"
+    # }).text
+    # print(nimi)
 
     data = lueJSONTiedosto("users.json")
     
     exists = 200
     if not id in data:
+        print("not")
         exists = 201
 
     data[id]["nimi"] = nimi
@@ -146,8 +151,10 @@ def haeKysymys():
 def tarkistaVastaus():
     kysymys = (int)(request.json["kysymysID"])
     vastaus = (int)(request.json['vastausID'])
-    aika = (int)(request.json["aika"])
+    #aika = (int)(request.json["aika"])
     id = request.json["kayttajaID"]
+
+    aika = 2000
 
     if vastaus >= 0:
         ov = haeKannasta(lambda c: hae_kysymys_ksm_ov(kysymys, c))[0][1]
