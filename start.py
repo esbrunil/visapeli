@@ -64,11 +64,10 @@ def asetaNimi():
     rnd = request.json["rnd"]
     nimi = request.json["nimi"]
 
-    #if rnd:
-    # nimi = requests.get("http://users.jyu.fi/~rajuruok/cgi-bin/visanimi/nimi.cgi/", headers={
-    #     "Accept": "text/plain"
-    # }).text
-    # print(nimi)
+    if rnd:
+        nimi = requests.get("http://users.jyu.fi/~rajuruok/cgi-bin/visanimi/nimi.cgi/", headers={
+            "Accept": "text/plain"
+        }).text
 
     data = lueJSONTiedosto("users.json")
     
@@ -97,7 +96,7 @@ def annaID():
 
     maksimi = math.floor(random.random() * haeKannasta(lambda c: hae_taulujen_maksimi(c)))
 
-    liveUsers[id] = { "aihe": "", "heartbeat": math.floor(time.time()), "nimi": "", "indeksi": 0, "pisteet": 0 }
+    liveUsers[id] = { "aihe": "", "heartbeat": math.floor(time.time()), "nimi": "", "indeksi": maksimi, "pisteet": 0 }
     
     kirjoitaJSONTiedostoon("users.json", liveUsers)
 
@@ -151,7 +150,7 @@ def haeKysymys():
 def tarkistaVastaus():
     kysymys = (int)(request.json["kysymysID"])
     vastaus = (int)(request.json['vastausID'])
-    #aika = (int)(request.json["aika"])
+    aika = (int)(request.json["aika"])
     id = request.json["kayttajaID"]
 
     aika = 2000
@@ -169,14 +168,24 @@ def tarkistaVastaus():
 
     pisteet = 0
     if onko_oikein:
-        pisteet = min(10000, (12000 - aika))
+        pisteet = min(10000, (2000 + aika))
         data = lueJSONTiedosto("users.json")
         data[id]["pisteet"] += pisteet
         kirjoitaJSONTiedostoon("users.json", data)
 
 
-    return ((str)(onko_oikein)).lower(), 200
-    #return jsonify({ "onkoOikein": ((str)(onko_oikein)).lower(), "pisteet": pisteet }), 200
+    #return ((str)(onko_oikein)).lower(), 200
+    return jsonify({ "onkoOikein": ((str)(onko_oikein)).lower(), "pisteet": pisteet }), 200
+
+
+# Antaa käyttäjän pisteet
+# attr: id
+# return: pisteet
+@app.route("/annaPisteet", methods=["POST"])
+def annaPisteet():
+    id = request.json["kayttajaID"]
+    data = lueJSONTiedosto("users.json")    
+    return data[id]["pisteet"], 200
 
 
 # Yleiset funktiot ------------------------------------------------------------------------------------------------------------------------------------------
