@@ -36,6 +36,10 @@ def Results():
 def Peli(aihe):
     return render_template("index.html")
 
+@app.route("/ErrorPage", methods=['GET'])
+def Error():
+    return render_template("index.html")
+
 @app.route('/heartbeat', methods=['POST'])
 def Heartbeat():
     aika = math.floor(time.time())
