@@ -203,9 +203,12 @@ def annaPisteet():
 
 
 
+# Lisää pelin päätteeksi käyttäjäen tarvittaessa hall of fameen
+# attr: käyttäjän id
+# return: json-objekti, jossa pisteet ja hall of fame data
 @app.route("/paataPeli", methods=["POST"])
-def paataPeli(id):
-    #id = request.json["kayttajaID"]
+def paataPeli():
+    id = request.json["kayttajaID"]
     data = lueJSONTiedosto("users.json")  
     HoFdata = lueJSONTiedosto("hallOfFame.json")
 
@@ -216,10 +219,10 @@ def paataPeli(id):
     HoFdata["lista"].insert(pos, pelaaja)
     HoFdata["lista"] = HoFdata["lista"][:10]
 
-    HoFdata["paivitetty"] = time.time()
+    HoFdata["paivitetty"] = math.floor(time.time())
     kirjoitaJSONTiedostoon("hallOfFame.json", HoFdata)
 
-    return data[id]["pisteet"], 200
+    return jsonify({ "pisteet": data[id]["pisteet"], "HoF": HoFdata }), 200
 
 
 # Yleiset funktiot ------------------------------------------------------------------------------------------------------------------------------------------
@@ -333,5 +336,3 @@ def kirjoitaJSONTiedostoon(tiedosto, data):
                 json.dump(data, tied, indent=2)
     except Timeout:
         return "timeout"
-    
-paataPeli("c")
