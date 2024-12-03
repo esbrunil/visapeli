@@ -20,8 +20,8 @@ CORS(app)
 @app.route("/", methods=['GET'])
 def index():
     #testaa onko uusi päivä ja päivitä päivänvisa?
-    #return redirect(request.base_url + "ValitseAihe", 301)
-    return "helou", 200
+    return redirect(request.base_url + "ValitseAihe", 301)
+    #return "helou", 200
 
 
 @app.route("/ValitseAihe", methods=['GET'])
@@ -55,10 +55,15 @@ def Heartbeat():
     return "", 200
 
 
+@app.route("/annaAiheet", methods=["GET"])
+def annaAiheet():
+    return haeKannasta(lambda c: haeAiheet(c))
+
+
 # Asettaa käyttäjälle käyttäjänimen, tai valitsee randomin. Palauttaa käyttäjänimen.
 # attr: nimi, random, käyttäjän_id
 # return: nimi
-@app.route("/asetaNimi", methods={"POST"})
+@app.route("/asetaNimi", methods=["POST"])
 def asetaNimi():
     id = request.json["kayttajaID"]
     rnd = request.json["rnd"]
@@ -150,8 +155,12 @@ def haeKysymys():
 def tarkistaVastaus():
     kysymys = (int)(request.json["kysymysID"])
     vastaus = (int)(request.json['vastausID'])
-    aika = (int)(request.json["aika"])
-    id = request.json["kayttajaID"]
+    #aika = (int)(request.json["aika"])
+    #id = request.json["kayttajaID"]
+
+    aika = 2000
+    data = lueJSONTiedosto("users.json")
+    id = next(iter(data))
 
     aika = 2000
 
@@ -184,7 +193,7 @@ def tarkistaVastaus():
 @app.route("/annaPisteet", methods=["POST"])
 def annaPisteet():
     id = request.json["kayttajaID"]
-    data = lueJSONTiedosto("users.json")    
+    data = lueJSONTiedosto("users.json")  
     return data[id]["pisteet"], 200
 
 
@@ -249,7 +258,7 @@ def tarkista_onko_oikein(vastausID, c):
 
 # Hakee maksimimäärän kysymyksiä per aihe
 def hae_taulujen_maksimi(c):
-    c.execute(f"SELECT * FROM Aiheet")
+    c.execute("SELECT * FROM Aiheet")
     aiheet = c.fetchall()
     maksimi = 0
     for aihe in aiheet:
@@ -258,6 +267,11 @@ def hae_taulujen_maksimi(c):
         if maara[0] > maksimi:
             maksimi = maara[0]
     return maksimi
+
+
+def haeAiheet(c):
+    c.execute("SELECT * FROM Aiheet")
+    return c.fetchall()
 
 # Muut ------------------------------------------------------------------------------------------------------------------------------------------
 

@@ -68,16 +68,20 @@ def main():
     with open('apiKysymykset.json', 'r', encoding='utf-8') as tk:
         file_data = json.load(tk)
 
+    overlap = 0
     for item in data['results']:
         if (item in file_data):
+            overlap += 1
             print(f"{WARNING} kohde on jo datassa, ohitetaan {item}{RESET} \n")
             continue
         file_data.append(item)
+
 
     with open('apiKysymykset.json', 'w', encoding='utf8') as tk:
         json.dump(file_data, tk, ensure_ascii=False,indent=2)
 
     print(f"{GREEN}Data päivitetty{RESET}")
+    print(f"{WARNING}Ohitettu {overlap} kysymys(tä){RESET} \n")
 
 if __name__ == '__main__':
     main()
