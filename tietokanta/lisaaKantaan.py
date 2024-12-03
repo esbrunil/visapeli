@@ -1,9 +1,9 @@
-import sqlite3, json, os
+import sqlite3, json, os, sys
 from kysymyssetti import Kysymyssetti
 
 
 #suluissa :memory:, niin tekee vain muistiin
-conn = sqlite3.connect('tietokanta/tietokanta.db')
+conn = sqlite3.connect('tietokanta.db')
 #conn = sqlite3.connect(':memory:')
 c = conn.cursor()
 
@@ -100,11 +100,15 @@ c.execute('SELECT * FROM Vastausvaihtoehdot WHERE kysymys_id = (?) AND onko_oike
 print(c.fetchall())
 '''
 
-with open('tietokanta/apiKysymykset.json', 'r') as kysym:
+with open('apiKysymykset.json', 'r') as kysym:
     data = json.load(kysym)
 ksetti = Kysymyssetti(data)
 
+maara = len(data)
+
+i = 0
 for kysymys in ksetti.kysymykset:
+    sys.stdout.write(f"\rLisätään: {i}/{maara}")
     if(get_aihe(kysymys.aihe) == None):
         insert_aihe(kysymys.aihe)
     if(get_kysymys(kysymys.kysymys) == None):
@@ -114,18 +118,21 @@ for kysymys in ksetti.kysymykset:
             k_id = get_kysymys_id(kysymys.kysymys)[0]
             for key, value in kysymys.vve.items():
                 insert_vve(k_id, key, value)
+    i+=1
+
+sys.stdout.write(f"\rLisätty {i} kysymys(tä).")
 
 
-print(get_aiheet())
-print(get_kysymykset())
-print(get_vve())
-result = get_kysymyksia_lkm_looppaamalla("History", 2, 3)
+#print(get_aiheet())
+#print(get_kysymykset())
+#print(get_vve())
+#result = get_kysymyksia_lkm_looppaamalla("History", 2, 3)
 #result2 = get_kysymyksia_lkm_aloittaenIdsta("History", 2, 3)
 #result3 = result + result2
-ids = [row[0] for row in result]
-print(ids)
+#ids = [row[0] for row in result]
+#print(ids)
 #print(result3)
-print(get_aiheen_kysymysten_lkm(1)[0])
+#print(get_aiheen_kysymysten_lkm(1)[0])
 
 #tästä alaspäin periaatteessa tarkistamisen toteutus
 

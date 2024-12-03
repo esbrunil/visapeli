@@ -6,7 +6,7 @@ from flask_cors import CORS
 from functools import wraps
 from filelock  import FileLock, Timeout
 #from tietokanta.lisaaKantaan import get_kysymyksia_lkm_looppaamalla, haeKannasta, tarkista_onko_oikein
-import time, json, math, random, uuid, sqlite3, requests
+import time, json, math, random, uuid, sqlite3, requests, bisect
 
 
 app = Flask(__name__)
@@ -103,7 +103,7 @@ def annaID():
 
     id = (str)(uuid.uuid4())
 
-    maksimi = math.floor(random.random() * haeKannasta(lambda c: hae_taulujen_maksimi(c)))
+    maksimi = math.floor(random.random() * haeKannasta(lambda c: hae_kysymykset_lkm(c)))
 
     liveUsers[id] = { "aihe": "", "heartbeat": math.floor(time.time()), "nimi": "", "indeksi": maksimi, "pisteet": 0 }
     
@@ -123,11 +123,6 @@ def asetaAihe():
     maara = 10
 
     data = lueJSONTiedosto("users.json")
-    
-    data[id]['aihe'] = aihe
-    data[id]['pisteet'] = 0
-
-    kirjoitaJSONTiedostoon("users.json", data)
 
     aihe_id = haeKannasta(lambda c: hae_aihe_id(aihe, c))
     kysymykset = haeKannasta(lambda c: hae_n_kysymys_id(aihe_id[0], data[id]["indeksi"], maara, c))
@@ -137,6 +132,12 @@ def asetaAihe():
 
     if len(kysymykset) > 0:
         data[id]["indeksi"] = kysymykset[len(kysymykset) - 1]
+
+    data[id]['aihe'] = aihe
+    data[id]['pisteet'] = 0
+    data[id]['indeksi'] += maara
+
+    kirjoitaJSONTiedostoon("users.json", data)
 
     return { "aiheData": data[id], "kysymykset": kysymykset }, 200
 
@@ -198,6 +199,26 @@ def tarkistaVastaus():
 def annaPisteet():
     id = request.json["kayttajaID"]
     data = lueJSONTiedosto("users.json")  
+    return data[id]["pisteet"], 200
+
+
+
+@app.route("/paataPeli", methods=["POST"])
+def paataPeli(id):
+    #id = request.json["kayttajaID"]
+    data = lueJSONTiedosto("users.json")  
+    HoFdata = lueJSONTiedosto("hallOfFame.json")
+
+    pelaaja = { "nimi": data[id]["nimi"], "pisteet": data[id]["pisteet"] }
+
+    pos = bisect.bisect_right([-(obj["pisteet"]) for obj in HoFdata["lista"]], -(pelaaja["pisteet"]))
+
+    HoFdata["lista"].insert(pos, pelaaja)
+    HoFdata["lista"] = HoFdata["lista"][:10]
+
+    HoFdata["paivitetty"] = time.time()
+    kirjoitaJSONTiedostoon("hallOfFame.json", HoFdata)
+
     return data[id]["pisteet"], 200
 
 
@@ -273,6 +294,11 @@ def hae_taulujen_maksimi(c):
     return maksimi
 
 
+def hae_kysymykset_lkm(c):
+    c.execute("SELECT COUNT(*) FROM Kysymykset")
+    return c.fetchone()[0]
+
+
 def haeAiheet(c):
     c.execute("SELECT * FROM Aiheet")
     return c.fetchall()
@@ -307,3 +333,5 @@ def kirjoitaJSONTiedostoon(tiedosto, data):
                 json.dump(data, tied, indent=2)
     except Timeout:
         return "timeout"
+    
+paataPeli("c")

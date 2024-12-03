@@ -2,7 +2,7 @@ import sqlite3, json
 from kysymyssetti import Kysymyssetti
 
 #suluissa :memory:, niin tekee vain muistiin
-conn = sqlite3.connect('tietokanta/tietokanta.db')
+conn = sqlite3.connect('tietokanta.db')
 #conn = sqlite3.connect(':memory:')
 
 c = conn.cursor()
