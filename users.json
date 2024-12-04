@@ -1,9 +1,24 @@
 {
+<<<<<<< HEAD
   "bdd29258-d357-4ff1-8d62-f6f3ea18690e": {
     "aihe": "History",
     "heartbeat": 1733328533,
     "nimi": "gamer1",
     "indeksi": 1353,
+=======
+  "1455e2c6-727b-4352-bfbb-365858128b9a": {
+    "aihe": "History",
+    "heartbeat": 1733325245,
+    "nimi": "",
+    "indeksi": 3954,
+    "pisteet": 0
+  },
+  "a4cb68e2-2869-4e75-aaf2-4c26a30bb3d2": {
+    "aihe": "History",
+    "heartbeat": 1733325243,
+    "nimi": "",
+    "indeksi": 601,
+>>>>>>> b7829a40713fdcb592f5ab927d818c87ad5e4050
     "pisteet": 0
   }
 }

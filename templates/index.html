@@ -18,7 +18,7 @@
 <body>
   <div id="root"></div>
   <script type="text/jsx">
-const { BrowserRouter, Routes, Route, useNavigate, Link, useParams } = ReactRouterDOM;
+const { BrowserRouter, Routes, Route, useNavigate, Link, useParams, useLocation, Router } = ReactRouterDOM;
 const url = window.location.pathname;
 const osat = url.split('/');
 const visapeliIndex = osat.indexOf("main.cgi");
@@ -33,6 +33,7 @@ const navigateTo = (paikka, navigate) => {
     const polku = "/" + path + "/" + paikka;
     navigate(polku);
 };
+
 
 const ValitseAihe = () => {
   const aiheet = ["History", "Geography"];
@@ -65,6 +66,8 @@ const ValitseAihe = () => {
   };
 
   return (
+    <React.Fragment>
+    <div className="etusivu">
     <div className="valitseAihe">
       <div className="aiheet">
       <h2 className="h1">PÄIVÄNVISA:</h2>
@@ -83,29 +86,42 @@ const ValitseAihe = () => {
         ))}
       </div>
     </div>
+    <div className="alaPalkki">
+      <hr className="otsikkoTekstiHr" />
+      <div className="alaPalkkiLinkit">
+        <a>Privacy Policy</a>
+        <a>About</a>
+      </div>
+    </div>
+    </div>
+    </React.Fragment>
   );
 };
 
 // Peli komponentit
 // -------------------------------------------------------------------- 
 
-const AlaNavi = () => {
-
-  const polku = (kohde) => {
-    return "http://users.jyu.fi" + path + "/" + kohde;
-  };
-
-  return (
-    <div className="alaNav">
-      <ul>
-        <a href={polku("PrivacyPolicy")} title="Go to Privacy Policy page">Privacy Policy</a>
-      </ul>
-    </div>
-  );
-};
-
 const NavMenu = () => {
   const [auki, setAuki] = React.useState(false);
+  const navRef = React.useRef(null);
+
+  React.useEffect(() => {
+
+    console.log(navRef.current.offsetHeight);
+    const paivitaKorkeus = () => {
+      document.documentElement.style.setProperty('--navKorkeus', `${navRef.current.offsetHeight}px`);
+    };
+ 
+    if (navRef.current) {
+        paivitaKorkeus();
+    }
+
+    window.addEventListener('resize', paivitaKorkeus);
+
+    return () => {
+      window.removeEventListener('resize', paivitaKorkeus);
+    };
+  }, []);
 
   const navigate = useNavigate();
   const handleClick = () => {
@@ -121,7 +137,7 @@ const NavMenu = () => {
   };
 
   return (
-    <div className="nav">
+    <div ref={navRef} className="nav">
       <div className={`icon ${auki ? "auki" : ''}`} onClick={() => setAuki(edellinen => !edellinen)}>
         <span className="line"></span>
         <span className="line"></span>
@@ -135,10 +151,11 @@ const NavMenu = () => {
   );
 };
 
-const LoadingKuvake = () => {
+const LoadingKuvake = ({luokka, koko}) => {
+
   return (
-    <div className="loadingDiv">
-      <div className="loading"></div>
+    <div className={`loadingDiv ${luokka}`}>
+      <div className={`loading ${koko}`}></div>
     </div>
   );
 }
@@ -166,6 +183,7 @@ const Kysymys = ({ userId, kysymys }) => {
   const [kysymysIndex, setKysymysIndex] = React.useState(0);
   const [question, setQuestion] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
+  const [results, setResults] = React.useState(false);
 
 
   React.useEffect(() => {
@@ -202,11 +220,7 @@ const Kysymys = ({ userId, kysymys }) => {
   const luoSeuraavaKysymys = () => {
     console.log(kysymysIndex, kysymys.kysymykset.length);
     if (kysymysIndex === kysymys.kysymykset.length - 1) {
-      const nykyinenPath = window.location.pathname;
-      const osat = nykyinenPath.split("/");
-      osat.pop();
-      const uusiPath = osat.join("/") + "/Results";
-      navigate(uusiPath);
+      setResults(true);
     }
     else {
       setKysymysIndex((kysymysIndex) => kysymysIndex + 1);
@@ -214,9 +228,10 @@ const Kysymys = ({ userId, kysymys }) => {
   };
 
   return (
-    <div>
-      {loading ? (
-        <LoadingKuvake />
+  <div>
+    {!results ? (
+      loading ? (
+          <LoadingKuvake luokka={"absolute"} koko={"perus"} />
       ) : question ? (
         <KysymysJaNapit
           question={question}
@@ -227,9 +242,12 @@ const Kysymys = ({ userId, kysymys }) => {
           key={kysymys.kysymykset[kysymysIndex].toString()}
         />
       ) : (
-        <LoadingKuvake />
-      )}
-    </div>
+        <LoadingKuvake luokka={"absolute"} koko={"perus"} />
+      )
+    ) : (
+          <Results userId={userId} />
+    )}
+  </div>
   );
 };
 
@@ -305,6 +323,9 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
         throw new Error("Virhe tarkistuksessa");
       }
       const result = await response.json();
+      console.log("------------");
+      console.log("Vastaus",result);
+      console.log("------------");
       return result.onkoOikein;
     } catch (error) {
       console.log(error);
@@ -320,7 +341,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
     e.target.classList.add("painettu");
 
     const oikeinko = await tarkistaVastaus(key);
-    console.log(oikeinko, "oiekin");
+    console.log(oikeinko, "oikea vastauas");
     if (oikeinko === "false" || oikeinko === 0) {
       setIsCorrect(false);
     }
@@ -337,7 +358,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
 
     setTimeout(() => {
       setKutsuSeuraavaKysymys("true");
-    }, 3000);
+    }, 100000);
   };
 
   const aikaLoppui = () => {
@@ -356,7 +377,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
   };
 
   if (!question || !question.kysymys || !question.vastausvaihtoehdot) {
-    return <LoadingKuvake />;
+    return <LoadingKuvake luokka={"absolute"} koko={"perus"}/>;
   }
 
   return (
@@ -391,24 +412,92 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
   );
 };
 
-const Results = () => {
+const Results = ({userId}) => {
   
+  const [pisteet, setPisteet] = React.useState();
+  const [pelaajat, setPelaajat] = React.useState();
+    
   const navigate = useNavigate();
 
+
+  React.useEffect(() => {
+    if (!userId) {
+      navigateTo("ValitseAihe", navigate);
+      return;
+    }
+    console.log(userId);
+
+    const annaPisteet = async () => {
+    try {
+      const response = await fetch("../annaPisteet", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          kayttajaID: userId.toString(),
+        }),
+      });
+      if (!response.ok) {
+          navigateTo("ErrorPage", navigate);
+          return;
+      }
+      const result = await response.text();
+      console.log("Response", result);
+      return result;
+    } catch (error) {
+      console.log(error);
+      }
+    };
+
+    //annaPisteet();
+    setPisteet("1000");
+
+    // TODO haetaan pelaajat hall of fame
+  
+
+  }, []);
+
   const handleClick = () => {
-      const nykyinenPath = window.location.pathname;
-      const osat = nykyinenPath.split("/");
-      osat.pop();
-      osat.pop();
-      const uusiPath = osat.join("/") + "/ValitseAihe";
-      navigate(uusiPath);
+    navigateTo("ValitseAihe", navigate);
   };
 
   return (
-    <div>
-      <h1>Pisteet</h1>
-      <button onClick={handleClick
-      }>Valikko</button>
+    <div className="kysymysJaNapit">
+      <div className="container">
+        <div onClick={handleClick} className="aihe">Valikko</div>
+      </div>
+      <div className="kysymysDiv pisteet">
+        <h1 className="fontOtsikko"> Pisteet </h1>
+        <hr className="otsikkoTekstiHr" />
+        <p className="fontText pisteetText"> ksjfdkasjf </p>
+      </div>  
+      <div className="kysymysDiv pisteet">  
+        <h1 className="fontOtsikko"> Hall of Fame </h1>
+        <hr className="otsikkoTekstiHr" />
+        <div className="divTaulukko">
+        {!pelaajat ? (
+            <LoadingKuvake luokka={"relative"} koko={"kiintea"}/>
+        ) : (
+        <table>
+          <thead>
+            <tr>
+              <th>Nimi</th>
+              <th>Pisteet</th>
+            </tr>
+          </thead>
+          <tbody>
+            {pelaajat.map((p, index) => (
+              <tr key={index}>
+                <td>{p.nimi}</td>
+                <td>{p.pisteet}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+        </div>
+      </div>
     </div>
   );
 };
@@ -514,11 +603,11 @@ const Peli = () => {
 
 
 const App = () => {
- console.log(path);
+
   return (
     <BrowserRouter>
+      <div className="content">
       <NavMenu />
-      <div>
         <Routes>
           <Route path={path + "/ValitseAihe"} element={<ValitseAihe />} />
           <Route path={path + "/Peli/Results"} element={<Results />} />
@@ -526,7 +615,6 @@ const App = () => {
           <Route path={path + "/ErrorPage"} element={<ErrorPage />} />
         </Routes>
       </div>
-      <AlaNavi />
     </BrowserRouter>
   );
 };

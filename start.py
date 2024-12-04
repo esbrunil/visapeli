@@ -28,10 +28,6 @@ def index():
 def ValitseAihe():
     return render_template("index.html")
 
-@app.route("/Peli/Results", methods=['GET'])
-def Results():
-    return render_template("index.html")
-
 @app.route("/Peli/<path:aihe>", methods=['GET'])
 def Peli(aihe):
     return render_template("index.html")
@@ -183,8 +179,9 @@ def tarkistaVastaus():
         data[id]["pisteet"] += pisteet
         kirjoitaJSONTiedostoon("users.json", data)
 
-    return jsonify({ "onkoOikein": ((str)(onko_oikein)).lower(), "pisteet": pisteet }), 200
+
     #return ((str)(onko_oikein)).lower(), 200
+    return jsonify({"onkoOikein": ((str)(onko_oikein)).lower(), "pisteet": pisteet }), 200
 
 
 # Antaa käyttäjän pisteet
@@ -195,7 +192,6 @@ def annaPisteet():
     id = request.json["kayttajaID"]
     data = lueJSONTiedosto("users.json")  
     return data[id]["pisteet"], 200
-
 
 
 # Lisää pelin päätteeksi käyttäjäen tarvittaessa hall of fameen
