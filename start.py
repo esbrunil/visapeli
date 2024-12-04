@@ -5,7 +5,7 @@ from flask import Flask, request, redirect, render_template, session, url_for, j
 from flask_cors import CORS
 from functools import wraps
 from filelock  import FileLock, Timeout
-#from tietokanta.lisaaKantaan import get_kysymyksia_lkm_looppaamalla, haeKannasta, tarkista_onko_oikein
+#from tietokanta.lisaaKantaan import get_kysymyksia_lkm_looppaamalla, tkOperaatio, tarkista_onko_oikein
 import time, json, math, random, uuid, sqlite3, requests, bisect
 
 
@@ -28,13 +28,16 @@ def index():
 def ValitseAihe():
     return render_template("index.html")
 
+
 @app.route("/Peli/<path:aihe>", methods=['GET'])
 def Peli(aihe):
     return render_template("index.html")
 
+
 @app.route("/ErrorPage", methods=['GET'])
 def Error():
     return render_template("index.html")
+
 
 @app.route('/heartbeat', methods=['POST'])
 def Heartbeat():
@@ -50,14 +53,14 @@ def Heartbeat():
             del data[user]
 
     kirjoitaJSONTiedostoon("users.json", data)
+       
+    return "", 200
 
-            
-    return jsonify({ "onkoOikein": ((str)(onko_oikein)).lower(), "pisteet": pisteet }), 200
 
 
 @app.route("/annaAiheet", methods=["GET"])
 def annaAiheet():
-    return haeKannasta(lambda c: haeAiheet(c))
+    return tkOperaatio(lambda c: haeAiheet(c), 'tietokanta/tietokanta.db')
 
 
 # Asettaa käyttäjälle käyttäjänimen, tai valitsee randomin. Palauttaa käyttäjänimen.
@@ -92,14 +95,12 @@ def asetaNimi():
 # return: id
 @app.route('/annaID', methods=['GET'])
 def annaID():
-    #luo indeksi, joka välillä 1 ja max lkm aiheista i mod h
-    #connect ja close
     id = None
     liveUsers = lueJSONTiedosto("users.json")
 
     id = (str)(uuid.uuid4())
 
-    maksimi = math.floor(random.random() * haeKannasta(lambda c: hae_kysymykset_lkm(c)))
+    maksimi = math.floor(random.random() * tkOperaatio(lambda c: hae_kysymykset_lkm(c), 'tietokanta/tietokanta.db'))
 
     liveUsers[id] = { "aihe": "", "heartbeat": math.floor(time.time()), "nimi": "", "indeksi": maksimi, "pisteet": 0 }
     
@@ -120,11 +121,11 @@ def asetaAihe():
 
     data = lueJSONTiedosto("users.json")
 
-    aihe_id = haeKannasta(lambda c: hae_aihe_id(aihe, c))
-    kysymykset = haeKannasta(lambda c: hae_n_kysymys_id(aihe_id[0], data[id]["indeksi"], maara, c))
+    aihe_id = tkOperaatio(lambda c: hae_aihe_id(aihe, c), 'tietokanta/tietokanta.db')
+    kysymykset = tkOperaatio(lambda c: hae_n_kysymys_id(aihe_id, data[id]["indeksi"], maara, c), 'tietokanta/tietokanta.db')
 
     if len(kysymykset) < maara:
-        kysymykset.extend(haeKannasta(lambda c: hae_n_kysymys_id(aihe_id[0], 0, maara - len(kysymykset), c)))
+        kysymykset.extend(tkOperaatio(lambda c: hae_n_kysymys_id(aihe_id, 0, maara - len(kysymykset), c)), 'tietokanta/tietokanta.db')
 
     if len(kysymykset) > 0:
         data[id]["indeksi"] = kysymykset[len(kysymykset) - 1]
@@ -143,7 +144,7 @@ def haeKysymys():
     userID = request.json['kayttajaID']
     qID = request.json['kysymysID']
 
-    kysymys = haeKannasta(lambda c: hae_kysymys(qID, c))
+    kysymys = tkOperaatio(lambda c: hae_kysymys(qID, c), 'tietokanta/tietokanta.db')
 
     return kysymys[qID], 200
 
@@ -165,11 +166,11 @@ def tarkistaVastaus():
 
     aika = 2000
 
-    ov = haeKannasta(lambda c: hae_kysymys_ksm_ov(kysymys, c))[0][1]
+    ov = tkOperaatio(lambda c: hae_kysymys_ksm_ov(kysymys, c), 'tietokanta/tietokanta.db')[0][1]
     if ov <= 1:
         onko_oikein = vastaus == ov
 
-    else: onko_oikein = haeKannasta(lambda c: tarkista_onko_oikein(vastaus, c))[0][0]
+    else: onko_oikein = tkOperaatio(lambda c: tarkista_onko_oikein(vastaus, c), 'tietokanta/tietokanta.db')[0][0]
 
 
     pisteet = 0
@@ -198,22 +199,15 @@ def annaPisteet():
 # attr: käyttäjän id
 # return: json-objekti, jossa pisteet ja hall of fame data
 @app.route("/paataPeli", methods=["POST"])
-def paataPeli():
-    id = request.json["kayttajaID"]
+def paataPeli(id):
+    #id = request.json["kayttajaID"]
     data = lueJSONTiedosto("users.json")  
-    HoFdata = lueJSONTiedosto("hallOfFame.json")
 
-    pelaaja = { "nimi": data[id]["nimi"], "pisteet": data[id]["pisteet"] }
+    tkOperaatio(lambda c: lisaa_jos_ansaitsee(c, data[id]), "tietokanta/paivakanta.db")
 
-    pos = bisect.bisect_right([-(obj["pisteet"]) for obj in HoFdata["lista"]], -(pelaaja["pisteet"]))
 
-    HoFdata["lista"].insert(pos, pelaaja)
-    HoFdata["lista"] = HoFdata["lista"][:10]
 
-    HoFdata["paivitetty"] = math.floor(time.time())
-    kirjoitaJSONTiedostoon("hallOfFame.json", HoFdata)
-
-    return jsonify({ "pisteet": data[id]["pisteet"], "HoF": HoFdata }), 200
+    return ""
 
 
 # Yleiset funktiot ------------------------------------------------------------------------------------------------------------------------------------------
@@ -222,12 +216,29 @@ def paataPeli():
 
 
 # Hakee tietokannasta siten, että kanta avataan ja suljetaan vain kerran. Argumentin funktio määrittelee tietokantaoperaation
-def haeKannasta(func):
-    conn = sqlite3.connect('tietokanta/tietokanta.db')
+def tkOperaatio(func, osoite):
+    conn = sqlite3.connect(osoite)
     c = conn.cursor()
     res = func(c)
+    conn.commit()
     conn.close()
     return res
+
+
+# Vaiheessa !
+def lisaa_jos_ansaitsee(c, pelaaja):
+    aihe = tkOperaatio(lambda c: hae_aihe_id(pelaaja["aihe"], c), "tietokanta/tietokanta.db")
+    c.execute("""
+        INSERT INTO HallOfFame (aihe_id, nimi, pisteet)      
+        SELECT ?,?,?
+        WHERE (
+              SELECT COUNT(*) 
+              FROM HallOfFame
+              WHERE aihe_id = ? AND pisteet >= ?
+              ) < 10
+    """, (aihe, pelaaja["nimi"], pelaaja["pisteet"], aihe, pelaaja["pisteet"])
+    )
+    return
 
 
 # Hakee n-kysymyksen id:t jostain luvusta lähtien tietyltä aiheelta
@@ -239,7 +250,7 @@ def hae_n_kysymys_id(aihe, alku, maara, c):
 # Hakee aiheen id:n tekstin perusteella
 def hae_aihe_id(aihe, c):
     c.execute(f"SELECT id FROM Aiheet WHERE aihe = ?", (aihe,))
-    return c.fetchone()
+    return c.fetchone()[0]
 
 
 # Hakee kysymyksen ja vastausvaihtoehdot kysymyksen id:n perusteella
@@ -327,3 +338,5 @@ def kirjoitaJSONTiedostoon(tiedosto, data):
                 json.dump(data, tied, indent=2)
     except Timeout:
         return "timeout"
+
+paataPeli("jorma")
