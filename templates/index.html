@@ -67,6 +67,7 @@ const ValitseAihe = () => {
 
   return (
     <React.Fragment>
+    <div className="etusivu">
     <div className="valitseAihe">
       <div className="aiheet">
       <h2 className="h1">PÄIVÄNVISA:</h2>
@@ -92,6 +93,7 @@ const ValitseAihe = () => {
         <a>About</a>
       </div>
     </div>
+    </div>
     </React.Fragment>
   );
 };
@@ -101,6 +103,25 @@ const ValitseAihe = () => {
 
 const NavMenu = () => {
   const [auki, setAuki] = React.useState(false);
+  const navRef = React.useRef(null);
+
+  React.useEffect(() => {
+
+    console.log(navRef.current.offsetHeight);
+    const paivitaKorkeus = () => {
+      document.documentElement.style.setProperty('--navKorkeus', `${navRef.current.offsetHeight}px`);
+    };
+ 
+    if (navRef.current) {
+        paivitaKorkeus();
+    }
+
+    window.addEventListener('resize', paivitaKorkeus);
+
+    return () => {
+      window.removeEventListener('resize', paivitaKorkeus);
+    };
+  }, []);
 
   const navigate = useNavigate();
   const handleClick = () => {
@@ -116,7 +137,7 @@ const NavMenu = () => {
   };
 
   return (
-    <div className="nav">
+    <div ref={navRef} className="nav">
       <div className={`icon ${auki ? "auki" : ''}`} onClick={() => setAuki(edellinen => !edellinen)}>
         <span className="line"></span>
         <span className="line"></span>
@@ -302,6 +323,9 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
         throw new Error("Virhe tarkistuksessa");
       }
       const result = await response.json();
+      console.log("------------");
+      console.log("Vastaus",result);
+      console.log("------------");
       return result.onkoOikein;
     } catch (error) {
       console.log(error);
@@ -317,7 +341,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
     e.target.classList.add("painettu");
 
     const oikeinko = await tarkistaVastaus(key);
-    console.log(oikeinko, "oiekin");
+    console.log(oikeinko, "oikea vastauas");
     if (oikeinko === "false" || oikeinko === 0) {
       setIsCorrect(false);
     }
@@ -334,7 +358,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
 
     setTimeout(() => {
       setKutsuSeuraavaKysymys("true");
-    }, 3000);
+    }, 100000);
   };
 
   const aikaLoppui = () => {

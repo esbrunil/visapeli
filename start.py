@@ -185,7 +185,7 @@ def tarkistaVastaus():
 
 
     #return ((str)(onko_oikein)).lower(), 200
-    return jsonify({ "onkoOikein": ((str)(onko_oikein)).lower(), "pisteet": pisteet }), 200
+    return jsonify({"onkoOikein": ((str)(onko_oikein)).lower(), "pisteet": pisteet }), 200
 
 
 # Antaa käyttäjän pisteet
