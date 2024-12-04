@@ -1,23 +1,9 @@
 {
-  "a": {
+  "bdd29258-d357-4ff1-8d62-f6f3ea18690e": {
     "aihe": "History",
-    "heartbeat": 1733260006,
-    "nimi": "atte",
-    "indeksi": 2975,
-    "pisteet": 16000
-  },
-  "b": {
-    "aihe": "History",
-    "heartbeat": 1733260006,
-    "nimi": "bette",
-    "indeksi": 2975,
-    "pisteet": 12000
-  },
-  "c": {
-    "aihe": "History",
-    "heartbeat": 1733260006,
-    "nimi": "rölli",
-    "indeksi": 2975,
-    "pisteet": 22000
+    "heartbeat": 1733328533,
+    "nimi": "gamer1",
+    "indeksi": 1353,
+    "pisteet": 0
   }
 }

@@ -56,7 +56,7 @@ def Heartbeat():
     kirjoitaJSONTiedostoon("users.json", data)
 
             
-    return "", 200
+    return jsonify({ "onkoOikein": ((str)(onko_oikein)).lower(), "pisteet": pisteet }), 200
 
 
 @app.route("/annaAiheet", methods=["GET"])
@@ -169,16 +169,12 @@ def tarkistaVastaus():
 
     aika = 2000
 
-    if vastaus >= 0:
-        ov = haeKannasta(lambda c: hae_kysymys_ksm_ov(kysymys, c))[0][1]
-        print(ov)
-        if ov <= 1:
-            onko_oikein = vastaus == ov
+    ov = haeKannasta(lambda c: hae_kysymys_ksm_ov(kysymys, c))[0][1]
+    if ov <= 1:
+        onko_oikein = vastaus == ov
 
-        else: onko_oikein = haeKannasta(lambda c: tarkista_onko_oikein(vastaus, c))[0][0]
+    else: onko_oikein = haeKannasta(lambda c: tarkista_onko_oikein(vastaus, c))[0][0]
 
-    else: 
-        onko_oikein = False
 
     pisteet = 0
     if onko_oikein:
@@ -187,9 +183,8 @@ def tarkistaVastaus():
         data[id]["pisteet"] += pisteet
         kirjoitaJSONTiedostoon("users.json", data)
 
-
-    #return ((str)(onko_oikein)).lower(), 200
     return jsonify({ "onkoOikein": ((str)(onko_oikein)).lower(), "pisteet": pisteet }), 200
+    #return ((str)(onko_oikein)).lower(), 200
 
 
 # Antaa käyttäjän pisteet

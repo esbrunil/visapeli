@@ -73,12 +73,11 @@ window.onload = async () => {
     // Testataan vastaus
     const vastausTark = {
         kysymysID: "1",
-        vastausID: "0",
+        vastausID: "5",
         aika: 3900,
         kayttajaID: uId
     }
 
-    for (let i = 0; i < 2; i++) {
         await (await fetch("../main.cgi/tarkistaVastaus", {
             method: "POST",
             body: JSON.stringify(vastausTark),
@@ -86,5 +85,4 @@ window.onload = async () => {
                 "Content-Type": "application/json"
             }
         }));
-    }
 }
