@@ -94,7 +94,6 @@ const Kirjaudu = ({ asetaIdJaNimi }) => {
 };
 
 const ValitseAihe = () => {
-  const aiheet = ["History", "Geography"];
   const navigate = useNavigate();
   const location = useLocation();
   const {id} = location.state || {};
@@ -102,6 +101,7 @@ const ValitseAihe = () => {
   const [aihe, setAihe] = React.useState(false);
   const [navi, setNavi] = React.useState(false);
   const [nimi, setNimi] = React.useState("");
+  const [aiheet, setAiheet] = React.useState();
 
   let handleResize = () => {
       muutaFonttiKoko(".aihe");
@@ -109,12 +109,24 @@ const ValitseAihe = () => {
   };
 
   React.useEffect(() => {
-    console.log("Löytyi", id);
+    const haeAiheet = async () => {
+      try {
+        const response = await fetch("./annaAiheet");
+        if (!response.ok) {
+          throw new Error("Virhe response ei ole ok");
+        }
+        const result = await response.json();
+        const uudet = result.map(i => i[1]);
+        setAiheet(uudet);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    haeAiheet();
     window.scrollTo(0, 0);
     muutaFonttiKoko(".aihe");
     muutaFonttiKoko(".h1");
-    window.addEventListener("resize", handleResize);
-    return () => {
+    window.addEventListener("resize", handleResize); return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
@@ -136,41 +148,49 @@ const ValitseAihe = () => {
     setUserId(uusiId);
   };
 
-return (
+
+  return (
   <React.Fragment>
-    {id || userId ? (
-      <div className="etusivu">
+    <div className="etusivu">
+      {id || userId ? (
         <div className="valitseAihe">
-          <div className="aiheet">
-            <h2 className="h1">PÄIVÄNVISA:</h2>
-            <div className="aihe" onClick={(e) => handleClick(e, "paivanvisa")}>
-              PELAA  
-            </div>
-            <h2 className="h1">AIHEET:</h2>
-            {aiheet.map((aihe, index) => (
-              <div
-                className="aihe"
-                key={index}
-                onClick={(e) => handleClick(e, aihe)}
-              >
-                {aihe.toUpperCase()}
+          {aiheet ? (
+            <div className="aiheet">
+              <h2 className="h1">PÄIVÄNVISA:</h2>
+              <div className="aihe" onClick={(e) => handleClick(e, "paivanvisa")}>
+                PELAA  
               </div>
-            ))}
-          </div>
+              <h2 className="h1">AIHEET:</h2>
+              {aiheet.map((a, index) => (
+                <div
+                  className="aihe"
+                  key={index}
+                  onClick={(e) => handleClick(e, a)}
+                >
+                  {a.toUpperCase()}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <LoadingKuvake luokka={"relative"} koko={"kiintea"}/>
+          )}
         </div>
-      </div>
-    ) : (
-          <Kirjaudu asetaIdJaNimi={asetaIdJaNimi}/>
-    )}
-    <div className="alaPalkki">
-      <hr className="otsikkoTekstiHr" />
-      <div className="alaPalkkiLinkit">
-        <a href="#">Privacy Policy</a>
-        <a href="#">About</a>
+      ) : (
+        <Kirjaudu asetaIdJaNimi={asetaIdJaNimi} />
+      )}
+      <div className="alaPalkki">
+        <hr className="otsikkoTekstiHr" />
+        <div className="alaPalkkiNimi">VISAPELI</div>
+        <div className="alaPalkkiLinkit">
+          <a href="#">Privacy</a>
+          <a href="#">About</a>
+        </div>
       </div>
     </div>
   </React.Fragment>
-);
+  );
+
+
 };
 
 
@@ -180,26 +200,7 @@ return (
 
 const NavMenu = ({id}) => {
   const [auki, setAuki] = React.useState(false);
-  const navRef = React.useRef(null);
   const navigate = useNavigate();
-
-  React.useEffect(() => {
-
-    console.log(navRef.current.offsetHeight);
-    const paivitaKorkeus = () => {
-      document.documentElement.style.setProperty('--navKorkeus', `${navRef.current.offsetHeight}px`);
-    };
- 
-    if (navRef.current) {
-        paivitaKorkeus();
-    }
-
-    window.addEventListener('resize', paivitaKorkeus);
-
-    return () => {
-      window.removeEventListener('resize', paivitaKorkeus);
-    };
-  }, []);
 
   const handleClick = () => {
     setAuki(() => false);
@@ -211,7 +212,7 @@ const NavMenu = ({id}) => {
   };
 
   return (
-    <div ref={navRef} className="nav">
+    <div className="nav">
       <div className={`icon ${auki ? "auki" : ''}`} onClick={() => setAuki(edellinen => !edellinen)}>
         <span className="line"></span>
         <span className="line"></span>
@@ -353,7 +354,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
     setStartAika(performance.now());
 
     return () => {
-      document.getElementById("root").removeEventListener('click', seuraavaKysymys);
+      document.body.removeEventListener('click', asetaSeuraavaKysymys);
     };
   }, []);
 
@@ -427,12 +428,16 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
     const kokonaisaika = (loppu - startAika) / 1000;
     console.log("aikaa meni", kokonaisaika, startAika);
 
-    document.body.addEventListener('click', () => { setKutsuSeuraavaKysymys("true"); });
+    document.body.addEventListener('click', asetaSeuraavaKysymys);
 
 
     setTimeout(() => {
       setKutsuSeuraavaKysymys("true");
     }, 100000);
+  };
+
+  const asetaSeuraavaKysymys = () => {
+    setKutsuSeuraavaKysymys("true");
   };
 
   const aikaLoppui = () => {
@@ -510,7 +515,7 @@ const Results = ({userId}) => {
         }),
       });
       if (!response.ok) {
-          navigateTo("ErrorPage", navigate);
+          navigateTo("ErrorPage", navigate, id);
           return;
       }
       const result = await response.text();
@@ -574,10 +579,8 @@ const Results = ({userId}) => {
   );
 };
 
-const ErrorPage = ({error}) => {
+const ErrorPage = ({id}) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { id } = location.state || {};
 
   const handleClick = () => {
     if (id) {
@@ -589,12 +592,15 @@ const ErrorPage = ({error}) => {
   };
 
   return (
-    <div>
-      <h1>Virhe</h1>
-      <p>{error}</p>
-      <button onClick={handleClick}>Valikko</button>
+    <div className="kysymysJaNapit">
+      <div className="container errorPage">
+        <h1 className="fontOtsikko errorOtsikko"> Error </h1>
+        <p className="fontText pisteetText">Error viesti tahan...</p>
+        <button className="button" onClick={handleClick}>ETUSIVU</button>
+      </div>
     </div>
   );
+
 };
 
 const Peli = () => {
@@ -619,7 +625,7 @@ const Peli = () => {
         });
 
         if (!response.ok) {
-          navigateTo("ErrorPage", navigate);
+          navigateTo("ErrorPage", navigate, id);
         }
         const result = await response.json();
         setKysymys(result);
@@ -684,6 +690,7 @@ const Main = () => {
         <Route path={path + "/Peli/Results"} element={<Results />} />
         <Route path={path + "/Peli/:aihe"} element={<Peli />} />
         <Route path={path + "/ErrorPage"} element={<ErrorPage id={id} />} />
+        <Route path={path + "/*"} element={<ErrorPage id={id} />} />
       </Routes>
     </div>
   );
