@@ -49,7 +49,7 @@ def Heartbeat():
     data[id]["heartbeat"] = aika
 
     for user in list(data):
-        if (aika - data[user]["heartbeat"]) > 10:
+        if (aika - data[user]["heartbeat"]) > 30:
             del data[user]
 
     kirjoitaJSONTiedostoon("users.json", data)
@@ -81,7 +81,6 @@ def asetaNimi():
     
     exists = 200
     if not id in data:
-        print("not")
         exists = 201
 
     data[id]["nimi"] = nimi
@@ -205,9 +204,9 @@ def paataPeli(id):
 
     tkOperaatio(lambda c: lisaa_jos_ansaitsee(c, data[id]), "tietokanta/paivakanta.db")
 
+    hof = tkOperaatio(lambda c: anna_hof(c, data[id]["aihe"]), "tietokanta/paivakanta.db")
 
-
-    return ""
+    return hof
 
 
 # Yleiset funktiot ------------------------------------------------------------------------------------------------------------------------------------------
@@ -225,19 +224,23 @@ def tkOperaatio(func, osoite):
     return res
 
 
+def anna_hof(c, aihe):
+    aihe_id = tkOperaatio(lambda c: hae_aihe_id(aihe, c), "tietokanta/tietokanta.db")
+    c.execute(f"SELECT * FROM HallOfFame WHERE aihe_id = {aihe_id}")
+    return c.fetchall()
+
+
+
 # Vaiheessa !
 def lisaa_jos_ansaitsee(c, pelaaja):
     aihe = tkOperaatio(lambda c: hae_aihe_id(pelaaja["aihe"], c), "tietokanta/tietokanta.db")
+    c.execute("INSERT INTO HallOfFame (aihe_id, nimi, pisteet) VALUES (?,?,?)", (aihe, pelaaja["nimi"], pelaaja["pisteet"]))
     c.execute("""
-        INSERT INTO HallOfFame (aihe_id, nimi, pisteet)      
-        SELECT ?,?,?
-        WHERE (
-              SELECT COUNT(*) 
-              FROM HallOfFame
-              WHERE aihe_id = ? AND pisteet >= ?
-              ) < 10
-    """, (aihe, pelaaja["nimi"], pelaaja["pisteet"], aihe, pelaaja["pisteet"])
-    )
+        DELETE FROM HallOfFame
+        WHERE aihe_id = ? AND id NOT IN (
+            SELECT id FROM HallOfFame ORDER BY pisteet DESC LIMIT 10
+        )
+    """, (aihe,))
     return
 
 
@@ -338,5 +341,3 @@ def kirjoitaJSONTiedostoon(tiedosto, data):
                 json.dump(data, tied, indent=2)
     except Timeout:
         return "timeout"
-
-paataPeli("jorma")
