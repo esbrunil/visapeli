@@ -1,16 +1,30 @@
 {
-  "jorma": {
+  "9e941726-7c60-4451-9513-908239610dec": {
     "aihe": "History",
-    "heartbeat": 1733325245,
+    "heartbeat": 1733429641,
     "nimi": "",
-    "indeksi": 3954,
-    "pisteet": 15900
+    "indeksi": 889,
+    "pisteet": 4000
   },
-  "maija": {
+  "d272d438-1bfc-45a2-bbd3-4063189574f4": {
     "aihe": "History",
-    "heartbeat": 1733325243,
+    "heartbeat": 1733429642,
     "nimi": "",
-    "indeksi": 601,
-    "pisteet": 18500
+    "indeksi": 3365,
+    "pisteet": 0
+  },
+  "619241e8-a7a0-4adf-b386-c5380667ca84": {
+    "aihe": "",
+    "heartbeat": 1733429655,
+    "nimi": "",
+    "indeksi": 25,
+    "pisteet": 0
+  },
+  "9c355328-e675-41ae-bf2d-58041d54097e": {
+    "aihe": "History",
+    "heartbeat": 1733429685,
+    "nimi": "",
+    "indeksi": 1809,
+    "pisteet": 0
   }
 }

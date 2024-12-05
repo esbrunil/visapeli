@@ -21,23 +21,87 @@
 const { BrowserRouter, Routes, Route, useNavigate, Link, useParams, useLocation, Router } = ReactRouterDOM;
 const url = window.location.pathname;
 const osat = url.split('/');
-const visapeliIndex = osat.indexOf("main.cgi");
+const mainIndex = osat.indexOf("main.cgi");
 let path = '';
 if (path !== -1) {
-  path = '/' + osat.slice(0, visapeliIndex + 1).join('/');
+  path = '/' + osat.slice(0, mainIndex + 1).join('/');
   path = path.replace(/^\/+/, '').replace(/^\/+/, '');
 }
 
-const navigateTo = (paikka, navigate) => {
-    console.log(path);
-    const polku = "/" + path + "/" + paikka;
+const navigateTo = (paikka, navigate, id="") => {
+  const polku = "/" + path + "/" + paikka;
+  if (id.toString() === "") {
     navigate(polku);
+  }
+  else {
+    navigate(polku, {state: {id: id}});
+  }
 };
 
+const Kirjaudu = ({ asetaIdJaNimi }) => {
+  
+  const [value, setValue] = React.useState('');
+  const [userId, setUserId] = React.useState();
+  const [nimi, setNimi] = React.useState('');
+
+  React.useEffect(() => {
+    const haeId = async () => {
+      try {
+        const response = await fetch("./annaID");
+        if (!response.ok) {
+          throw new Error("Virhe response ei ole ok");
+        }
+        const result = await response.text();
+        console.log(result);
+        setUserId(result);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    haeId();
+  }, []);
+
+  React.useEffect(() => {
+    if (userId && nimi) {
+      console.log("asetettu user");
+      asetaIdJaNimi(userId, nimi);
+    }
+  }, [userId, nimi]);
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  const asetaNimi = () => {
+    console.log("asetaan nimi");
+    setNimi(value);
+  };
+
+  return (
+    <div className="etusivu">
+      <label>
+        Nimi:
+        <input 
+          type="text" 
+          value={value} 
+          onChange={handleChange}
+        />
+      </label>
+      <button onClick={asetaNimi}>Aseta</button>
+    </div>
+  );
+};
 
 const ValitseAihe = () => {
   const aiheet = ["History", "Geography"];
   const navigate = useNavigate();
+  const location = useLocation();
+  const {id} = location.state || {};
+  const [userId, setUserId] = React.useState(id);
+  const [aihe, setAihe] = React.useState(false);
+  const [navi, setNavi] = React.useState(false);
+  const [nimi, setNimi] = React.useState("");
 
   let handleResize = () => {
       muutaFonttiKoko(".aihe");
@@ -45,6 +109,7 @@ const ValitseAihe = () => {
   };
 
   React.useEffect(() => {
+    console.log("Löytyi", id);
     window.scrollTo(0, 0);
     muutaFonttiKoko(".aihe");
     muutaFonttiKoko(".h1");
@@ -55,55 +120,68 @@ const ValitseAihe = () => {
   }, []);
 
   const handleClick = (e, aihe) => {
-    const nykyinenPath = window.location.pathname;
-    const osat = nykyinenPath.split("/");
- 
-    osat.pop();
-  
-    const uusiPath = osat.join("/") + "/Peli/" + aihe;
-  
-    navigate(uusiPath);
+    setAihe(aihe);
+    setNavi(true);
   };
 
-  return (
-    <React.Fragment>
-    <div className="etusivu">
-    <div className="valitseAihe">
-      <div className="aiheet">
-      <h2 className="h1">PÄIVÄNVISA:</h2>
-      <div className="aihe" onClick={(e) => handleClick(e, "paivanvisa")}>
-         PELAA  
-      </div>
-      <h2 className="h1">AIHEET:</h2>
-        {aiheet.map((aihe, index) => (
-          <div
-            className="aihe"
-            key={index}
-            onClick={(e) => handleClick(e, aihe)}
-          >
-            {aihe.toUpperCase()}
+  React.useEffect(() => {
+    if (userId && navi && aihe) {
+      navigateTo(`Peli/${aihe}`, navigate, userId);
+    }
+  }, [userId, navigate, aihe]);
+
+
+  const asetaIdJaNimi = (uusiId, nimi) => {
+    setNimi(nimi);
+    setUserId(uusiId);
+  };
+
+return (
+  <React.Fragment>
+    {id || userId ? (
+      <div className="etusivu">
+        <div className="valitseAihe">
+          <div className="aiheet">
+            <h2 className="h1">PÄIVÄNVISA:</h2>
+            <div className="aihe" onClick={(e) => handleClick(e, "paivanvisa")}>
+              PELAA  
+            </div>
+            <h2 className="h1">AIHEET:</h2>
+            {aiheet.map((aihe, index) => (
+              <div
+                className="aihe"
+                key={index}
+                onClick={(e) => handleClick(e, aihe)}
+              >
+                {aihe.toUpperCase()}
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
-    </div>
+    ) : (
+          <Kirjaudu asetaIdJaNimi={asetaIdJaNimi}/>
+    )}
     <div className="alaPalkki">
       <hr className="otsikkoTekstiHr" />
       <div className="alaPalkkiLinkit">
-        <a>Privacy Policy</a>
-        <a>About</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">About</a>
       </div>
     </div>
-    </div>
-    </React.Fragment>
-  );
+  </React.Fragment>
+);
 };
+
+
 
 // Peli komponentit
 // -------------------------------------------------------------------- 
 
-const NavMenu = () => {
+const NavMenu = ({id}) => {
   const [auki, setAuki] = React.useState(false);
   const navRef = React.useRef(null);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
 
@@ -123,17 +201,13 @@ const NavMenu = () => {
     };
   }, []);
 
-  const navigate = useNavigate();
   const handleClick = () => {
-    const nykyinenPath = window.location.pathname;
-    const osat = nykyinenPath.split("/");
-
-    const indeksi = osat.findIndex(osa => osa === "main.cgi");
-
-    const uusiPath = osat.slice(0, indeksi + 1).join("/") + "/ValitseAihe"
     setAuki(() => false);
-    navigate(uusiPath); 
-
+    if (id) {
+      navigateTo("ValitseAihe", navigate, id);
+    } else {
+      navigateTo("ValitseAihe", navigate);
+    }
   };
 
   return (
@@ -231,7 +305,7 @@ const Kysymys = ({ userId, kysymys }) => {
   <div>
     {!results ? (
       loading ? (
-          <LoadingKuvake luokka={"absolute"} koko={"perus"} />
+         <LoadingKuvake luokka={"relative"} koko={"kiintea"}/>
       ) : question ? (
         <KysymysJaNapit
           question={question}
@@ -242,7 +316,7 @@ const Kysymys = ({ userId, kysymys }) => {
           key={kysymys.kysymykset[kysymysIndex].toString()}
         />
       ) : (
-        <LoadingKuvake luokka={"absolute"} koko={"perus"} />
+         <LoadingKuvake luokka={"relative"} koko={"kiintea"}/>
       )
     ) : (
           <Results userId={userId} />
@@ -413,16 +487,13 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
 };
 
 const Results = ({userId}) => {
-  
   const [pisteet, setPisteet] = React.useState();
   const [pelaajat, setPelaajat] = React.useState();
-    
   const navigate = useNavigate();
-
 
   React.useEffect(() => {
     if (!userId) {
-      navigateTo("ValitseAihe", navigate);
+      navigateTo("ValitseAihe", navigate, userId);
       return;
     }
     console.log(userId);
@@ -459,7 +530,8 @@ const Results = ({userId}) => {
   }, []);
 
   const handleClick = () => {
-    navigateTo("ValitseAihe", navigate);
+    console.log("userId", userId);
+    navigateTo("ValitseAihe", navigate, userId);
   };
 
   return (
@@ -504,56 +576,46 @@ const Results = ({userId}) => {
 
 const ErrorPage = ({error}) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { id } = location.state || {};
+
+  const handleClick = () => {
+    if (id) {
+      navigateTo("ValitseAihe", navigate, id);
+    }
+    else {
+      navigateTo("ValitseAihe", navigate);
+    }
+  };
 
   return (
     <div>
       <h1>Virhe</h1>
       <p>{error}</p>
-      <button onClick={() => navigateTo("ValitseAihe", navigate)
-      }>Valikko</button>
+      <button onClick={handleClick}>Valikko</button>
     </div>
   );
 };
 
 const Peli = () => {
   const { aihe } = useParams();
+  const location = useLocation();
+  const { id } = location.state || {};
   const pelinAihe = aihe;
+  const [kysymys, setKysymys] = React.useState();
   const navigate = useNavigate();
 
-  const [userId, setUserId] = React.useState("");
-  const [kysymys, setKysymys] = React.useState();
-  
-
-
   React.useEffect(() => {
-    let id = "";
-    const haeId = async () => {
-      try {
-        const response = await fetch("../annaID");
-        if (!response.ok) {
-          throw new Error("Virhe response ei ole ok");
-        }
-        const result = await response.text();
-        console.log(result);
-        await setUserId(result);
-        id = result;
-        asetaAihe(result);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-
+    console.log("id", id);
     const asetaAihe = async (kayttajaId) => {
       try {
-        console.log(kayttajaId);
         console.log(pelinAihe, "aihe");
         const response = await fetch("../asetaAihe", {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ kayttajaID: kayttajaId.toString(), aihe: pelinAihe }),
+          body: JSON.stringify({ kayttajaID: id.toString(), aihe: pelinAihe }),
         });
 
         if (!response.ok) {
@@ -561,7 +623,6 @@ const Peli = () => {
         }
         const result = await response.json();
         setKysymys(result);
-        console.log(userId);
         const interval = setInterval(async () => {
           console.log("Sending heartbeat...");
           try {
@@ -589,33 +650,42 @@ const Peli = () => {
         console.log("virhe ei onnistu");
       }
     };
-    haeId();
+    asetaAihe(id);
   }, []);
 
   return (
     <div>
-      {userId && kysymys && (<Kysymys userId={userId} kysymys={kysymys} />)}
+      {id && kysymys && (<Kysymys userId={id} kysymys={kysymys} />)}
     </div>);
 };
 
 
 //--------------------------------------------------------------------
 
-
 const App = () => {
-
   return (
     <BrowserRouter>
-      <div className="content">
-      <NavMenu />
-        <Routes>
-          <Route path={path + "/ValitseAihe"} element={<ValitseAihe />} />
-          <Route path={path + "/Peli/Results"} element={<Results />} />
-          <Route path={path + "/Peli/:aihe"} element={<Peli />} />
-          <Route path={path + "/ErrorPage"} element={<ErrorPage />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/*" element={<Main />} />
+      </Routes>
     </BrowserRouter>
+  );
+};
+
+const Main = () => {
+  const location = useLocation();
+  const { id } = location.state || {};
+
+  return (
+    <div className="content">
+      <NavMenu id={id}/>
+      <Routes>
+        <Route path={path + "/ValitseAihe"} element={<ValitseAihe />} />
+        <Route path={path + "/Peli/Results"} element={<Results />} />
+        <Route path={path + "/Peli/:aihe"} element={<Peli />} />
+        <Route path={path + "/ErrorPage"} element={<ErrorPage id={id} />} />
+      </Routes>
+    </div>
   );
 };
 
