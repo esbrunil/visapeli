@@ -24,18 +24,8 @@ def index():
     #return "helou", 200
 
 
-@app.route("/ValitseAihe", methods=['GET'])
-def ValitseAihe():
-    return render_template("index.html")
-
-
-@app.route("/Peli/<path:aihe>", methods=['GET'])
-def Peli(aihe):
-    return render_template("index.html")
-
-
-@app.route("/ErrorPage", methods=['GET'])
-def Error():
+@app.route('/<path:path>')
+def route(path):
     return render_template("index.html")
 
 
@@ -341,3 +331,5 @@ def kirjoitaJSONTiedostoon(tiedosto, data):
                 json.dump(data, tied, indent=2)
     except Timeout:
         return "timeout"
+
+#paataPeli("jorma")
