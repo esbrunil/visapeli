@@ -48,6 +48,8 @@ def Heartbeat():
 
 
 
+# Palauttaa listan aiheista
+# return taulukko aiheista
 @app.route("/annaAiheet", methods=["GET"])
 def annaAiheet():
     return tkOperaatio(lambda c: haeAiheet(c), 'tietokanta/tietokanta.db')
@@ -79,6 +81,7 @@ def asetaNimi():
 
     return nimi, exists
 
+
 # Palauttaa clientille käyttäjäspesifin ID:n
 # attr: None
 # return: id
@@ -105,7 +108,6 @@ def annaID():
 def asetaAihe():
     id = request.json['kayttajaID']
     aihe = request.json['aihe']
-
     maara = 10
 
     data = lueJSONTiedosto("users.json")
@@ -128,15 +130,14 @@ def asetaAihe():
     return { "aiheData": data[id], "kysymykset": kysymykset }, 200
 
 
+# Hakeee kysymyksen id:llä
+# attr: kysymyksen id
+# return kysymysobjekti vastausvaihtoehtoineen
 @app.route('/haeKysymys', methods=['POST'])
 def haeKysymys():
-    userID = request.json['kayttajaID']
     qID = request.json['kysymysID']
-
     kysymys = tkOperaatio(lambda c: hae_kysymys(qID, c), 'tietokanta/tietokanta.db')
-
     return kysymys[qID], 200
-
 
 
 # Tarkistaa annetun vastauksen
@@ -153,14 +154,15 @@ def tarkistaVastaus():
     data = lueJSONTiedosto("users.json")
     id = next(iter(data))
 
-    aika = 2000
-
     ov = tkOperaatio(lambda c: hae_kysymys_ksm_ov(kysymys, c), 'tietokanta/tietokanta.db')[0][1]
     if ov <= 1:
         onko_oikein = vastaus == ov
+        oikea = vastaus if onko_oikein else not vastaus
 
-    else: onko_oikein = tkOperaatio(lambda c: tarkista_onko_oikein(vastaus, c), 'tietokanta/tietokanta.db')[0][0]
-
+    else: 
+        tarkistus = tkOperaatio(lambda c: tarkista_onko_oikein(kysymys, vastaus, c), 'tietokanta/tietokanta.db')
+        onko_oikein = tarkistus[0]
+        oikea = tarkistus[1]
 
     pisteet = 0
     if onko_oikein:
@@ -169,9 +171,7 @@ def tarkistaVastaus():
         data[id]["pisteet"] += pisteet
         kirjoitaJSONTiedostoon("users.json", data)
 
-
-    #return ((str)(onko_oikein)).lower(), 200
-    return jsonify({"onkoOikein": ((str)(onko_oikein)).lower(), "pisteet": pisteet }), 200
+    return jsonify({"onkoOikein": ((str)(onko_oikein)).lower(), "oikea": oikea, "pisteet": pisteet }), 200
 
 
 # Antaa käyttäjän pisteet
@@ -214,14 +214,14 @@ def tkOperaatio(func, osoite):
     return res
 
 
+# Hakee hall of fame-listan tietyllä aiheella
 def anna_hof(c, aihe):
     aihe_id = tkOperaatio(lambda c: hae_aihe_id(aihe, c), "tietokanta/tietokanta.db")
     c.execute(f"SELECT * FROM HallOfFame WHERE aihe_id = {aihe_id}")
     return c.fetchall()
 
 
-
-# Vaiheessa !
+# Lisää käyttäjän hall of fameen, jos tarpeeksi pisteitä
 def lisaa_jos_ansaitsee(c, pelaaja):
     aihe = tkOperaatio(lambda c: hae_aihe_id(pelaaja["aihe"], c), "tietokanta/tietokanta.db")
     c.execute("INSERT INTO HallOfFame (aihe_id, nimi, pisteet) VALUES (?,?,?)", (aihe, pelaaja["nimi"], pelaaja["pisteet"]))
@@ -274,9 +274,18 @@ def hae_kysymys_ksm_ov(kysymysID, c):
 
 
 # Tarkistaa, onko vastaus oikein
-def tarkista_onko_oikein(vastausID, c):
+def tarkista_onko_oikein(kysymysID, vastausID, c):
     c.execute(f"SELECT onko_oikein FROM (SELECT * FROM Vastausvaihtoehdot WHERE id = {vastausID})")
-    return c.fetchall()
+    onko = (c.fetchone()[0] == 1)
+    if not onko:
+        ov = hae_kysymyksen_ov(kysymysID, c)
+    return [onko, ov]
+
+
+# Hakee kysymyksen oikean vastauksen id:n
+def hae_kysymyksen_ov(kysymysID, c):
+    c.execute("SELECT id FROM Vastausvaihtoehdot WHERE kysymys_id = ? AND onko_oikein = TRUE", (kysymysID,))
+    return c.fetchone()[0]
 
 
 # Hakee maksimimäärän kysymyksiä per aihe
@@ -292,18 +301,20 @@ def hae_taulujen_maksimi(c):
     return maksimi
 
 
+# Hakee kysymysten kokonaislukumäärän
 def hae_kysymykset_lkm(c):
     c.execute("SELECT COUNT(*) FROM Kysymykset")
     return c.fetchone()[0]
 
 
+# Hakee aiheet taulukkona
 def haeAiheet(c):
     c.execute("SELECT * FROM Aiheet")
     return c.fetchall()
 
 # Muut ------------------------------------------------------------------------------------------------------------------------------------------
 
-
+# Lukitsee ja lukee halutun JSON-tiedoston
 def lueJSONTiedosto(tiedosto):
     lock_tied = f"{tiedosto}.lock"
 
@@ -320,6 +331,7 @@ def lueJSONTiedosto(tiedosto):
         return "timeout"
         
 
+# Lukitsee ja kirjoittaa halutun datan haluttuun JSON-tiedostoon
 def kirjoitaJSONTiedostoon(tiedosto, data):
     lock_tied = f"{tiedosto}.lock"
 
@@ -331,5 +343,3 @@ def kirjoitaJSONTiedostoon(tiedosto, data):
                 json.dump(data, tied, indent=2)
     except Timeout:
         return "timeout"
-
-#paataPeli("jorma")
