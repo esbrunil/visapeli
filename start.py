@@ -301,6 +301,12 @@ def lisaa_jos_ansaitsee(c, pelaaja):
     return
 
 
+# Poistetaan tietyn aiheen HoF
+def poista_aiheen_hof(c, aihe):
+    c.execute("DELETE FROM HallOfFame Where aihe_id = ?", (aihe,))
+    return
+
+
 # Hakee n-kysymyksen id:t jostain luvusta lähtien tietyltä aiheelta
 def hae_n_kysymys_id(aihe, alku, maara, c):
     c.execute(f"SELECT id FROM Kysymykset WHERE id > {alku} AND aihe_id = {aihe} LIMIT {maara}")
