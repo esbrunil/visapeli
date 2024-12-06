@@ -7,6 +7,7 @@ from functools import wraps
 from filelock  import FileLock, Timeout
 from datetime import datetime
 from better_profanity import profanity
+from flask_sanitize_escape import SanitizeEscapeExtension 
 #from tietokanta.lisaaKantaan import get_kysymyksia_lkm_looppaamalla, tkOperaatio, tarkista_onko_oikein
 import time, json, math, random, uuid, sqlite3, requests
 
@@ -14,6 +15,12 @@ import time, json, math, random, uuid, sqlite3, requests
 app = Flask(__name__)
 CORS(app)
 
+#Sanitoi vissiin automaattisesti kaiken syötteen
+sanitize_extension = SanitizeEscapeExtension(
+    app, sanitize_quotes=True, custom_characters=["$", "#", "%"]
+)
+
+sanitize_extension.init_app(app)
 
 # Reitit ------------------------------------------------------------------------------------------------------------------------------------------
 
