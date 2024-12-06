@@ -315,6 +315,7 @@ const Kysymys = ({ userId, kysymys }) => {
           kysymysId={kysymys.kysymykset[kysymysIndex].toString()}
           kysymyksetPituus={kysymys.kysymykset.length}
           key={kysymys.kysymykset[kysymysIndex].toString()}
+          userId={userId}
         />
       ) : (
          <LoadingKuvake luokka={"relative"} koko={"kiintea"}/>
@@ -326,7 +327,7 @@ const Kysymys = ({ userId, kysymys }) => {
   );
 };
 
-const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymyksetPituus }) => {
+const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymyksetPituus, userId }) => {
   const [aktiivinen, setAktiivinen] = React.useState(false);
   const [isCorrect, setIsCorrect] = React.useState(null);
   const [painettu, setPainettu] = React.useState(false);
@@ -392,6 +393,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
         body: JSON.stringify({
           kysymysID: kysymysId,
           vastausID: vastausId.toString(),
+          kayttajaID: userId
         }),
       });
       if (!response.ok) {

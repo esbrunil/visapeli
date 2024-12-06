@@ -61,14 +61,16 @@ window.onload = async () => {
         kysymysID: resp["kysymykset"][0]
     }
 
-    // Requesti kysymyksen hakemiselle annetulla id:llä
-    const kyssari = await (await fetch("../main.cgi/haeKysymys", {
-        method: "POST",
-        body: JSON.stringify(kysymHaku),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }));
+    for (let i = 0; i < 2; i++) {
+        // Requesti kysymyksen hakemiselle annetulla id:llä
+        const kyssari = await (await fetch("../main.cgi/haeKysymys", {
+            method: "POST",
+            body: JSON.stringify(kysymHaku),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }));
+    }
 
     // Testataan vastaus
     const vastausTark = {

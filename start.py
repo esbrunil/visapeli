@@ -8,7 +8,7 @@ from filelock  import FileLock, Timeout
 from datetime import datetime
 from better_profanity import profanity
 #from tietokanta.lisaaKantaan import get_kysymyksia_lkm_looppaamalla, tkOperaatio, tarkista_onko_oikein
-import time, json, math, random, uuid, sqlite3, requests, bisect
+import time, json, math, random, uuid, sqlite3, requests
 
 
 app = Flask(__name__)
@@ -99,7 +99,7 @@ def annaID():
 
     maksimi = math.floor(random.random() * tkOperaatio(lambda c: hae_kysymykset_lkm(c), 'tietokanta/tietokanta.db'))
 
-    liveUsers[id] = { "aihe": "", "heartbeat": math.floor(time.time()), "nimi": "", "indeksi": maksimi, "pisteet": 0 }
+    liveUsers[id] = { "aihe": "", "heartbeat": math.floor(time.time()), "nimi": "", "indeksi": maksimi, "pisteet": 0, "kID": 0, "prevkID": 0 }
     
     kirjoitaJSONTiedostoon("users.json", liveUsers)
 
@@ -128,7 +128,7 @@ def asetaAihe():
 
     data[id]['aihe'] = aihe
     data[id]['pisteet'] = 0
-    data[id]['indeksi'] += maara
+    data[id]['indeksi'] = kysymykset[maara-1]
 
     kirjoitaJSONTiedostoon("users.json", data)
 
@@ -179,13 +179,25 @@ def paivanVisa():
 @app.route('/haeKysymys', methods=['POST'])
 def haeKysymys():
     qID = request.json['kysymysID']
+    uID = request.json['kayttajaID']
+
     kysymys = tkOperaatio(lambda c: hae_kysymys(qID, c), 'tietokanta/tietokanta.db')
     lukuaika = max(2, math.floor((len(kysymys[qID]["kysymys"]) * 40) / 1000))
     kysymys[qID]["lukuaika"] = lukuaika
+    uData = lueJSONTiedosto("users.json")
+    uData[uID]["prevkID"] = uData[uID]["kID"]
+    uData[uID]["kID"] = qID
+
+    if qID == uData[uID]["prevkID"]:
+        return "2 samaa kysymystä peräkkäin.", 400
+    
+    kirjoitaJSONTiedostoon("users.json", uData)
+
     return kysymys[qID], 200
 
 
 # Tarkistaa annetun vastauksen
+# Tarkistaa myös räikeän oikeellisuuden, eli onko vastauksen id ja aihe ne, mitä pitäisi
 # attr: { vastaus, kysymysID, kayttajaID}
 # return oikeiden määrä?
 @app.route('/tarkistaVastaus', methods=['POST'])
@@ -193,11 +205,15 @@ def tarkistaVastaus():
     kysymys = (int)(request.json["kysymysID"])
     vastaus = (int)(request.json['vastausID'])
     #aika = (int)(request.json["aika"])
-    #id = request.json["kayttajaID"]
+    uID = request.json["kayttajaID"]
 
     aika = 2000
     data = lueJSONTiedosto("users.json")
-    id = next(iter(data))
+
+    aihe = tkOperaatio(lambda c: hae_aihe_id(data[uID]["aihe"], c), "tietokanta/tietokanta.db")
+    tkAihe = tkOperaatio(lambda c: hae_ksm_aihe(kysymys, c), "tietokanta/tietokanta.db")
+    if (int)(data[uID]["kID"]) != (int)(kysymys) or (int)(aihe) != (int)(tkAihe):
+        return jsonify({ "virheellinen kysymys" }), 400
 
     ov = tkOperaatio(lambda c: hae_kysymys_ksm_ov(kysymys, c), 'tietokanta/tietokanta.db')[0][1]
     if ov <= 1:
@@ -309,6 +325,12 @@ def hae_kysymys(kysymysID, c):
         obj[kysymysID]["vastausvaihtoehdot"] = { 0: "False", 1: "True" }
 
     return obj
+
+
+# Hakee kysymyksen aiheen id:n perusteella
+def hae_ksm_aihe(kysymysID, c):
+    c.execute(f"SELECT aihe_id FROM Kysymykset WHERE id = {kysymysID}")
+    return c.fetchone()[0]
 
 
 # Hakee kysymyksen tekstin ja oikean vastauksen tyypin kysymyksen id:n perusteella
