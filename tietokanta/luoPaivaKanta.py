@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect("paivakanta.db")
+conn = sqlite3.connect("tietokanta.db")
 c = conn.cursor()
 
 c.execute('''
@@ -11,4 +11,3 @@ c.execute('''
         pisteet INTEGER NOT NULL
     )     
 ''')
-

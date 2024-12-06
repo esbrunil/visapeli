@@ -6,6 +6,7 @@ from flask_cors import CORS
 from functools import wraps
 from filelock  import FileLock, Timeout
 from datetime import datetime
+from better_profanity import profanity
 #from tietokanta.lisaaKantaan import get_kysymyksia_lkm_looppaamalla, tkOperaatio, tarkista_onko_oikein
 import time, json, math, random, uuid, sqlite3, requests, bisect
 
@@ -70,6 +71,9 @@ def asetaNimi():
             "Accept": "text/plain"
         }).text
 
+    elif nimi.strip() == "" or len(nimi) > 30 or not onko_siveellinen(nimi):
+        return "Virhe nimessä", 400
+
     data = lueJSONTiedosto("users.json")
     
     exists = 200
@@ -80,7 +84,7 @@ def asetaNimi():
 
     kirjoitaJSONTiedostoon("users.json", data)
 
-    return nimi, exists
+    return (nimi, exists), 200
 
 
 # Palauttaa clientille käyttäjäspesifin ID:n
@@ -176,6 +180,8 @@ def paivanVisa():
 def haeKysymys():
     qID = request.json['kysymysID']
     kysymys = tkOperaatio(lambda c: hae_kysymys(qID, c), 'tietokanta/tietokanta.db')
+    lukuaika = max(2, math.floor((len(kysymys[qID]["kysymys"]) * 40) / 1000))
+    kysymys[qID]["lukuaika"] = lukuaika
     return kysymys[qID], 200
 
 
@@ -231,9 +237,8 @@ def paataPeli(id):
     #id = request.json["kayttajaID"]
     data = lueJSONTiedosto("users.json")  
 
-    tkOperaatio(lambda c: lisaa_jos_ansaitsee(c, data[id]), "tietokanta/paivakanta.db")
-
-    hof = tkOperaatio(lambda c: anna_hof(c, data[id]["aihe"]), "tietokanta/paivakanta.db")
+    tkOperaatio(lambda c: lisaa_jos_ansaitsee(c, data[id]), "tietokanta/tietokanta.db")
+    hof = tkOperaatio(lambda c: anna_hof(c, data[id]["aihe"]), "tietokanta/tietokanta.db")
 
     return hof
 
@@ -391,3 +396,10 @@ def kirjoitaJSONTiedostoon(tiedosto, data):
                 json.dump(data, tied, indent=2)
     except Timeout:
         return "timeout"
+    
+
+# Tarkistaa, noudattaako ehdotettu nimi sivistyneitä länsimaisia standardeja, vai yrittääkö käyttäjä lisätä jotain ilkeää :(
+# Tukee pelkkää englantia atm
+def onko_siveellinen(nimi):
+    hyhhyhData = lueJSONTiedosto("hyhhyh.json")
+    return not (profanity.contains_profanity(nimi) or any(sana.lower() in nimi.lower() for sana in hyhhyhData["fi"]))
