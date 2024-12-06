@@ -152,7 +152,7 @@ def paivanVisa():
     #Jos tänää eri päivä kuin eilen, päivitetään päivä ja indeksi
     if(tanaa != paivanVisaMeta.get("paivitetty")):
         kysymysten_lkm = tkOperaatio(lambda c: hae_kysymykset_lkm(c), 'tietokanta/tietokanta.db')
-        aloitus_id = random.randrange(kysymysten_lkm)
+        aloitus_id = aloitus_id + 10
         if(kysymysten_lkm - aloitus_id < maara):
             aloitus_id -= maara - (kysymysten_lkm - aloitus_id)
         paivanVisaMeta["visaIndex"] = aloitus_id
