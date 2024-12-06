@@ -5,6 +5,7 @@ from flask import Flask, request, redirect, render_template, session, url_for, j
 from flask_cors import CORS
 from functools import wraps
 from filelock  import FileLock, Timeout
+from datetime import datetime
 #from tietokanta.lisaaKantaan import get_kysymyksia_lkm_looppaamalla, tkOperaatio, tarkista_onko_oikein
 import time, json, math, random, uuid, sqlite3, requests, bisect
 
@@ -120,6 +121,44 @@ def asetaAihe():
 
     if len(kysymykset) > 0:
         data[id]["indeksi"] = kysymykset[len(kysymykset) - 1]
+
+    data[id]['aihe'] = aihe
+    data[id]['pisteet'] = 0
+    data[id]['indeksi'] += maara
+
+    kirjoitaJSONTiedostoon("users.json", data)
+
+    return { "aiheData": data[id], "kysymykset": kysymykset }, 200
+
+
+# Asettaa päivän visan käyttäjälle
+# attr: { userID, aihe}
+# return onnistuiko?
+@app.route('/paivanVisa', methods=['POST'])
+def paivanVisa():
+    id = request.json['kayttajaID']
+    aihe = request.json['aihe']
+    maara = 10
+
+    tanaa = str(datetime.today().date())
+
+    paivanVisaPolku = "./tietokanta/paivaMeta.json"
+    paivanVisaMeta = lueJSONTiedosto(paivanVisaPolku)
+    
+    #Jos tänää eri päivä kuin eilen, päivitetään päivä ja indeksi
+    if(tanaa != paivanVisaMeta.get("paivitetty")):
+        kysymysten_lkm = tkOperaatio(lambda c: hae_kysymykset_lkm(c), 'tietokanta/tietokanta.db')
+        aloitus_id = random.randrange(kysymysten_lkm)
+        if(kysymysten_lkm - aloitus_id < maara):
+            aloitus_id -= maara - (kysymysten_lkm - aloitus_id)
+        paivanVisaMeta["visaIndex"] = aloitus_id
+        paivanVisaMeta["paivitetty"] = tanaa
+        kirjoitaJSONTiedostoon(paivanVisaPolku, paivanVisaMeta)
+
+    kysymykset = tkOperaatio(lambda c: get_kysymyksia_lkm_aloittaenIdsta(paivanVisaMeta["visaIndex"], maara, c), 'tietokanta/tietokanta.db')
+
+    data = lueJSONTiedosto("users.json")
+    data[id]["indeksi"] = kysymykset[len(kysymykset) - 1]
 
     data[id]['aihe'] = aihe
     data[id]['pisteet'] = 0
@@ -311,6 +350,15 @@ def hae_kysymykset_lkm(c):
 def haeAiheet(c):
     c.execute("SELECT * FROM Aiheet")
     return c.fetchall()
+
+
+#hakee lkm määrän id:itä tietystä id:stä alkaen
+def get_kysymyksia_lkm_aloittaenIdsta(aloitusID, lkm, c):
+    c.execute('''SELECT id 
+                 FROM Kysymykset 
+                 WHERE id >= ?
+                 LIMIT ?''', (aloitusID, lkm))
+    return [item[0] for item in c.fetchall()]
 
 # Muut ------------------------------------------------------------------------------------------------------------------------------------------
 
