@@ -116,7 +116,7 @@ def asetaAihe():
     kysymykset = tkOperaatio(lambda c: hae_n_kysymys_id(aihe_id, data[id]["indeksi"], maara, c), 'tietokanta/tietokanta.db')
 
     if len(kysymykset) < maara:
-        kysymykset.extend(tkOperaatio(lambda c: hae_n_kysymys_id(aihe_id, 0, maara - len(kysymykset), c)), 'tietokanta/tietokanta.db')
+        kysymykset.extend(tkOperaatio(lambda c: hae_n_kysymys_id(aihe_id, 0, maara - len(kysymykset), c), 'tietokanta/tietokanta.db'))
 
     if len(kysymykset) > 0:
         data[id]["indeksi"] = kysymykset[len(kysymykset) - 1]
