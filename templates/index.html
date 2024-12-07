@@ -18,7 +18,7 @@
 <body>
   <div id="root"></div>
   <script type="text/jsx">
-const { BrowserRouter, Routes, Route, useNavigate, Link, useParams, useLocation, Router } = ReactRouterDOM;
+const { BrowserRouter, Routes, Route, useNavigate, Link, useParams, useLocation, Router, Navigate } = ReactRouterDOM;
 const url = window.location.pathname;
 const osat = url.split('/');
 const mainIndex = osat.indexOf("main.cgi");
@@ -28,22 +28,23 @@ if (path !== -1) {
   path = path.replace(/^\/+/, '').replace(/^\/+/, '');
 }
 
-const navigateTo = (paikka, navigate, id="") => {
+const navigateTo = (paikka, navigate, id) => {
   const polku = "/" + path + "/" + paikka;
-  if (id.toString() === "") {
-    navigate(polku);
+  if (id) {
+    navigate(polku, {state: {id: id}});
   }
   else {
-    navigate(polku, {state: {id: id}});
+    const p = "/" + path + "/" + "Kirjaudu";
+    navigate(p, {state: {id: id}});
   }
 };
 
-const Kirjaudu = ({ asetaIdJaNimi }) => {
-  
+const Kirjaudu = () => {
   const [value, setValue] = React.useState('');
   const [userId, setUserId] = React.useState();
-  const [nimi, setNimi] = React.useState('');
-  const [randomNimi, setRandomNimi] = React.useState(false);
+  const [nimi, setNimi] = React.useState(false);
+  const [poista, setPoista] = React.useState(false);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const haeId = async () => {
@@ -64,9 +65,9 @@ const Kirjaudu = ({ asetaIdJaNimi }) => {
   }, []);
 
   React.useEffect(() => {
+    console.log("kokeile", nimi, userId);
     if (userId && nimi) {
-      console.log("asetettu user");
-      asetaIdJaNimi(userId, nimi, randomNimi);
+      navigateTo("ValitseAihe", navigate, userId);
     }
   }, [userId, nimi]);
 
@@ -74,14 +75,57 @@ const Kirjaudu = ({ asetaIdJaNimi }) => {
     setValue(event.target.value);
   };
 
-  const asetaNimi = () => {
+  const asetaNimi = async (e) => {
+    if (poista) {
+      return;
+    }
+    setPoista(true);
     console.log("asetaan nimi");
-    setNimi(value);
+    try {
+      const response = await fetch("./asetaNimi", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          kayttajaID: userId.toString(),
+          rnd: false,
+          nimi: value.trim(),
+        }),
+      });
+      console.log(response);
+      if (!response.ok) throw new Error("Error in setting username");
+      const result = await response.json();
+      setNimi(true);
+    } catch(error) {
+      console.error(error);
+    }
   };
 
-  const asetaRandom = () => {
-    setRandomNimi(true);
-    setNimi('  ');
+  const asetaRandom = async () => {
+    if (poista) {
+      return;
+    }
+    setPoista(true);
+    try {
+      const response = await fetch("./asetaNimi", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          kayttajaID: userId.toString(),
+          rnd: true,
+          nimi: nimi,
+        }),
+      });
+      console.log(response);
+      if (!response.ok) throw new Error("Error in setting username");
+      const result = await response.json();
+      setNimi(true);
+    } catch(error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -104,7 +148,6 @@ const ValitseAihe = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const {id} = location.state || {};
-  const [userId, setUserId] = React.useState(id);
   const [aihe, setAihe] = React.useState(false);
   const [navi, setNavi] = React.useState(false);
   const [nimi, setNimi] = React.useState("");
@@ -116,6 +159,7 @@ const ValitseAihe = () => {
   };
 
   React.useEffect(() => {
+    console.log("ValitseAihe id!", id);
     const haeAiheet = async () => {
       try {
         const response = await fetch("./annaAiheet");
@@ -144,42 +188,14 @@ const ValitseAihe = () => {
   };
 
   React.useEffect(() => {
-    if (userId && navi && aihe) {
-      navigateTo(`Peli/${aihe}`, navigate, userId);
+    if (id && navi && aihe) {
+      navigateTo(`Peli/${aihe}`, navigate, id);
     }
-  }, [userId, navigate, aihe]);
-
-
-  const asetaIdJaNimi = async (uusiId, nimi, onkoRandomNimi) => {
-    setNimi(nimi);
-    setUserId(uusiId);
-    try {
-      const response = await fetch("./asetaNimi", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          kayttajaID: uusiId.toString(),
-          rnd: onkoRandomNimi,
-          nimi: nimi,
-        }),
-      });
-      console.log(response);
-      if (!response.ok) throw new Error("Error in setting username");
-
-      const result = await response.json();
-    } catch(error) {
-      console.error(error);
-    }
-
-  };
-
+  }, [id, navigate, aihe]);
 
   return (
   <React.Fragment>
     <div className="etusivu">
-      {id || userId ? (
         <div className="valitseAihe">
           {aiheet ? (
             <div className="aiheet">
@@ -202,25 +218,10 @@ const ValitseAihe = () => {
             <LoadingKuvake luokka={"relative"} koko={"kiintea"}/>
           )}
         </div>
-      ) : (
-        <Kirjaudu asetaIdJaNimi={asetaIdJaNimi} />
-      )}
-      <div className="alaPalkki">
-        <hr className="otsikkoTekstiHr" />
-        <div className="alaPalkkiNimi">VISAPELI</div>
-        <div className="alaPalkkiLinkit">
-          <a href="#">Privacy</a>
-          <a href="#">About</a>
-        </div>
-      </div>
     </div>
   </React.Fragment>
   );
-
-
 };
-
-
 
 // Peli komponentit
 // -------------------------------------------------------------------- 
@@ -231,11 +232,7 @@ const NavMenu = ({id}) => {
 
   const handleClick = () => {
     setAuki(() => false);
-    if (id) {
-      navigateTo("ValitseAihe", navigate, id);
-    } else {
-      navigateTo("ValitseAihe", navigate);
-    }
+    navigateTo("ValitseAihe", navigate, id);
   };
 
   return (
@@ -528,11 +525,6 @@ const Results = ({userId}) => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    if (!userId) {
-      navigateTo("ValitseAihe", navigate, userId);
-      return;
-    }
-    console.log(userId);
 
     const annaPisteet = async () => {
     try {
@@ -564,7 +556,6 @@ const Results = ({userId}) => {
   }, []);
 
   const handleClick = () => {
-    console.log("userId", userId);
     navigateTo("ValitseAihe", navigate, userId);
   };
 
@@ -612,12 +603,7 @@ const ErrorPage = ({id}) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    if (id) {
-      navigateTo("ValitseAihe", navigate, id);
-    }
-    else {
-      navigateTo("ValitseAihe", navigate);
-    }
+    navigateTo("ValitseAihe", navigate, id);
   };
 
   return (
@@ -714,10 +700,19 @@ const App = () => {
 const Main = () => {
   const location = useLocation();
   const { id } = location.state || {};
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    const polku = "/" + path + "/" + "Kirjaudu";
+    if (!id) {
+      navigate(polku);
+    }
+  }, [id, navigate]);
 
   return (
-    <div className="content">
-      <NavMenu id={id}/>
+  <div className="content">
+    <NavMenu id={id} />
+    {id ? (
       <Routes>
         <Route path={path + "/ValitseAihe"} element={<ValitseAihe />} />
         <Route path={path + "/Peli/Results"} element={<Results />} />
@@ -725,9 +720,25 @@ const Main = () => {
         <Route path={path + "/ErrorPage"} element={<ErrorPage id={id} />} />
         <Route path={path + "/*"} element={<ErrorPage id={id} />} />
       </Routes>
+    ) : (
+      <Routes>
+        <Route path={path + "/Kirjaudu"} element={<Kirjaudu />} />
+        <Route path={path + "/*"} element={<ErrorPage id={id} />} />
+      </Routes>
+    )}
+    <div className="alaPalkki">
+      <hr className="otsikkoTekstiHr" />
+      <div className="alaPalkkiNimi">VISAPELI</div>
+      <div className="alaPalkkiLinkit">
+        <a href="#">Privacy</a>
+        <a href="#">About</a>
+      </div>
+    </div>
     </div>
   );
+
 };
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
