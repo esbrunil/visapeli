@@ -43,6 +43,7 @@ const Kirjaudu = ({ asetaIdJaNimi }) => {
   const [value, setValue] = React.useState('');
   const [userId, setUserId] = React.useState();
   const [nimi, setNimi] = React.useState('');
+  const [randomNimi, setRandomNimi] = React.useState(false);
 
   React.useEffect(() => {
     const haeId = async () => {
@@ -65,7 +66,7 @@ const Kirjaudu = ({ asetaIdJaNimi }) => {
   React.useEffect(() => {
     if (userId && nimi) {
       console.log("asetettu user");
-      asetaIdJaNimi(userId, nimi);
+      asetaIdJaNimi(userId, nimi, randomNimi);
     }
   }, [userId, nimi]);
 
@@ -78,6 +79,11 @@ const Kirjaudu = ({ asetaIdJaNimi }) => {
     setNimi(value);
   };
 
+  const asetaRandom = () => {
+    setRandomNimi(true);
+    setNimi('  ');
+  };
+
   return (
     <div className="etusivu">
       <label>
@@ -88,7 +94,8 @@ const Kirjaudu = ({ asetaIdJaNimi }) => {
           onChange={handleChange}
         />
       </label>
-      <button onClick={asetaNimi}>Aseta</button>
+      <button onClick={asetaNimi}>Set</button>
+      <button onClick={asetaRandom}>Use randomly generated username</button>
     </div>
   );
 };
@@ -143,9 +150,29 @@ const ValitseAihe = () => {
   }, [userId, navigate, aihe]);
 
 
-  const asetaIdJaNimi = (uusiId, nimi) => {
+  const asetaIdJaNimi = async (uusiId, nimi, onkoRandomNimi) => {
     setNimi(nimi);
     setUserId(uusiId);
+    try {
+      const response = await fetch("./asetaNimi", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          kayttajaID: uusiId.toString(),
+          rnd: onkoRandomNimi,
+          nimi: nimi,
+        }),
+      });
+      console.log(response);
+      if (!response.ok) throw new Error("Error in setting username");
+
+      const result = await response.json();
+    } catch(error) {
+      console.error(error);
+    }
+
   };
 
 
@@ -156,11 +183,11 @@ const ValitseAihe = () => {
         <div className="valitseAihe">
           {aiheet ? (
             <div className="aiheet">
-              <h2 className="h1">PÄIVÄNVISA:</h2>
+              <h2 className="h1">DAILY QUIZ:</h2>
               <div className="aihe" onClick={(e) => handleClick(e, "paivanvisa")}>
-                PELAA  
+                PLAY  
               </div>
-              <h2 className="h1">AIHEET:</h2>
+              <h2 className="h1">TOPICS:</h2>
               {aiheet.map((a, index) => (
                 <div
                   className="aihe"
@@ -220,7 +247,7 @@ const NavMenu = ({id}) => {
       </div>
       <div onClick={handleClick} className="nimi">VISAPELI</div>
       <div className={`sivupalkki ${auki ? "auki" : ''}`}>
-        <a onClick={handleClick}>Etusivu</a>
+        <a onClick={handleClick}>Front page</a>
       </div>
     </div>
   );
@@ -316,6 +343,7 @@ const Kysymys = ({ userId, kysymys }) => {
           kysymyksetPituus={kysymys.kysymykset.length}
           key={kysymys.kysymykset[kysymysIndex].toString()}
           userId={userId}
+          kysymysNumero={kysymysIndex}
         />
       ) : (
          <LoadingKuvake luokka={"relative"} koko={"kiintea"}/>
@@ -327,7 +355,7 @@ const Kysymys = ({ userId, kysymys }) => {
   );
 };
 
-const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymyksetPituus, userId }) => {
+const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymyksetPituus, userId, kysymysNumero }) => {
   const [aktiivinen, setAktiivinen] = React.useState(false);
   const [isCorrect, setIsCorrect] = React.useState(null);
   const [painettu, setPainettu] = React.useState(false);
@@ -399,6 +427,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
       if (!response.ok) {
         throw new Error("Virhe tarkistuksessa");
       }
+      console.log(response);
       const result = await response.json();
       console.log("------------");
       console.log("Vastaus",result);
@@ -419,16 +448,16 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
 
     const oikeinko = await tarkistaVastaus(key);
     console.log(oikeinko, "oikea vastauas");
-    if (oikeinko === "false" || oikeinko === 0) {
+    if (oikeinko === "false" || oikeinko === "0") {
       setIsCorrect(false);
-    }
-    else {
+    } else {
       setIsCorrect(true);
     }
 
     const loppu = performance.now();
     const kokonaisaika = (loppu - startAika) / 1000;
     console.log("aikaa meni", kokonaisaika, startAika);
+    console.log(`Tästä kysymyksestä: ${pisteet} pistettä`);
 
     document.body.addEventListener('click', asetaSeuraavaKysymys);
 
@@ -467,7 +496,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
         <div className="tausta">
           <div className="tiedot">
             <div className="kello">{sekunnit}</div>
-            <div>{kysymysId}/10  {aihe}</div>
+            <div>{kysymysNumero + 1}/10  {aihe}</div>
           </div>
           <div className="ylapalkki">
             <h1 className="kysymys">{question.kysymys}</h1>
@@ -521,15 +550,13 @@ const Results = ({userId}) => {
           return;
       }
       const result = await response.text();
+      setPisteet(result);
       console.log("Response", result);
       return result;
     } catch (error) {
       console.log(error);
       }
     };
-
-    //annaPisteet();
-    setPisteet("1000");
 
     // TODO haetaan pelaajat hall of fame
   
@@ -544,12 +571,12 @@ const Results = ({userId}) => {
   return (
     <div className="kysymysJaNapit">
       <div className="container">
-        <div onClick={handleClick} className="aihe">Valikko</div>
+        <div onClick={handleClick} className="aihe">Menu</div>
       </div>
       <div className="kysymysDiv pisteet">
-        <h1 className="fontOtsikko"> Pisteet </h1>
+        <h1 className="fontOtsikko"> Points </h1>
         <hr className="otsikkoTekstiHr" />
-        <p className="fontText pisteetText"> ksjfdkasjf </p>
+        <p className="fontText pisteetText"> {pisteet} </p>
       </div>  
       <div className="kysymysDiv pisteet">  
         <h1 className="fontOtsikko"> Hall of Fame </h1>
@@ -614,6 +641,7 @@ const Peli = () => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
+    let interval;
     console.log("id", id);
     const asetaAihe = async (kayttajaId) => {
       try {
@@ -631,7 +659,7 @@ const Peli = () => {
         }
         const result = await response.json();
         setKysymys(result);
-        const interval = setInterval(async () => {
+        interval = setInterval(async () => {
           console.log("Sending heartbeat...");
           try {
             const response = await fetch("../heartbeat", {
@@ -659,6 +687,9 @@ const Peli = () => {
       }
     };
     asetaAihe(id);
+    return () => {
+      if (interval) { clearInterval(interval); }
+    };
   }, []);
 
   return (

@@ -91,7 +91,7 @@ def asetaNimi():
 
     kirjoitaJSONTiedostoon("users.json", data)
 
-    return (nimi, exists), 200
+    return {"nimi": nimi, "exists": exists}, 200
 
 
 # Palauttaa clientille käyttäjäspesifin ID:n
@@ -249,7 +249,8 @@ def tarkistaVastaus():
 def annaPisteet():
     id = request.json["kayttajaID"]
     data = lueJSONTiedosto("users.json")  
-    return data[id]["pisteet"], 200
+    return str(data[id]["pisteet"]), 200
+    
 
 
 # Lisää pelin päätteeksi käyttäjäen tarvittaessa hall of fameen
