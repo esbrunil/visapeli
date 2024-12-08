@@ -1,9 +1,15 @@
 * {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 0;
 }
 
 body {
     margin-bottom: 10vh;
+    background-color: #eeeeee;
+}
+
+div {
+    margin: 2vw;
 }
 
 h2 {
@@ -26,12 +32,48 @@ div {
 }
 
 #topBar {
-    background-color: grey;
-    height: 10vh;
+    background-color: white;
+    margin-left: 3vw;
+    margin-right: 3vw;
+    height: 5vh;
+    position: fixed;
+    width: 94%;
+    top: 0;
     display: flex;
     align-items: center;
+    border-bottom: 2px solid #CCCCCC;
+    z-index: 1;
 }
 
-#topBar > a {
+#topBar > a{
     margin-left: 2vh;
+    text-decoration: none;
+}
+
+#content {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 5vh;
+}
+
+#content > div {
+    width: 50%;
+    padding-left: 5vw;
+}
+
+.returnText {
+    color: black;
+    font-weight: bold;
+    padding-left: 2vw;
+}
+
+.visapeliText {
+    font-size: 4vh;
+    color: #686868;
+    position: relative;
+    left: 1vw;
+    text-decoration: none;
+    border-right: 2px solid #CCCCCC;
+    padding-right: 1vw;
 }
