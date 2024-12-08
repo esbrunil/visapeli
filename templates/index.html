@@ -247,7 +247,7 @@ const NavMenu = ({id}) => {
       </div>
       <div onClick={handleClick} className="nimi">VISAPELI</div>
       <div className={`sivupalkki ${auki ? "auki" : ''}`}>
-        <a onClick={handleClick}>Front page</a>
+        <a onClick={handleClick}>Main menu</a>
       </div>
     </div>
   );
@@ -366,6 +366,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
   const [sekunnit, setSekunnit] = React.useState(10);
   const [kysymysNakyviin, setKysymysNakyviin] = React.useState(false);
   const [pisteet, setPisteet] = React.useState(0);
+  const [oikeaVastaus, setOikeaVastaus] = React.useState(0);
 
 
 
@@ -381,6 +382,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
 
     setStart(true);
     setStartAika(performance.now());
+    // console.log(question.vastausvaihtoehdot);
 
     return () => {
       document.body.removeEventListener('click', asetaSeuraavaKysymys);
@@ -411,7 +413,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
     }
   }, [start, pause]);
 
-  const tarkistaVastaus = async (vastausId) => {
+  const tarkistaVastaus = async (vastausId, aika) => {
     try {
       const response = await fetch("../tarkistaVastaus", {
         method: "POST",
@@ -421,7 +423,8 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
         body: JSON.stringify({
           kysymysID: kysymysId,
           vastausID: vastausId.toString(),
-          kayttajaID: userId
+          kayttajaID: userId,
+          aika: aika
         }),
       });
       if (!response.ok) {
@@ -429,10 +432,12 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
       }
       console.log(response);
       const result = await response.json();
+      setPisteet(result.pisteet);
+      setOikeaVastaus(result.oikea);
       console.log("------------");
       console.log("Vastaus",result);
       console.log("------------");
-      return result.onkoOikein;
+      return result;
     } catch (error) {
       console.log(error);
     }
@@ -446,16 +451,17 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
     setPause(true);
     e.target.classList.add("painettu");
 
-    const oikeinko = await tarkistaVastaus(key);
+    const loppu = performance.now();
+    const kokonaisaika = Math.round((loppu - startAika) / 1000);
+
+    const oikeinko = await tarkistaVastaus(key, kokonaisaika);
     console.log(oikeinko, "oikea vastauas");
-    if (oikeinko === "false" || oikeinko === "0") {
+    if (oikeinko.onkoOikein === "false" || oikeinko.onkoOikein === "0") {
       setIsCorrect(false);
     } else {
       setIsCorrect(true);
     }
 
-    const loppu = performance.now();
-    const kokonaisaika = (loppu - startAika) / 1000;
     console.log("aikaa meni", kokonaisaika, startAika);
     console.log(`Tästä kysymyksestä: ${pisteet} pistettä`);
 
@@ -471,14 +477,16 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
     setKutsuSeuraavaKysymys("true");
   };
 
-  const aikaLoppui = () => {
+  const aikaLoppui = async () => {
     setPainettu(true);
     //TODO HAE OIKEA VASTAUA
     // await haeVastauus 
+    const vastaus = await tarkistaVastaus(1000);
+    const olisOikein = vastaus.oikein;
     document.body.addEventListener('click', () => { setKutsuSeuraavaKysymys("true"); });
     setTimeout(() => {
       setKutsuSeuraavaKysymys("true");
-    }, 3000);
+    }, 5000);
   };
 
   const handleAikaloppui = () => {
@@ -510,6 +518,8 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
                 ? isCorrect
                   ? "oikein vastaus"
                   : "vaarin vastaus"
+                : oikeaVastaus == key
+                  ? "oikein vastaus"
                 : "vastaus"
             }
             onClick={(e) => handleAnswerClick(e, key, index)}
@@ -524,7 +534,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
 
 const Results = ({userId}) => {
   const [pisteet, setPisteet] = React.useState();
-  const [pelaajat, setPelaajat] = React.useState();
+  const [pelaajat, setPelaajat] = React.useState([]);
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -559,8 +569,33 @@ const Results = ({userId}) => {
     };
 
     // TODO haetaan pelaajat hall of fame
+    const annaHallOfFame = async () => {
+      try {
+        const response = await fetch("../paataPeli", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            kayttajaID: userId.toString(),
+          }),
+        });
+        if (!response.ok) {
+          navigateTo("ErrorPage", navigate, id);
+          return;
+        }
+        const result = await response.json();
+        setPelaajat(result);
+        console.log(result);
+
+      } catch (error) {
+        console.log(error);
+      }
+    };
   
     annaPisteet();
+    annaHallOfFame();
+    console.log(pelaajat);
   }, []);
 
   const handleClick = () => {
@@ -625,7 +660,7 @@ const ErrorPage = ({id}) => {
       <div className="container errorPage">
         <h1 className="fontOtsikko errorOtsikko"> Error </h1>
         <p className="fontText pisteetText">Error viesti tahan...</p>
-        <button className="button" onClick={handleClick}>ETUSIVU</button>
+        <button className="button" onClick={handleClick}>MAIN MENU</button>
       </div>
     </div>
   );

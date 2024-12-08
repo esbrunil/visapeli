@@ -211,10 +211,10 @@ def haeKysymys():
 def tarkistaVastaus():
     kysymys = (int)(request.json["kysymysID"])
     vastaus = (int)(request.json['vastausID'])
-    #aika = (int)(request.json["aika"])
+    aika = (int)(request.json["aika"])
     uID = request.json["kayttajaID"]
 
-    aika = 2000
+    #aika = 2000
     data = lueJSONTiedosto("users.json")
 
     aihe = tkOperaatio(lambda c: hae_aihe_id(data[uID]["aihe"], c), "tietokanta/tietokanta.db")
@@ -257,8 +257,8 @@ def annaPisteet():
 # attr: käyttäjän id
 # return: json-objekti, jossa pisteet ja hall of fame data
 @app.route("/paataPeli", methods=["POST"])
-def paataPeli(id):
-    #id = request.json["kayttajaID"]
+def paataPeli():
+    id = request.json["kayttajaID"]
     data = lueJSONTiedosto("users.json")  
 
     tkOperaatio(lambda c: lisaa_jos_ansaitsee(c, data[id]), "tietokanta/tietokanta.db")
