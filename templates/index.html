@@ -515,7 +515,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
                 ? isCorrect
                   ? "oikein vastaus"
                   : "vaarin vastaus"
-                : oikeaVastaus == key
+                : oikeaVastaus == key && painettu === true
                   ? "oikein vastaus"
                 : "vastaus"
             }
