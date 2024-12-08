@@ -214,7 +214,7 @@ def tarkistaVastaus():
     #aika = (int)(request.json["aika"])
     uID = request.json["kayttajaID"]
 
-    aika = 2000
+    aika = 10000
     data = lueJSONTiedosto("users.json")
 
     aihe = tkOperaatio(lambda c: hae_aihe_id(data[uID]["aihe"], c), "tietokanta/tietokanta.db")
@@ -236,7 +236,7 @@ def tarkistaVastaus():
     if onko_oikein:
         pisteet = min(10000, (2000 + aika))
         data = lueJSONTiedosto("users.json")
-        data[id]["pisteet"] += pisteet
+        data[uID]["pisteet"] += pisteet
         kirjoitaJSONTiedostoon("users.json", data)
 
     return jsonify({"onkoOikein": ((str)(onko_oikein)).lower(), "oikea": oikea, "pisteet": pisteet }), 200
@@ -357,6 +357,7 @@ def hae_kysymys_ksm_ov(kysymysID, c):
 def tarkista_onko_oikein(kysymysID, vastausID, c):
     c.execute(f"SELECT onko_oikein FROM (SELECT * FROM Vastausvaihtoehdot WHERE id = {vastausID})")
     onko = (c.fetchone()[0] == 1)
+    ov = onko
     if not onko:
         ov = hae_kysymyksen_ov(kysymysID, c)
     return [onko, ov]
