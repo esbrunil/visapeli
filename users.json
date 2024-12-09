@@ -1,15 +1,344 @@
-<<<<<<< HEAD
 {
-  "a2aa4d41-4e8e-401c-b80b-2ba2fa20d21d": {
+  "f7ee31aa-f8c5-4c1e-898c-1b690825be9e": {
     "aihe": "History",
-    "heartbeat": 1733752470,
-    "nimi": "Visat Miesvisa",
-    "indeksi": 1928,
-    "pisteet": 30000,
-    "kID": "1928",
-    "prevkID": "1896"
+    "heartbeat": 1733752323,
+    "nimi": "Visamaatti Kissavilli",
+    "indeksi": 450,
+    "pisteet": 0,
+    "kID": "181",
+    "prevkID": "180"
+  },
+  "c1477f86-b26c-4f9a-956c-bdc45d32c4e7": {
+    "aihe": "",
+    "heartbeat": 1733752331,
+    "nimi": "",
+    "indeksi": 1669,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "1964ecca-f9c5-4a0f-a205-768ca3dd638c": {
+    "aihe": "",
+    "heartbeat": 1733752375,
+    "nimi": "",
+    "indeksi": 3527,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "bf50b652-1750-4879-ab0f-a67bf8ee1ed6": {
+    "aihe": "",
+    "heartbeat": 1733752414,
+    "nimi": "",
+    "indeksi": 2352,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "b55e7b4b-775e-42e1-9f3e-3755221977a3": {
+    "aihe": "",
+    "heartbeat": 1733752582,
+    "nimi": "",
+    "indeksi": 1272,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "9c381c78-6eb2-4d42-ac36-a36c9e4ff1e5": {
+    "aihe": "",
+    "heartbeat": 1733752618,
+    "nimi": "",
+    "indeksi": 1759,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "3397e2f2-cb34-4169-92b5-386649a41b7f": {
+    "aihe": "",
+    "heartbeat": 1733752656,
+    "nimi": "",
+    "indeksi": 357,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "05e4f29e-bbd6-4445-ac06-506c273b797c": {
+    "aihe": "",
+    "heartbeat": 1733752692,
+    "nimi": "",
+    "indeksi": 1382,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "d12bd176-a5c8-4741-8f94-f134fb625ccd": {
+    "aihe": "",
+    "heartbeat": 1733752705,
+    "nimi": "",
+    "indeksi": 1516,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "8356163d-ac70-465b-8834-4dd38dbfa28d": {
+    "aihe": "",
+    "heartbeat": 1733752763,
+    "nimi": "",
+    "indeksi": 3396,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "328a8b1c-0d3c-4b9d-af62-57be16effb21": {
+    "aihe": "",
+    "heartbeat": 1733752874,
+    "nimi": "Visapelitt\u00e4j\u00e4 Vaara",
+    "indeksi": 1820,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "d668f7ce-060a-4685-918a-a208c3da129a": {
+    "aihe": "",
+    "heartbeat": 1733752902,
+    "nimi": "",
+    "indeksi": 2776,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "54a24774-61ce-4452-90e2-c69f910dd825": {
+    "aihe": "",
+    "heartbeat": 1733753006,
+    "nimi": "",
+    "indeksi": 1895,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "c6ee852e-a762-4c55-95c7-079a92bc9f89": {
+    "aihe": "",
+    "heartbeat": 1733753030,
+    "nimi": "",
+    "indeksi": 2056,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "ec304f6b-863b-4476-b2a8-801fe77e49c2": {
+    "aihe": "",
+    "heartbeat": 1733753033,
+    "nimi": "",
+    "indeksi": 3978,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "c3ee82e2-394b-4a71-b495-fe7efcfe2a9c": {
+    "aihe": "",
+    "heartbeat": 1733753044,
+    "nimi": "",
+    "indeksi": 2381,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "aa525064-e629-4ac4-a095-60852f4d9f35": {
+    "aihe": "",
+    "heartbeat": 1733753054,
+    "nimi": "",
+    "indeksi": 2816,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "b3997bf8-e75a-42bd-88b4-1ff222cd4d61": {
+    "aihe": "",
+    "heartbeat": 1733753085,
+    "nimi": "",
+    "indeksi": 1849,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "aa558628-ba9e-4d51-9f0a-47597b299331": {
+    "aihe": "",
+    "heartbeat": 1733753107,
+    "nimi": "",
+    "indeksi": 3222,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "252eccb8-e8ff-4833-8159-b0dde758b7e5": {
+    "aihe": "",
+    "heartbeat": 1733753113,
+    "nimi": "",
+    "indeksi": 1605,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "33bc576a-2bdf-43a3-a9dc-2774bc14015d": {
+    "aihe": "",
+    "heartbeat": 1733753120,
+    "nimi": "",
+    "indeksi": 2902,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "dc938dda-f198-4495-b71a-9aef18d16b94": {
+    "aihe": "",
+    "heartbeat": 1733753140,
+    "nimi": "",
+    "indeksi": 3061,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "74f3118c-b30d-4bf2-8ac8-ee9ae384febc": {
+    "aihe": "",
+    "heartbeat": 1733753151,
+    "nimi": "",
+    "indeksi": 1,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "3fb77370-9b7c-4be7-a283-328e78f7257a": {
+    "aihe": "",
+    "heartbeat": 1733753179,
+    "nimi": "",
+    "indeksi": 213,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "b19ad44e-306a-4ede-9c4f-5f89edc1ba4e": {
+    "aihe": "",
+    "heartbeat": 1733753205,
+    "nimi": "",
+    "indeksi": 917,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "5b42cce4-eefd-4800-b1ab-1e452358f86e": {
+    "aihe": "",
+    "heartbeat": 1733753208,
+    "nimi": "",
+    "indeksi": 1751,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "7e2c5588-9d56-42cd-9f68-afaec8e938ac": {
+    "aihe": "",
+    "heartbeat": 1733753238,
+    "nimi": "Visapelailija Reisikallo",
+    "indeksi": 644,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "4945e34d-0b5a-4066-baad-57cc929ce82b": {
+    "aihe": "",
+    "heartbeat": 1733753312,
+    "nimi": "Visa Tilavaara",
+    "indeksi": 2749,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "26e1e212-3941-459b-89e0-8f8ddabe939b": {
+    "aihe": "",
+    "heartbeat": 1733753335,
+    "nimi": "",
+    "indeksi": 2038,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "1cd561b8-f750-403e-bf0f-f077922d51ce": {
+    "aihe": "",
+    "heartbeat": 1733753356,
+    "nimi": "Visan Rannepelitt\u00e4j\u00e4",
+    "indeksi": 3725,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "cbfc68a1-8a04-49b3-ad99-4fa7839109d3": {
+    "aihe": "",
+    "heartbeat": 1733753404,
+    "nimi": "Visaksi Kammiovarvas",
+    "indeksi": 562,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "864bf861-52ed-4a5e-b0da-d8d19263297c": {
+    "aihe": "",
+    "heartbeat": 1733753495,
+    "nimi": "",
+    "indeksi": 1533,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "1bbc5e22-68d8-4724-82f6-2c6b384c10b2": {
+    "aihe": "",
+    "heartbeat": 1733753548,
+    "nimi": "Visailija Niemipeppu",
+    "indeksi": 3455,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "5d4b66dc-8fb0-4640-9458-71bfefdbb69d": {
+    "aihe": "",
+    "heartbeat": 1733753553,
+    "nimi": "",
+    "indeksi": 2829,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "14fab172-7f55-4c9f-a0d3-e4e92fc58699": {
+    "aihe": "",
+    "heartbeat": 1733753579,
+    "nimi": "",
+    "indeksi": 2077,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "4a80a871-4016-4246-bb43-c011ebf84ef1": {
+    "aihe": "",
+    "heartbeat": 1733753596,
+    "nimi": "Visailija Pronssiruskea",
+    "indeksi": 3350,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "e71f7555-4525-4b4f-a878-d3c6b3ca5952": {
+    "aihe": "",
+    "heartbeat": 1733753617,
+    "nimi": "",
+    "indeksi": 1644,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "a9fcb900-135b-4d4a-b302-5353da3fd1bc": {
+    "aihe": "",
+    "heartbeat": 1733753644,
+    "nimi": "",
+    "indeksi": 3043,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
   }
 }
-=======
-{}
->>>>>>> 9947202be661f13c63385cb8140d396bba55d226
