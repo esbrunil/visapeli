@@ -283,6 +283,7 @@ const Kysymys = ({ userId, kysymys }) => {
   const [question, setQuestion] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
   const [results, setResults] = React.useState(false);
+  const [lukuaika, setLukuaika] = React.useState(0);
 
 
   React.useEffect(() => {
@@ -304,6 +305,7 @@ const Kysymys = ({ userId, kysymys }) => {
         if (!response.ok) throw new Error("Virhe kysymyksen haussa");
 
         const result = await response.json();
+        setLukuaika(result.lukuaika);
         setQuestion(result);
       } catch (error) {
         console.error(error);
@@ -341,6 +343,7 @@ const Kysymys = ({ userId, kysymys }) => {
           key={kysymys.kysymykset[kysymysIndex].toString()}
           userId={userId}
           kysymysNumero={kysymysIndex}
+          lukuaika={lukuaika}
         />
       ) : (
          <LoadingKuvake luokka={"relative"} koko={"kiintea"}/>
@@ -352,7 +355,7 @@ const Kysymys = ({ userId, kysymys }) => {
   );
 };
 
-const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymyksetPituus, userId, kysymysNumero }) => {
+const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymyksetPituus, userId, kysymysNumero, lukuaika }) => {
   const [aktiivinen, setAktiivinen] = React.useState(false);
   const [isCorrect, setIsCorrect] = React.useState(null);
   const [painettu, setPainettu] = React.useState(false);
@@ -377,8 +380,11 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
       muutaFonttiKoko(".vastaus");
     });
 
-    setStart(true);
-    setStartAika(performance.now());
+    console.log("lukuaika just ennen: " + lukuaika);
+    setTimeout(() => {
+      setStart(true);
+      setStartAika(performance.now());
+    }, lukuaika * 1000);
     // console.log(question.vastausvaihtoehdot);
 
     return () => {
@@ -478,7 +484,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
     setPainettu(true);
     //TODO HAE OIKEA VASTAUA
     // await haeVastauus 
-    const vastaus = await tarkistaVastaus(1000);
+    const vastaus = await tarkistaVastaus(1000, 10000);
     const olisOikein = vastaus.oikein;
     document.body.addEventListener('click', () => { setKutsuSeuraavaKysymys("true"); });
     setTimeout(() => {
