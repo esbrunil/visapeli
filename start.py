@@ -264,6 +264,8 @@ def paataPeli():
     tkOperaatio(lambda c: lisaa_jos_ansaitsee(c, data[id]), "tietokanta/tietokanta.db")
     hof = tkOperaatio(lambda c: anna_hof(c, data[id]["aihe"]), "tietokanta/tietokanta.db")
 
+
+
     return hof
 
 
@@ -285,7 +287,7 @@ def tkOperaatio(func, osoite):
 # Hakee hall of fame-listan tietyllä aiheella
 def anna_hof(c, aihe):
     aihe_id = tkOperaatio(lambda c: hae_aihe_id(aihe, c), "tietokanta/tietokanta.db")
-    c.execute(f"SELECT * FROM HallOfFame WHERE aihe_id = {aihe_id}")
+    c.execute(f"SELECT * FROM HallOfFame WHERE aihe_id = {aihe_id} ORDER BY pisteet")
     return c.fetchall()
 
 
