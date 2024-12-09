@@ -214,13 +214,13 @@ def tarkistaVastaus():
     aika = (int)(request.json["aika"])
     uID = request.json["kayttajaID"]
 
-    #aika = 2000
     data = lueJSONTiedosto("users.json")
 
-    aihe = tkOperaatio(lambda c: hae_aihe_id(data[uID]["aihe"], c), "tietokanta/tietokanta.db")
+    aihe = (int)(tkOperaatio(lambda c: hae_aihe_id(data[uID]["aihe"], c), "tietokanta/tietokanta.db"))
     tkAihe = tkOperaatio(lambda c: hae_ksm_aihe(kysymys, c), "tietokanta/tietokanta.db")
-    if (int)(data[uID]["kID"]) != (int)(kysymys) or (int)(aihe) != (int)(tkAihe):
+    if (int)(data[uID]["kID"]) != (int)(kysymys) or (aihe != (int)(tkAihe) and aihe != 25):
         return jsonify({ "virheellinen kysymys" }), 400
+
 
     ov = tkOperaatio(lambda c: hae_kysymys_ksm_ov(kysymys, c), 'tietokanta/tietokanta.db')[0][1]
     if ov <= 1:
@@ -287,7 +287,7 @@ def tkOperaatio(func, osoite):
 # Hakee hall of fame-listan tietyllä aiheella
 def anna_hof(c, aihe):
     aihe_id = tkOperaatio(lambda c: hae_aihe_id(aihe, c), "tietokanta/tietokanta.db")
-    c.execute(f"SELECT * FROM HallOfFame WHERE aihe_id = {aihe_id} ORDER BY pisteet")
+    c.execute(f"SELECT * FROM HallOfFame WHERE aihe_id = {aihe_id} ORDER BY pisteet DESC")
     return c.fetchall()
 
 
