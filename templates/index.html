@@ -128,18 +128,22 @@ const Kirjaudu = () => {
   };
 
   return (
-    <div className="etusivu">
-      <label>
-        Nimi:
-        <input 
-          type="text" 
-          value={value} 
-          onChange={handleChange}
-        />
-      </label>
+    <div className="etusivu keskita">
+      <div className="valitseAihe kirjauduDiv">
+        <div className="kirjauduSivu">
+        <div className="labelDiv">
+          <label>Nimi:</label>
+          <input 
+            type="text" 
+            value={value} 
+            onChange={handleChange} 
+          />
+        </div>
       <button onClick={asetaNimi}>Set</button>
       <button onClick={asetaRandom}>Use randomly generated username</button>
-    </div>
+            </div>
+         </div>
+      </div>
   );
 };
 
