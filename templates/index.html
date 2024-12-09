@@ -93,7 +93,10 @@ const Kirjaudu = () => {
         }),
       });
       console.log(response);
-      if (!response.ok) throw new Error("Error in setting username");
+      if (!response.ok) {
+        setPoista(false);
+        throw new Error("Error in setting username");
+      }
       const result = await response.json();
       setNimi(true);
     } catch(error) {
@@ -422,7 +425,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
   const [sekunnit, setSekunnit] = React.useState(10);
   const [kysymysNakyviin, setKysymysNakyviin] = React.useState(false);
   const [pisteet, setPisteet] = React.useState(0);
-  const [oikeaVastaus, setOikeaVastaus] = React.useState(0);
+  const [oikeaVastaus, setOikeaVastaus] = React.useState(-8);
 
 
 
@@ -503,14 +506,14 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
 
   const handleAnswerClick = async (e, key, index) => {
     if (painettu) return;
-
+    console.log(key);
     setPainettu(true);
     setAktiivinen(index);
     setPause(true);
     e.target.classList.add("painettu");
 
     const loppu = performance.now();
-    const kokonaisaika = Math.round((loppu - startAika) / 1000);
+    const kokonaisaika = Math.round(loppu - startAika);
 
     const oikeinko = await tarkistaVastaus(key, kokonaisaika);
     console.log(oikeinko, "oikea vastauas");
@@ -521,14 +524,13 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
     }
 
     console.log("aikaa meni", kokonaisaika, startAika);
-    console.log(`Tästä kysymyksestä: ${pisteet} pistettä`);
 
     document.body.addEventListener('click', asetaSeuraavaKysymys);
 
 
     setTimeout(() => {
       setKutsuSeuraavaKysymys("true");
-    }, 100000);
+    }, 5000);
   };
 
   const asetaSeuraavaKysymys = () => {
@@ -539,7 +541,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
     setPainettu(true);
     //TODO HAE OIKEA VASTAUA
     // await haeVastauus 
-    const vastaus = await tarkistaVastaus(1000, 10000);
+    const vastaus = await tarkistaVastaus(3, 10000);
     const olisOikein = vastaus.oikein;
     document.body.addEventListener('click', () => { setKutsuSeuraavaKysymys("true"); });
     setTimeout(() => {
@@ -576,7 +578,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
                 ? isCorrect
                   ? "oikein vastaus"
                   : "vaarin vastaus"
-                : oikeaVastaus == key && painettu === true
+                : oikeaVastaus == key
                   ? "oikein vastaus"
                 : "vastaus"
             }
@@ -770,6 +772,7 @@ const Peli = () => {
         console.log("virhe ei onnistu");
       }
     };
+    asetaAihe(id);
     asetaAihe(id);
     return () => {
       if (interval) { clearInterval(interval); }
