@@ -405,7 +405,7 @@ const Kysymys = ({ userId, kysymys }) => {
          <LoadingKuvake luokka={"relative"} koko={"kiintea"}/>
       )
     ) : (
-          <Results userId={userId} />
+          <Results userId={userId} aihe={kysymys.aiheData.aihe} />
     )}
   </div>
   );
@@ -427,7 +427,6 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
 
 
   React.useEffect(() => {
-    window.scrollTo(0, 0);
     setKysymysNakyviin(() => true);
     muutaFonttiKoko(".ylapalkki");
     muutaFonttiKoko(".vastaus");
@@ -591,7 +590,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
   );
 };
 
-const Results = ({userId}) => {
+const Results = ({userId, aihe}) => {
   const [pisteet, setPisteet] = React.useState();
   const [pelaajat, setPelaajat] = React.useState([]);
   const navigate = useNavigate();
@@ -678,13 +677,15 @@ const Results = ({userId}) => {
             <tr>
               <th>Nimi</th>
               <th>Pisteet</th>
+              <th>Aihe</th>
             </tr>
           </thead>
           <tbody>
             {pelaajat.map((p, index) => (
               <tr key={index}>
-                <td>{p.nimi}</td>
-                <td>{p.pisteet}</td>
+                <td>{p[2]}</td>
+                <td>{p[3]}</td>
+                <td>{aihe}</td>
               </tr>
             ))}
           </tbody>
