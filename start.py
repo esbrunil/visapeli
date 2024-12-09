@@ -287,7 +287,7 @@ def tkOperaatio(func, osoite):
 # Hakee hall of fame-listan tietyllä aiheella
 def anna_hof(c, aihe):
     aihe_id = tkOperaatio(lambda c: hae_aihe_id(aihe, c), "tietokanta/tietokanta.db")
-    c.execute(f"SELECT * FROM HallOfFame WHERE aihe_id = {aihe_id} ORDER BY pisteet")
+    c.execute(f"SELECT * FROM HallOfFame WHERE aihe_id = {aihe_id} ORDER BY pisteet DESC")
     return c.fetchall()
 
 
