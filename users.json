@@ -1,83 +1,11 @@
 {
-  "3b337754-3112-4629-b57e-0b0b0f9cdefa": {
-    "aihe": "History",
-    "heartbeat": 1733754981,
-    "nimi": "Visa Kelta",
-    "indeksi": 331,
-    "pisteet": 0,
-    "kID": "179",
-    "prevkID": "46"
-  },
-  "36997191-da73-4e44-9efe-92b829e8833a": {
-    "aihe": "",
-    "heartbeat": 1733754993,
-    "nimi": "",
-    "indeksi": 115,
-    "pisteet": 0,
-    "kID": 0,
-    "prevkID": 0
-  },
-  "5708a615-a7eb-48b1-a47c-0daafd437409": {
-    "aihe": "",
-    "heartbeat": 1733755026,
-    "nimi": "",
-    "indeksi": 3401,
-    "pisteet": 0,
-    "kID": 0,
-    "prevkID": 0
-  },
-  "b9dcc3a5-3121-4dd6-b7fd-a25b5af9c61e": {
-    "aihe": "",
-    "heartbeat": 1733755059,
-    "nimi": "",
-    "indeksi": 2910,
-    "pisteet": 0,
-    "kID": 0,
-    "prevkID": 0
-  },
-  "9bed975d-1d0b-46ed-939a-7dad7d2da254": {
-    "aihe": "",
-    "heartbeat": 1733755064,
-    "nimi": "",
-    "indeksi": 2097,
-    "pisteet": 0,
-    "kID": 0,
-    "prevkID": 0
-  },
-  "bca8a8f1-ed7b-467b-af69-047152433271": {
-    "aihe": "",
-    "heartbeat": 1733755071,
-    "nimi": "Visailija Vakavakarhu",
-    "indeksi": 2003,
-    "pisteet": 0,
-    "kID": 0,
-    "prevkID": 0
-  },
-  "b1892915-5ac3-4606-84c4-a2431c0fd0e8": {
-    "aihe": "",
-    "heartbeat": 1733755081,
-    "nimi": "Visaksi Lammashopea",
-    "indeksi": 2904,
-    "pisteet": 0,
-    "kID": 0,
-    "prevkID": 0
-  },
-  "1e37d17e-a136-4b87-a2bd-f6011207a89a": {
-    "aihe": "",
-    "heartbeat": 1733755084,
-    "nimi": "Visat J\u00e4nisselk\u00e4",
-    "indeksi": 3401,
-    "pisteet": 0,
-    "kID": 0,
-    "prevkID": 0
-  },
-  "d1fe2491-476e-4dfc-bed5-63ee4cd8450c": {
-    "aihe": "",
-    "heartbeat": 1733755088,
-    "nimi": "Visailija Peppuhanhi",
-    "indeksi": 227,
-    "pisteet": 0,
-    "kID": 0,
-    "prevkID": 0
+  "697294b9-cb1b-4ee2-8acf-c76292eb3804": {
+    "aihe": "Science: Mathematics",
+    "heartbeat": 1733770510,
+    "nimi": "Visakortti Ruttorouta",
+    "indeksi": 756,
+    "pisteet": 40000,
+    "kID": "756",
+    "prevkID": "753"
   }
 }

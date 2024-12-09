@@ -118,13 +118,14 @@ const Kirjaudu = () => {
         body: JSON.stringify({
           kayttajaID: userId.toString(),
           rnd: true,
-          nimi: nimi,
+          nimi: value.trim(),
         }),
       });
       console.log(response);
       if (!response.ok) throw new Error("Error in setting username");
       const result = await response.json();
       setNimi(true);
+      setValue(result.nimi);
     } catch(error) {
       console.error(error);
     }
