@@ -530,7 +530,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
 
     setTimeout(() => {
       setKutsuSeuraavaKysymys("true");
-    }, 100000);
+    }, 5000);
   };
 
   const asetaSeuraavaKysymys = () => {
@@ -784,6 +784,7 @@ const Peli = () => {
         console.log(error);
       }
     };
+    asetaAihe(id);
     asetaAihe(id);
     return () => {
       if (interval) { clearInterval(interval); }

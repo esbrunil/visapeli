@@ -275,6 +275,7 @@ table tbody tr td {
   align-items: center;
   padding: 3%;
   border-radius: 1%;
+  font-size: clamp(0.0001vw, 1.5em, 2em);
 }
 
 .kirjauduDiv {
@@ -290,7 +291,7 @@ table tbody tr td {
 }
 
 .kirjauduSivu * {
-  margin-bottom: 2%;
+  margin-bottom: 4%;
 }
 
 .labelDiv {
@@ -299,30 +300,33 @@ table tbody tr td {
   justify-content: center;
   width: 70%;
   margin-right: 1%;
-  margin-bottom: 0.5%;
+  margin-bottom: 1%;
+  margin-top: 1%;
   margin-inline: auto;
 }
 
 .labelDiv label {
-  margin-right: 1%;
+  margin-right: 2%;
   border-radius: 1%;
 }
 
 .kirjauduSivu input {
+  height: fit-content;
   width: 80%;
+  font-size: clamp(0.0001vw, 0.6em, 1.2em);
 }
 
 .kirjauduSivu button {
-  width: 70%;
+  width: 40%;
   margin-inline: auto;
-  font-size: clamp(0.000001vw, 0.9em, 1.8em);
+  font-size: clamp(0.0001vw, 1.0em, 1.2em);
   transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
 }
 
 .kirjauduSivu button:hover {
-  width: 70%;
+  width: 40%;
   margin-inline: auto;
-  font-size: clamp(0.000001vw, 0.9em, 1.8em);
+  font-size: clamp(0.0001vw, 1.0em, 1.2em);
   background-color: var(--aiheHover);
   box-shadow: 0 0 100px var(--vastusBoxShadowColor);
   transform: scale(1.05);
@@ -566,7 +570,7 @@ table tbody tr td {
   min-height: fit-content;
   max-height: fit-content;
   margin-bottom: 4%;
-  padding: 2%;
+  padding: 1%;
   box-shadow: 0 0 2px var(--kysymysDivBoxShadow);
 }
 
