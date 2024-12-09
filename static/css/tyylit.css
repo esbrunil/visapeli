@@ -51,6 +51,27 @@ body {
   max-width: 100vw;
 }
 
+.fontText {
+  color: var(--fontColor);
+}
+
+.fontOtsikko {
+  color: var(--fontColor);
+}
+
+table {
+  color: var(--fontColor);
+  padding: 3%;
+}
+
+table thead tr th {
+  color: var(--fontColor);
+}
+
+table tbody tr td {
+  color: var(--fontColor);
+}
+
 .navLinkit {
   display: flex;
   flex-direction: column;
@@ -513,6 +534,7 @@ body {
 
 .divTaulukko {
   position: relative;
+  margin-inline: auto;
 }
 
 .loading {
@@ -628,6 +650,7 @@ body {
 
   .fontOtsikko {
     font-size: clamp(0.01vw + 0.01vh, 4vw + 4vh, 5.5vw + 5.5vh);
+    color: var(--fontColor);
   }
 
   .otsikkoTekstiHr {
