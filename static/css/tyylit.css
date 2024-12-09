@@ -14,6 +14,7 @@
   --aiheBoxShadowColor: rgba(0, 0, 0, 0.30);
   --kysymysDivTaustavari: #f0f4fa;
   --kysymysDivBoxShadow: rgba(0, 0, 0, 0.3);
+  --olisOikeinVari: #2befce;
   --oikeinVari: #4caf50;
   --vaarinVari: #f44336;
   --loadingVari: #3f51b5;
@@ -36,6 +37,7 @@
   --aiheBoxShadowColor: rgba(255, 255, 255, 0.6);
   --kysymysDivTaustavari: #3a4b5c;
   --kysymysDivBoxShadow: rgba(0, 0, 0, 0.6);
+  --olisOikeinVari: #85b100;
   --oikeinVari: #27ae60;
   --vaarinVari: #e74c3c;
   --loadingVari: #2980b9;
@@ -420,6 +422,10 @@ table tbody tr td {
 
 .oikein {
   background-color: var(--oikeinVari);
+}
+
+.olisOikein {
+  background-color: var(--olisOikeinVari);
 }
 
 .painettu {

@@ -152,7 +152,7 @@ def paivanVisa():
     maara = 10
 
     tanaa = str(datetime.today().date())
-
+    
     paivanVisaPolku = "./tietokanta/paivaMeta.json"
     paivanVisaMeta = lueJSONTiedosto(paivanVisaPolku)
     
