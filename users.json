@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "32ba7a23-bbf6-4105-acfb-b382eec488e4": {
     "aihe": "Science & Nature",
     "heartbeat": 1733747698,
@@ -7,5 +8,42 @@
     "pisteet": 0,
     "kID": "2640",
     "prevkID": "2638"
+=======
+  "67f867be-44e6-4053-8377-f4ae1321b877": {
+    "aihe": "History",
+    "heartbeat": 1733747207,
+    "nimi": "Elias",
+    "indeksi": 1613,
+    "pisteet": 14224,
+    "kID": "1613",
+    "prevkID": "1594"
+  },
+  "a685cddb-0e95-42a9-8a18-87a6c03b9ea1": {
+    "aihe": "",
+    "heartbeat": 1733747217,
+    "nimi": "",
+    "indeksi": 3298,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "46ef48ce-3d15-42b2-ac1f-779db1c4d057": {
+    "aihe": "",
+    "heartbeat": 1733746196,
+    "nimi": "",
+    "indeksi": 1000,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+  },
+  "0d610a03-b146-46c2-9fd5-29413e34e0a4": {
+    "aihe": "",
+    "heartbeat": 1733747218,
+    "nimi": "",
+    "indeksi": 3115,
+    "pisteet": 0,
+    "kID": 0,
+    "prevkID": 0
+>>>>>>> 6ed424d6e0c2eaae98fa09b56720303c8fc86984
   }
 }

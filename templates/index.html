@@ -131,18 +131,22 @@ const Kirjaudu = () => {
   };
 
   return (
-    <div className="etusivu">
-      <label>
-        Nimi:
-        <input 
-          type="text" 
-          value={value} 
-          onChange={handleChange}
-        />
-      </label>
+    <div className="etusivu keskita">
+      <div className="valitseAihe kirjauduDiv">
+        <div className="kirjauduSivu">
+        <div className="labelDiv">
+          <label>Nimi:</label>
+          <input 
+            type="text" 
+            value={value} 
+            onChange={handleChange} 
+          />
+        </div>
       <button onClick={asetaNimi}>Set</button>
       <button onClick={asetaRandom}>Use randomly generated username</button>
-    </div>
+            </div>
+         </div>
+      </div>
   );
 };
 
@@ -404,7 +408,7 @@ const Kysymys = ({ userId, kysymys }) => {
          <LoadingKuvake luokka={"relative"} koko={"kiintea"}/>
       )
     ) : (
-          <Results userId={userId} />
+          <Results userId={userId} aihe={kysymys.aiheData.aihe} />
     )}
   </div>
   );
@@ -426,7 +430,6 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
 
 
   React.useEffect(() => {
-    window.scrollTo(0, 0);
     setKysymysNakyviin(() => true);
     muutaFonttiKoko(".ylapalkki");
     muutaFonttiKoko(".vastaus");
@@ -589,7 +592,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
   );
 };
 
-const Results = ({userId}) => {
+const Results = ({userId, aihe}) => {
   const [pisteet, setPisteet] = React.useState();
   const [pelaajat, setPelaajat] = React.useState([]);
   const navigate = useNavigate();
@@ -676,6 +679,7 @@ const Results = ({userId}) => {
             <tr>
               <th>Nimi</th>
               <th>Pisteet</th>
+              <th>Aihe</th>
             </tr>
           </thead>
           <tbody>
@@ -683,6 +687,7 @@ const Results = ({userId}) => {
               <tr key={index}>
                 <td>{p[2]}</td>
                 <td>{p[3]}</td>
+                <td>{aihe}</td>
               </tr>
             ))}
           </tbody>
