@@ -574,12 +574,12 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
           <div
             key={key}
             className={
-              aktiivinen === index && isCorrect !== null
+              aktiivinen === index && isCorrect !== null && painettu === true
                 ? isCorrect
                   ? "oikein vastaus"
                   : "vaarin vastaus"
                 : oikeaVastaus == key
-                  ? "oikein vastaus"
+                  ? "olisOikein vastaus"
                 : "vastaus"
             }
             onClick={(e) => handleAnswerClick(e, key, index)}
@@ -732,13 +732,25 @@ const Peli = () => {
     const asetaAihe = async (kayttajaId) => {
       try {
         console.log(pelinAihe, "aihe");
-        const response = await fetch("../asetaAihe", {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ kayttajaID: id.toString(), aihe: pelinAihe }),
-        });
+        let response;
+
+        if (pelinAihe === "paivanvisa") {
+          response = await fetch("../paivanVisa", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ kayttajaID: id.toString(), aihe: pelinAihe }),
+          });
+        } else {
+          response = await fetch("../asetaAihe", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ kayttajaID: id.toString(), aihe: pelinAihe }),
+          });
+        }
 
         if (!response.ok) {
           navigateTo("ErrorPage", navigate, id);
@@ -769,7 +781,7 @@ const Peli = () => {
         }, 5000);
 
       } catch (error) {
-        console.log("virhe ei onnistu");
+        console.log(error);
       }
     };
     asetaAihe(id);
