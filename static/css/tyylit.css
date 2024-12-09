@@ -17,7 +17,7 @@
   --olisOikeinVari: #2befce;
   --oikeinVari: #4caf50;
   --vaarinVari: #f44336;
-  --loadingVari: #3f51b5;
+  --loadingVari: black;
   --teemaNappulaVari: white;
 }
 
@@ -320,6 +320,7 @@ input {
   color: #333;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   box-sizing: border-box;
+  box-shadow: 0 0 2px var(--aiheBoxShadowColor);
 }
 
 input:focus {
@@ -344,7 +345,7 @@ input::placeholder {
   padding: 1rem;
   margin-top: 0.01rem;
   font-size: 1rem;
-  background-color: var(--aiheTaustavari);
+  background-color: var(--navTausta);
   color: white;
   border: none;
   border-radius: 4px;
@@ -422,6 +423,7 @@ input::placeholder {
 
 .vastaus {
   display: flex;
+  user-select: none;
   cursor: pointer;
   border: 0.1vw solid black;
   border-radius: 0em;
@@ -535,6 +537,7 @@ input::placeholder {
   padding-top: 1%;
   color: var(--fontColor);
   font-size: clamp(0.1em, 1.5em, 2em);
+  user-select: none;
 }
 
 .kysymysDiv {
@@ -546,6 +549,8 @@ input::placeholder {
 }
 
 .tiedot {
+  user-select: none;
+  user-select: none;
   display: flex;
   flex-direction: row;
   height: fit-content;
@@ -583,8 +588,8 @@ input::placeholder {
 }
 
 .loading {
-  border: 0.15em solid var(--perusVari);
-  border-top: 0.15em solid var(--toinenVari);
+  border: 0.15em solid var(--fontColor);
+  border-top: 0.15em solid var(--perusVari);
   border-radius: 50%;
   animation: spin 2s linear infinite;
 }
@@ -605,7 +610,7 @@ input::placeholder {
   min-height: fit-content;
   max-height: fit-content;
   margin-bottom: 4%;
-  padding: 1%;
+  padding: 0;
   box-shadow: 0 0 2px var(--kysymysDivBoxShadow);
 }
 
@@ -706,6 +711,7 @@ input::placeholder {
   }
 
   .fontOtsikko {
+    padding: 2%;
     font-size: clamp(0.01vw + 0.01vh, 4vw + 4vh, 5.5vw + 5.5vh);
     color: var(--fontColor);
   }
