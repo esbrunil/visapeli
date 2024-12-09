@@ -213,13 +213,17 @@ def tarkistaVastaus():
     vastaus = (int)(request.json['vastausID'])
     aika = (int)(request.json["aika"])
     uID = request.json["kayttajaID"]
+    #uID = "905faa81-b5e3-4ad1-bb0d-cca07b48cc8f"
+    #aika = 2500
+    #kysymys = 600
+    #vastaus = 9382
 
     data = lueJSONTiedosto("users.json")
 
     aihe = (int)(tkOperaatio(lambda c: hae_aihe_id(data[uID]["aihe"], c), "tietokanta/tietokanta.db"))
     tkAihe = tkOperaatio(lambda c: hae_ksm_aihe(kysymys, c), "tietokanta/tietokanta.db")
     if (int)(data[uID]["kID"]) != (int)(kysymys) or (aihe != (int)(tkAihe) and aihe != 25):
-        return jsonify({ "virheellinen kysymys" }), 400
+        return jsonify({ "d_kysymys": data[uID]["kID"], "ksm": kysymys, "aihe": aihe }), 400
 
 
     ov = tkOperaatio(lambda c: hae_kysymys_ksm_ov(kysymys, c), 'tietokanta/tietokanta.db')[0][1]
@@ -240,6 +244,7 @@ def tarkistaVastaus():
         kirjoitaJSONTiedostoon("users.json", data)
 
     return jsonify({"onkoOikein": ((str)(onko_oikein)).lower(), "oikea": oikea, "pisteet": pisteet }), 200
+    #return "moi"
 
 
 # Antaa käyttäjän pisteet
