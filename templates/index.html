@@ -6,13 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>VISAPELI</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='../../static/css/tyylit.css') }}">
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
-  <script src='https://unpkg.com/@remix-run/router@1.11.0/dist/router.umd.min.js'></script>
-  <script src='https://unpkg.com/react-router@6.18.0/dist/umd/react-router.development.js'></script>
-  <script src='https://unpkg.com/react-router-dom@6.18.0/dist/umd/react-router-dom.development.js'></script>
+  <script src="https://cdn.jsdelivr.net/npm/babel-standalone@6.26.0/babel.min.js"></script>
+  <script crossorigin src="https://cdn.jsdelivr.net/npm/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@remix-run/router@1.11.0/dist/router.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-router@6.18.0/dist/umd/react-router.development.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-router-dom@6.18.0/dist/umd/react-router-dom.development.js"></script>
 </head>
 
 <body>
@@ -196,6 +195,13 @@ const ValitseAihe = () => {
     }
   }, [id, navigate, aihe]);
 
+  const animationProps = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+    transition: { duration: 0.5 },
+  };
+
   return (
   <React.Fragment>
     <div className="etusivu">
@@ -233,21 +239,67 @@ const NavMenu = ({id}) => {
   const [auki, setAuki] = React.useState(false);
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  React.useEffect(() => {
+    const teema = localStorage.getItem("theme");
+    if (teema === "dark") {
+        document.body.classList.add("dark");
+    }
+  }, []);
+
+  const handleClick = (e) => {
+    e.preventDefault();
     setAuki(() => false);
+    console.log("NAV MENU ROUTING:..", id);
     navigateTo("ValitseAihe", navigate, id);
+  };
+
+  const handleClickButton = () => {
+    const teema = localStorage.getItem("theme");
+    if (teema === "dark") {
+        document.body.classList.remove("dark");
+        localStorage.removeItem("theme");
+    } else {
+        document.body.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+    }
+  };
+
+  const handleLogout = () => {
+    navigateTo("Kirjaudu", navigate, undefined);
+    setAuki(() => false);
   };
 
   return (
     <div className="nav">
-      <div className={`icon ${auki ? "auki" : ''}`} onClick={() => setAuki(edellinen => !edellinen)}>
-        <span className="line"></span>
-        <span className="line"></span>
-        <span className="line"></span>
+      <div
+        className="menu"
+        onClick={() => setAuki((edellinen) => !edellinen)}
+      >
+         <svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 -960 960 960" width="100%" fill="#e8eaed"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>
       </div>
-      <div onClick={handleClick} className="nimi">VISAPELI</div>
-      <div className={`sivupalkki ${auki ? "auki" : ''}`}>
-        <a onClick={handleClick}>Main menu</a>
+      <div onClick={handleClick} className="nimi">
+        VISAPELI
+      </div>
+      <div className={`sivupalkki ${auki ? "auki" : ""}`}>
+        <div className="rasti">
+          <div className="teemaNappulaDiv">
+            <button onClick={handleClickButton} className="teemaNappula">
+          <svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 -960 960 960" width="100%" fill="#e8eaed"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 -960 960 960" width="100%" fill="#e8eaed"><path d="M480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
+          </button>
+          </div>
+          <div className="svgRasti" onClick={handleClick}>
+            <svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 -960 960 960" width="100%" fill="#e8eaed"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+          </div>
+        </div>
+        <div className="navLinkit">
+        <a href="#main-menu" onClick={handleClick}> Main menu </a>
+        <a href="#">Privacy</a>
+        <a href="#">About</a>
+        <div className="logoutDiv" onClick={handleLogout}>
+          <svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 -960 960 960" width="100%" fill="#e8eaed"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg>
+        </div>
+      </div>
       </div>
     </div>
   );
@@ -732,6 +784,12 @@ const Peli = () => {
 //--------------------------------------------------------------------
 
 const App = () => {
+
+  React.useEffect(() => {
+    document.body.classList.add("darkMode");
+  }
+  , []);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -747,17 +805,19 @@ const Main = () => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    const polku = "/" + path + "/" + "Kirjaudu";
+    console.log("ROUTING ID...", id);
     if (!id) {
+      console.log("ei ole id");
+      const polku = "/" + path + "/" + "Kirjaudu";
       navigate(polku);
     }
-  }, [id, navigate]);
+  }, [id]);
 
   return (
-  <div className="content">
+    <div className="content">
     <NavMenu id={id} />
     {id ? (
-      <Routes>
+      <Routes location={location}>
         <Route path={path + "/ValitseAihe"} element={<ValitseAihe />} />
         <Route path={path + "/Peli/Results"} element={<Results />} />
         <Route path={path + "/Peli/:aihe"} element={<Peli />} />
@@ -770,7 +830,7 @@ const Main = () => {
         <Route path={path + "/*"} element={<ErrorPage id={id} />} />
       </Routes>
     )}
-    <div className="alaPalkki">
+    <div className={"alaPalkki"}>
       <hr className="otsikkoTekstiHr" />
       <div className="alaPalkkiNimi">VISAPELI</div>
       <div className="alaPalkkiLinkit">
@@ -780,9 +840,7 @@ const Main = () => {
     </div>
     </div>
   );
-
 };
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
