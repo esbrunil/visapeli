@@ -421,7 +421,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
   const [sekunnit, setSekunnit] = React.useState(10);
   const [kysymysNakyviin, setKysymysNakyviin] = React.useState(false);
   const [pisteet, setPisteet] = React.useState(0);
-  const [oikeaVastaus, setOikeaVastaus] = React.useState(0);
+  const [oikeaVastaus, setOikeaVastaus] = React.useState(-8);
 
 
 
@@ -503,7 +503,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
 
   const handleAnswerClick = async (e, key, index) => {
     if (painettu) return;
-
+    console.log(key);
     setPainettu(true);
     setAktiivinen(index);
     setPause(true);
@@ -521,7 +521,6 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
     }
 
     console.log("aikaa meni", kokonaisaika, startAika);
-    console.log(`Tästä kysymyksestä: ${pisteet} pistettä`);
 
     document.body.addEventListener('click', asetaSeuraavaKysymys);
 
@@ -539,7 +538,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
     setPainettu(true);
     //TODO HAE OIKEA VASTAUA
     // await haeVastauus 
-    const vastaus = await tarkistaVastaus(1000, 10000);
+    const vastaus = await tarkistaVastaus(3, 10000);
     const olisOikein = vastaus.oikein;
     document.body.addEventListener('click', () => { setKutsuSeuraavaKysymys("true"); });
     setTimeout(() => {
@@ -576,7 +575,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
                 ? isCorrect
                   ? "oikein vastaus"
                   : "vaarin vastaus"
-                : oikeaVastaus == key && painettu === true
+                : oikeaVastaus == key
                   ? "oikein vastaus"
                 : "vastaus"
             }
@@ -682,8 +681,8 @@ const Results = ({userId}) => {
           <tbody>
             {pelaajat.map((p, index) => (
               <tr key={index}>
-                <td>{p.nimi}</td>
-                <td>{p.pisteet}</td>
+                <td>{p[2]}</td>
+                <td>{p[3]}</td>
               </tr>
             ))}
           </tbody>
