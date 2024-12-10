@@ -208,7 +208,7 @@ const ValitseAihe = () => {
         <div className="valitseAihe">
           {aiheet ? (
             <div className="aiheet">
-              <h3 className="h3">{nimi}</h3>
+              <h3 className="h3">User: {nimi}</h3>
               <h2 className="h1">DAILY QUIZ:</h2>
               <div className="aihe" onClick={(e) => handleClick(e, "paivanvisa")}>
                 PLAY  
@@ -515,9 +515,15 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
     e.target.classList.add("painettu");
 
     const loppu = performance.now();
-    const kokonaisaika = Math.round(loppu - startAika);
+    const kokonaisaika = Math.round(10000 - (loppu - startAika));
+    let oikeinko;
 
-    const oikeinko = await tarkistaVastaus(key, kokonaisaika);
+    if (!start) {
+      oikeinko = await tarkistaVastaus(key, 10000);
+    } else {
+      oikeinko = await tarkistaVastaus(key, kokonaisaika);
+    }
+    
     console.log(oikeinko, "oikea vastauas");
     if (oikeinko.onkoOikein === "false" || oikeinko.onkoOikein === "0") {
       setIsCorrect(false);
@@ -543,7 +549,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
     setPainettu(true);
     //TODO HAE OIKEA VASTAUA
     // await haeVastauus 
-    const vastaus = await tarkistaVastaus(3, 10000);
+    const vastaus = await tarkistaVastaus(3, 0);
     const olisOikein = vastaus.oikein;
     document.body.addEventListener('click', () => { setKutsuSeuraavaKysymys("true"); });
     setTimeout(() => {
@@ -562,7 +568,7 @@ const KysymysJaNapit = ({ question, aihe, seuraavaKysymys, kysymysId, kysymykset
 
   return (
     <div className={`kysymysJaNapit havitys ${kysymysNakyviin ? 'nakyviin' : ''}`}>
-      <h3 className="h3">{nimi}</h3>
+      <h3 className="h33">User: {nimi}</h3>
       <div className="kysymysDiv">
         <div className="tausta">
           <div className="tiedot">
@@ -664,7 +670,7 @@ const Results = ({userId, aihe, nimi}) => {
     <div className="kysymysJaNapit">
       <div className="container">
         <div onClick={handleClick} className="aihe">Menu</div>
-        <h3 className="h3">{nimi}</h3>
+        <h3 className="h3">User: {nimi}</h3>
       </div>
       <div className="kysymysDiv pisteet">
         <h1 className="fontOtsikko"> Points </h1>
@@ -714,7 +720,7 @@ const ErrorPage = ({id, nimi}) => {
     <div className="kysymysJaNapit">
       <div className="container errorPage">
         <h1 className="fontOtsikko errorOtsikko"> Error </h1>
-        <p className="fontText pisteetText">Error viesti tahan...</p>
+        <p className="fontText pisteetText">Your session proabably timed out, try logging in again</p>
         <button className="button" onClick={handleClick}>MAIN MENU</button>
       </div>
     </div>
