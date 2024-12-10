@@ -1,15 +1,11 @@
-<<<<<<< HEAD
 {
-  "a2aa4d41-4e8e-401c-b80b-2ba2fa20d21d": {
-    "aihe": "History",
-    "heartbeat": 1733752470,
-    "nimi": "Visat Miesvisa",
-    "indeksi": 1928,
-    "pisteet": 30000,
-    "kID": "1928",
-    "prevkID": "1896"
+  "d1a99e4f-4694-431a-bb37-f05403334fa7": {
+    "aihe": "paivanvisa",
+    "heartbeat": 1733833189,
+    "nimi": "nibz",
+    "indeksi": 49,
+    "pisteet": 0,
+    "kID": "32",
+    "prevkID": "31"
   }
 }
-=======
-{}
->>>>>>> 9947202be661f13c63385cb8140d396bba55d226
