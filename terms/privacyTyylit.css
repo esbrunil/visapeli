@@ -40,7 +40,7 @@ div {
 }
 
 #topBar {
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     margin-left: 3vw;
     margin-right: 3vw;
     height: 5vh;
@@ -53,8 +53,8 @@ div {
     z-index: 1;
 }
 
-#topBar > a{
-    margin-left: 2vh;
+#topBar a{
+    margin-left: 0.5vw;
     text-decoration: none;
 }
 
@@ -73,7 +73,7 @@ div {
 .returnText {
     color: black;
     font-weight: bold;
-    padding-left: 2vw;
+    padding-left: 1vw;
 }
 
 .visapeliText {

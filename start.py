@@ -78,7 +78,7 @@ def asetaNimi():
             "Accept": "text/plain"
         }).text
 
-    elif nimi.strip() == "" or len(nimi) > 30 or not onko_siveellinen(nimi):
+    elif nimi.strip() == "" or len(nimi) > 20 or not onko_siveellinen(nimi):
         return "Virhe nimessä", 400
 
     data = lueJSONTiedosto("users.json")
@@ -159,7 +159,7 @@ def paivanVisa():
     #Jos tänää eri päivä kuin eilen, päivitetään päivä ja indeksi
     if(tanaa != paivanVisaMeta.get("paivitetty")):
         kysymysten_lkm = tkOperaatio(lambda c: hae_kysymykset_lkm(c), 'tietokanta/tietokanta.db')
-        aloitus_id = aloitus_id + 10
+        aloitus_id = paivanVisaMeta["visaIndex"] + 10
         if(kysymysten_lkm - aloitus_id < maara):
             aloitus_id -= maara - (kysymysten_lkm - aloitus_id)
         paivanVisaMeta["visaIndex"] = aloitus_id
@@ -213,14 +213,17 @@ def tarkistaVastaus():
     vastaus = (int)(request.json['vastausID'])
     aika = (int)(request.json["aika"])
     uID = request.json["kayttajaID"]
+    #uID = "905faa81-b5e3-4ad1-bb0d-cca07b48cc8f"
+    #aika = 2500
+    #kysymys = 600
+    #vastaus = 9382
 
-    #aika = 2000
     data = lueJSONTiedosto("users.json")
-
-    aihe = tkOperaatio(lambda c: hae_aihe_id(data[uID]["aihe"], c), "tietokanta/tietokanta.db")
+    aihe = (int)(tkOperaatio(lambda c: hae_aihe_id(data[uID]["aihe"], c), "tietokanta/tietokanta.db"))
     tkAihe = tkOperaatio(lambda c: hae_ksm_aihe(kysymys, c), "tietokanta/tietokanta.db")
-    if (int)(data[uID]["kID"]) != (int)(kysymys) or (int)(aihe) != (int)(tkAihe):
-        return jsonify({ "virheellinen kysymys" }), 400
+    if (int)(data[uID]["kID"]) != (int)(kysymys) or (aihe != (int)(tkAihe) and aihe != 25):
+        return jsonify({ "d_kysymys": data[uID]["kID"], "ksm": kysymys, "aihe": aihe }), 400
+
 
     ov = tkOperaatio(lambda c: hae_kysymys_ksm_ov(kysymys, c), 'tietokanta/tietokanta.db')[0][1]
     if ov <= 1:
@@ -234,12 +237,13 @@ def tarkistaVastaus():
 
     pisteet = 0
     if onko_oikein:
-        pisteet = min(10000, (2000 + aika))
+        pisteet = min(10000, max(2000, aika))
         data = lueJSONTiedosto("users.json")
         data[uID]["pisteet"] += pisteet
         kirjoitaJSONTiedostoon("users.json", data)
 
     return jsonify({"onkoOikein": ((str)(onko_oikein)).lower(), "oikea": oikea, "pisteet": pisteet }), 200
+    #return "moi"
 
 
 # Antaa käyttäjän pisteet
