@@ -695,7 +695,7 @@ const Results = ({userId, aihe, nimi}) => {
           <tbody>
             {pelaajat.map((p, index) => (
               <tr key={index}>
-                <td>{p[2]}</td>
+                <td className="hofNimi">{p[2]}</td>
                 <td>{p[3]}</td>
                 <td>{aihe}</td>
               </tr>
