@@ -523,14 +523,25 @@ h3 {
   display: block ruby;
 }
 
+table {
+  border-left: 2px solid #d8d8d8;
+  border-right: 2px solid #d8d8d8;
+  padding-left: 1em;
+  padding-right: 1em;
+  border-radius: 15px;
+  margin-bottom: 0.5em;
+}
+
 th {
-  border-bottom: 1px solid black;
-  font-size: 2em;
-  margin-right: 2em;
+  font-size: 1.5em;
+  padding-right: 1em;
+  text-align: left;
+  border-bottom: 1.5px dashed #d8d8d8;
 }
 
 td {
-  font-size: clamp(0.01vw + 0.01vh, 1vw + 1vh, 2.5vw + 2.5vh);
+  font-size: 1.5em;
+  
 }
 
 .h33 {

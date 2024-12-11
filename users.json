@@ -1,11 +1,11 @@
 {
-  "a1a4c50e-aa4c-4377-a7e5-21e8c01710eb": {
-    "aihe": "Geography",
-    "heartbeat": 1733902374,
-    "nimi": "Visavisa Hein\u00e4niemi",
-    "indeksi": 2751,
-    "pisteet": 20000,
-    "kID": "2751",
-    "prevkID": "2748"
+  "00a692ed-9aee-4a26-8345-89293d6e1bf8": {
+    "aihe": "History",
+    "heartbeat": 1733913656,
+    "nimi": "Visapelailija Kanareisi",
+    "indeksi": 179,
+    "pisteet": 40000,
+    "kID": "179",
+    "prevkID": "173"
   }
 }
